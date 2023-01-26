@@ -2,7 +2,9 @@ import nodeLogo from "./assets/node.svg";
 import { useState } from 'react';
 import './App.scss';
 
-console.log('[App.tsx]', `Hello world from Electron ${process.versions.electron}!`);
+const electoronVersion = typeof process !== 'undefined' ? process.versions.electron : 'tm:22.1.0';
+
+console.log('[App.tsx]', `Hello world from Electron ${electoronVersion}.`);
 
 function App() {
     const [count, setCount] = useState(0);
