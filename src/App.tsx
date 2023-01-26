@@ -1,5 +1,5 @@
-import nodeLogo from "./assets/node.svg";
 import { useState } from 'react';
+import nodeLogo from "./assets/node.svg";
 import './App.scss';
 
 const electoronVersion = typeof process !== 'undefined' ? process.versions.electron : 'tm:22.1.0';
@@ -10,7 +10,7 @@ function App() {
     const [count, setCount] = useState(0);
 
     return (
-        <div className="App">
+        <div className="App bg-green-500">
             <div>
                 <a href="https://github.com/electron-vite/electron-vite-react" target="_blank">
                     <img src="./electron-vite.svg" className="logo" alt="Electron + Vite logo" />
