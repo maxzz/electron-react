@@ -15,6 +15,12 @@ function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn 
     }) as Fn;
 }
 
+function startWithOrwithoutDebug() {
+    return !!process.env.VSCODE_DEBUG // Will start Electron via VSCode Debug
+        ? [customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),]
+        : [];
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
     rmSync('dist-electron', { recursive: true, force: true });
@@ -29,13 +35,7 @@ export default defineConfig(({ command }) => {
                 include: ['electron'],
                 transformOptions: { sourcemap, },
                 plugins: [
-                    ...(!!process.env.VSCODE_DEBUG
-                        ? [
-                            // Will start Electron via VSCode Debug
-                            customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
-                        ]
-                        : []
-                    ),
+                    ...(startWithOrwithoutDebug()),
                     loadViteEnv(), // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
                 ],
             }),

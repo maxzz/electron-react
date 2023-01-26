@@ -2,7 +2,7 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-    appId: 'YourAppID',
+    appId: 'YourTmAppID',
     asar: true,
     directories: {
         output: 'release/${version}',
@@ -13,13 +13,8 @@
         target: ['dmg'],
     },
     win: {
-        target: [
-            {
-                target: 'nsis',
-                arch: ['x64'],
-            },
-        ],
         artifactName: '${productName}_${version}.${ext}',
+        target: [ { target: 'nsis', arch: ['x64'], }, ],
     },
     nsis: {
         oneClick: false,
