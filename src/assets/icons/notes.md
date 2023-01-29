@@ -1,3 +1,7 @@
+
+<!-- 
+//js electron preserve previous windows position
+//https://github.com/electron/electron/issues/526 'Save / restore window state # 526'
 app.on('ready', function () {
     const path = require("path");
     const fs = require("fs");
@@ -28,3 +32,4 @@ app.on('ready', function () {
     });
     // ...
 });
+-->
