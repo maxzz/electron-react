@@ -1,6 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { release } from 'node:os';
 import { join } from 'node:path';
+import { getWinBounds, saveWinBounds } from './window-pos';
 
 // The built directory structure
 //
@@ -40,9 +41,12 @@ const indexHtml = join(process.env.DIST, 'index.html');
 const url = process.env.VITE_DEV_SERVER_URL;
 
 async function createWindow() {
+    const bounds = getWinBounds();
+
     win = new BrowserWindow({
         title: 'Main window',
         icon: join(process.env.PUBLIC, 'favicon.ico'),
+        ...(bounds && bounds),
         webPreferences: {
             preload,
             // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
@@ -71,6 +75,10 @@ async function createWindow() {
             shell.openExternal(url);
         }
         return { action: 'deny' };
+    });
+
+    win.on('close', () => {
+        saveWinBounds(win.getBounds());
     });
 }
 
@@ -119,33 +127,33 @@ ipcMain.handle('open-win', (_, arg) => {
 
 
 
-app.on('ready', function () {
-    const path = require("path");
-    const fs = require("fs");
-    const initPath = path.join(app.getPath('userData'), "init.json");
+// app.on('ready', function () {
+//     const path = require("path");
+//     const fs = require("fs");
+//     const initPath = path.join(app.getPath('userData'), "init.json");
 
-    console.log(`app name ${app.getName()}`); // 'electron-vite-react'
+//     console.log(`app name ${app.getName()}`); // 'electron-vite-react'
 
-    //https://www.electronjs.org/docs/latest/api/app#appsetpathname-path
-    console.log(`data path ${initPath}`); // C:\Users\maxzz\AppData\Roaming\electron-vite-react\init.json
+//     //https://www.electronjs.org/docs/latest/api/app#appsetpathname-path
+//     console.log(`data path ${initPath}`); // C:\Users\maxzz\AppData\Roaming\electron-vite-react\init.json
 
-    let data: any;
-    try {
-        data = JSON.parse(fs.readFileSync(initPath, 'utf8'));
-    }
-    catch (e) {
-    }
+//     let data: any;
+//     try {
+//         data = JSON.parse(fs.readFileSync(initPath, 'utf8'));
+//     }
+//     catch (e) {
+//     }
 
-    // // Create the browser window.
-    // win = new BrowserWindow((data && data.bounds) ? data.bounds : {width: 800, height: 600});
-    // ...
+//     // // Create the browser window.
+//     // win = new BrowserWindow((data && data.bounds) ? data.bounds : {width: 800, height: 600});
+//     // ...
 
-    win.on("close", function () {
-        console.log('win', win);
-        const data = {
-            bounds: win.getBounds()
-        };
-        fs.writeFileSync(initPath, JSON.stringify(data));
-    });
-    // ...
-});
+//     win.on("close", function () {
+//         console.log('win', win);
+//         const data = {
+//             bounds: win.getBounds()
+//         };
+//         fs.writeFileSync(initPath, JSON.stringify(data));
+//     });
+//     // ...
+// });
