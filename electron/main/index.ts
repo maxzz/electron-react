@@ -1,7 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { release } from 'node:os';
 import { join } from 'node:path';
-import { getIniOptions, saveIniOptions } from './window-pos';
+import { getIniOptions, saveIniOptions } from './ini-options';
 
 // The built directory structure
 //
