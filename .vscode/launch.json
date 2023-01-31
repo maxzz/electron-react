@@ -50,25 +50,5 @@
                 "http://127.0.0.1:7777/**"
             ]
         },
-
-        //No
-        //G: 'vscode debug electron'
-        //https://www.electronjs.org/docs/latest/tutorial/debugging-vscode
-        //https://github.com/octref/vscode-electron-debug/blob/master/electron-quick-start/.vscode/launch.json
-        // {
-        //     "name": "Debug2 Renderer Process",
-        //     "type": "chrome",
-        //     "request": "launch",
-        //     "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
-        //     "windows": {
-        //         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
-        //     },
-        //     "runtimeArgs": [
-        //         "--no-sandbox",
-        //         "--remote-debugging-port=9229",
-        //         "."
-        //     ],
-        //     "webRoot": "${workspaceRoot}"
-        // }
     ]
 }
