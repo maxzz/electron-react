@@ -43,7 +43,11 @@
 // }
 
 body {
-    @apply min-h-screen flex place-items-center;
+    @apply min-h-screen h-screen;
+}
+
+#root {
+    @apply h-full;
 }
 
 // a {
