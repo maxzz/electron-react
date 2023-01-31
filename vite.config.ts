@@ -7,6 +7,40 @@ import renderer from 'vite-plugin-electron-renderer';
 import { customStart, loadViteEnv } from 'vite-electron-plugin/plugin';
 import pkg from './package.json';
 
+function electronPlugins() {
+    function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
+        let t: NodeJS.Timeout;
+        return ((...args: Parameters<Fn>) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn(...args), delay);
+        }) as Fn;
+    }
+
+    function startWithOrwithoutDebug() {
+        return !!process.env.VSCODE_DEBUG // Will start Electron via VSCode Debug
+            ? [customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),]
+            : [];
+    }
+
+    return [
+        ...startWithOrwithoutDebug(),
+        loadViteEnv(), // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
+    ];
+}
+
+function ok() {
+    return [
+        ...(!!process.env.VSCODE_DEBUG
+            ? [
+                // Will start Electron via VSCode Debug
+                customStart(debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
+            ]
+            : []),
+        // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
+        loadViteEnv(),
+    ];
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
     rmSync('dist-electron', { recursive: true, force: true });
@@ -20,16 +54,8 @@ export default defineConfig(({ command }) => {
             electron({
                 include: ['electron'],
                 transformOptions: { sourcemap, },
-                plugins: [
-                    ...(!!process.env.VSCODE_DEBUG
-                        ? [
-                            // Will start Electron via VSCode Debug
-                            customStart(debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
-                        ]
-                        : []),
-                    // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
-                    loadViteEnv(),
-                ],
+                // plugins: ok(),
+                plugins: electronPlugins(),
             }),
 
             renderer({ nodeIntegration: true, }), // Use Node.js API in the Renderer-process
