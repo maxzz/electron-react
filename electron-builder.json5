@@ -14,7 +14,9 @@
     },
     win: {
         artifactName: '${productName}_${version}.${ext}',
-        target: [ { target: 'nsis', arch: ['x64'], }, ],
+        //target: [ { target: 'nsis', arch: ['x64'], }, ],
+        // target: [ { target: 'portable', arch: ['x64'], }, ],
+        target: [ { target: 'msi', arch: ['x64'], }, ],
     },
     nsis: {
         oneClick: false,
