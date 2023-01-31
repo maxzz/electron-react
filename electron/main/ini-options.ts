@@ -12,36 +12,15 @@ export type IniOptions = {
 function fixBounds(bounds: Rectangle): Rectangle | undefined {
     if (bounds) {
         const area = screen.getDisplayMatching(bounds).workArea;
-
-        const isInsideRect = (bounds: Rectangle, area: Rectangle) =>
-            bounds.x >= area.x &&
-            bounds.y >= area.y &&
-            bounds.x + bounds.width <= area.x + area.width &&
-            bounds.y + bounds.height <= area.y + area.height;
-
-        const isInsideWidth = (bounds: Rectangle, area: Rectangle) =>
-            bounds.width <= area.width ||
-            bounds.height <= area.height;
-
         if (isInsideRect(bounds, area)) {
             return bounds;
         }
-
-        // const options: Partial<Rectangle> = {};
-
-        // // If the saved position still valid (the window is entirely inside the display area), use it.
-        // if (isInsideRect(bounds, area)) {
-        //     options.x = bounds.x;
-        //     options.y = bounds.y;
-        // }
-
-        // // If the saved size is still valid, use it. //https://github.com/electron/electron/issues/526
-        // if (isInsideWidth(bounds, area)) {
-        //     options.width = bounds.width;
-        //     options.height = bounds.height;
-        // }
-
-        // return options;
+    }
+    function isInsideRect(bounds: Rectangle, area: Rectangle) {
+        return bounds.x >= area.x &&
+            bounds.y >= area.y &&
+            bounds.x + bounds.width <= area.x + area.width &&
+            bounds.y + bounds.height <= area.y + area.height;
     }
 }
 
