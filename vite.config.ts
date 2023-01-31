@@ -3,22 +3,29 @@ import { rmSync } from 'node:fs';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import electron from 'vite-electron-plugin';
-import { customStart, loadViteEnv } from 'vite-electron-plugin/plugin';
 import renderer from 'vite-plugin-electron-renderer';
+import { customStart, loadViteEnv } from 'vite-electron-plugin/plugin';
 import pkg from './package.json';
 
-function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
-    let t: NodeJS.Timeout;
-    return ((...args: Parameters<Fn>) => {
-        clearTimeout(t);
-        t = setTimeout(() => fn(...args), delay);
-    }) as Fn;
-}
+function electronPlugins() {
+    function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
+        let t: NodeJS.Timeout;
+        return ((...args: Parameters<Fn>) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn(...args), delay);
+        }) as Fn;
+    }
 
-function startWithOrwithoutDebug() {
-    return !!process.env.VSCODE_DEBUG // Will start Electron via VSCode Debug
-        ? [customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),]
-        : [];
+    function startWithOrwithoutDebug() {
+        return !!process.env.VSCODE_DEBUG // Will start Electron via VSCode Debug
+            ? [customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),]
+            : [];
+    }
+
+    return [
+        ...(startWithOrwithoutDebug()),
+        loadViteEnv(), // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
+    ];
 }
 
 // https://vitejs.dev/config/
@@ -34,10 +41,7 @@ export default defineConfig(({ command }) => {
             electron({
                 include: ['electron'],
                 transformOptions: { sourcemap, },
-                plugins: [
-                    ...(startWithOrwithoutDebug()),
-                    loadViteEnv(), // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
-                ],
+                plugins: electronPlugins(),
             }),
 
             renderer({ nodeIntegration: true, }), // Use Node.js API in the Renderer-process
