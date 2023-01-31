@@ -17,11 +17,10 @@ export function App() {
 
                 <div className="flex items-center space-x-2">
                     <a
-                        className="flex-none"
                         href="https://github.com/electron-vite/electron-vite-react"
                         title="Click on the Electron + Vite logo to learn more" target="_blank"
                     >
-                        <img className="w-8 h-8 animate-spin [animation-duration:8s]" src="./electron-vite.svg" alt="Electron + Vite logo" />
+                        <img className="w-8 h-8" src="./electron-vite.svg" alt="Electron + Vite logo" />
                     </a>
 
                     <h1 className="font-semibold">Electron+Vite+React</h1>
@@ -35,9 +34,9 @@ export function App() {
                     count is {count}
                 </button>
 
-                <div className="text-xs flex items-center">
-                    <span className="whitespace-nowrap">Place static files into the</span> <span className="px-1 font-semibold">/public</span> folder
-                    <img className="w-4 h-4 fill-red-500" src={nodeLogo} alt="Node logo" />
+                <div className="text-xs">
+                    Place static files into the <span className="font-semibold">/public</span> folder
+                    <img className="inline-block w-4 h-4 fill-red-500" src={nodeLogo} alt="Node logo" />
                 </div>
 
             </div>
