@@ -28,7 +28,15 @@ function electronPlugins() {
     ];
 }
 
-function ok() {
+function original() {
+    function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
+        let t: NodeJS.Timeout;
+        return ((...args: Parameters<Fn>) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn(...args), delay);
+        }) as Fn;
+    }
+
     return [
         ...(!!process.env.VSCODE_DEBUG
             ? [
@@ -54,7 +62,7 @@ export default defineConfig(({ command }) => {
             electron({
                 include: ['electron'],
                 transformOptions: { sourcemap, },
-                // plugins: ok(),
+                //plugins: original(),
                 plugins: electronPlugins(),
             }),
 
@@ -80,11 +88,3 @@ export default defineConfig(({ command }) => {
         clearScreen: false,
     };
 });
-
-function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
-    let t: NodeJS.Timeout;
-    return ((...args: Parameters<Fn>) => {
-        clearTimeout(t);
-        t = setTimeout(() => fn(...args), delay);
-    }) as Fn;
-}
