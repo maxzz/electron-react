@@ -9,7 +9,7 @@ console.log('[App.tsx]', `Hello world from Electron ${electoronVersion}.`);
 export function App() {
     return (
         <div className="h-full grid grid-rows-[auto_1fr_auto]">
-            <div className="bg-green-600">Header</div>
+            <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Header</div>
 
             <div className="grid grid-cols-[1fr_minmax(0,64ch)_1fr] bg-green-500">
                 <div className="col-start-2 p-4 flex flex-col space-y-4">
@@ -18,7 +18,7 @@ export function App() {
                     <TheRest />
                 </div>
             </div>
-            <div className="bg-green-600">Footer</div>
+            <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Footer</div>
         </div>
     );
 }
@@ -32,10 +32,14 @@ function Header() {
             >
                 <img className="w-8 h-8" src="./electron-vite.svg" alt="Electron + Vite logo" />
             </a>
-            <h1 className="font-semibold">Electron+Vite+React</h1>
-            <p className="pb-4 text-[0.55rem]">
-                * Click on the Electron + Vite logo to learn more
-            </p>
+
+            <div>
+                <h1 className="font-semibold">Electron, Vite, React</h1>
+
+                <p className="text-[0.55rem]">
+                    Click logo to learn more
+                </p>
+            </div>
         </div>
     );
 }
