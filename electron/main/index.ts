@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, Notification } from 'electron';
 import { release } from 'node:os';
 import { join } from 'node:path';
 import { getIniOptions, saveIniOptions } from './ini-options';
@@ -54,6 +54,13 @@ async function createWindow() {
             // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
             nodeIntegration: true,
             contextIsolation: false,
+
+            // preload,
+            // // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
+            // // Consider using contextBridge.exposeInMainWorld
+            // // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
+            // nodeIntegration: true,
+            // contextIsolation: false,
         },
     });
 
@@ -123,4 +130,8 @@ ipcMain.handle('open-win', (_, arg) => {
     } else {
         childWindow.loadFile(indexHtml, { hash: arg });
     }
+});
+
+ipcMain.on('notify', (event, message) => {
+    new Notification({ title: 'My Noti', body: message }).show();
 });

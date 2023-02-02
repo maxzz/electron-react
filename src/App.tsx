@@ -15,6 +15,7 @@ export function App() {
                 <div className="col-start-2 p-4 flex flex-col space-y-4">
                     <Header />
                     <TestState />
+                    <TestState2 />
                     <TheRest />
                 </div>
             </div>
@@ -47,8 +48,25 @@ function Header() {
 function TestState() {
     const [count, setCount] = useState(0);
     return (
-        <button className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]" onClick={() => setCount((count) => count + 1)}>
+        <button
+            className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
+            onClick={() => setCount((count) => count + 1)}
+        >
             count is {count}
+        </button>
+    );
+}
+
+function TestState2() {
+    return (
+        <button
+            className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
+            onClick={() => {
+                window.sendNotification('My message')
+
+            }}
+        >
+            Send notification
         </button>
     );
 }
