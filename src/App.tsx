@@ -62,7 +62,8 @@ function TestState2() {
         <button
             className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
             onClick={() => {
-                window.sendNotification('My message')
+                //window.sendNotification('My message')
+                window.tmApi.sendNotification('My secure transfered message');
 
             }}
         >

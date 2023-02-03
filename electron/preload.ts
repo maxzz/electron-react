@@ -1,7 +1,9 @@
-const { ipcRenderer } = require('electron');
+import { contextBridge, ipcRenderer } from "electron";
 
 console.log('ipcRenderer', ipcRenderer);
 
-window.sendNotification = (message) => {
-    ipcRenderer.send('notify', message);
-};
+contextBridge.exposeInMainWorld('tmApi', {
+    sendNotification: (message) => {
+        ipcRenderer.send('notify', message);
+    }
+});
