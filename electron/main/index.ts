@@ -36,7 +36,8 @@ if (!app.requestSingleInstanceLock()) {
 let win: BrowserWindow | null = null;
 
 // Here, you can also use other preload
-const preload = join(__dirname, '../preload/index.js');
+// const preload = join(__dirname, '../preload/index.js');
+const preload = join(__dirname, '../preload.js');
 const indexHtml = join(process.env.DIST, 'index.html');
 const url = process.env.VITE_DEV_SERVER_URL;
 
@@ -89,6 +90,10 @@ async function createWindow() {
     });
 }
 
+ipcMain.on('notify', (event, message) => {
+    new Notification({ title: 'My Noti', body: message }).show();
+});
+
 app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
@@ -130,8 +135,4 @@ ipcMain.handle('open-win', (_, arg) => {
     } else {
         childWindow.loadFile(indexHtml, { hash: arg });
     }
-});
-
-ipcMain.on('notify', (event, message) => {
-    new Notification({ title: 'My Noti', body: message }).show();
 });
