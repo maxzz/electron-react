@@ -12,7 +12,25 @@
         (function () {
             const orginalInfo = console.info;
             console.info = function (message) {
-                if (!/Download the React DevTools/.test(message)) orginalInfo.apply(console, arguments);
+                if (
+                    !/Download the React DevTools/.test(message) &&
+                    !/DevTools failed to load source map/.test(message)
+                ) {
+                    orginalInfo.apply(console, arguments);
+                }
+
+            };
+        })();
+        (function () {
+            const orginalInfo = console.log;
+            console.log = function (message) {
+                if (
+                    !/Download the React DevTools/.test(message) &&
+                    !/DevTools failed to load source map/.test(message)
+                ) {
+                    orginalInfo.apply(console, arguments);
+                }
+
             };
         })();
     </script>
