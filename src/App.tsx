@@ -5,6 +5,7 @@ import './App.scss';
 const electoronVersion = typeof process !== 'undefined' ? process.versions.electron : 'tm:22.1.0';
 
 console.log('[App.tsx]', `Hello world from Electron ${electoronVersion}.`);
+//console.log('process.env.DIST_ELECTRON', process.env.DIST_ELECTRON);
 
 export function App() {
     return (
@@ -63,11 +64,26 @@ function TestState2() {
             className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
             onClick={() => {
                 //window.sendNotification('My message')
-                window.tmApi.sendNotification('My secure transfered message');
+                tmApi.sendNotification('My secure transfered message');
 
             }}
         >
             Send notification
+        </button>
+    );
+}
+
+function TestState3() {
+    return (
+        <button
+            className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
+            onClick={async () => {
+                //window.sendNotification('My message')
+                await tmApi.confirm('My secure transfered message');
+
+            }}
+        >
+            Confirm
         </button>
     );
 }
