@@ -22,7 +22,7 @@
             ]
         },
     },
-    "include": ["src"],
+    "include": ["src", "electron/vite-api.d.ts"],
     "references": [
         {
             "path": "./tsconfig.node.json"
