@@ -2,6 +2,10 @@
 //     sendNotification: (message: string) => void
 // }
 
+type TmApi = {
+    sendNotification: (message: string) => void;
+}
+
 declare namespace tmApi {
     interface DialogOptions {
         type?: string;
