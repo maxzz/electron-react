@@ -2,6 +2,7 @@ import { join } from 'node:path';
 import { release } from 'node:os';
 import { app, BrowserWindow, shell, ipcMain, Notification } from 'electron';
 import { getIniOptions, saveIniOptions } from './app/ini-options';
+import { createTestFiles } from './app/ipcMainHandlers';
 
 process.env.DIST_ELECTRON = join(__dirname, '../');
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist');
@@ -63,6 +64,8 @@ async function createWindow() {
     win.on('close', () => {
         saveIniOptions(win);
     });
+
+    createTestFiles();
 }
 
 app.whenReady().then(createWindow);

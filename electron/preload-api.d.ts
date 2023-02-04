@@ -4,20 +4,11 @@
 
 type TmApi = {
     sendNotification: (message: string) => void;
+    startDrag: (filename: string) => void;
 }
 
-declare namespace tmApi {
-    interface DialogOptions {
-        type?: string;
-        title?: string;
-        message: string;
-        detail?: string;
-        textConfirm?: string;
-        textCancel?: string;
-        checkboxLabel?: string;
-        checkboxChecked?: boolean;
-    }
-    
-    function sendNotification(message: string): void;
-    function confirm(option: DialogOptions | string): Promise<void>;
-}
+declare var tmApi: TmApi;
+
+// declare namespace tmApi {
+//     function sendNotification(message: string): void;
+// }
