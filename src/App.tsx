@@ -15,7 +15,6 @@ export function App() {
                     <Header />
                     <TestState />
                     <TestState2 />
-                    <TestState3 />
                     <TheRest />
                 </div>
             </div>
@@ -70,20 +69,6 @@ function TestState2() {
         >
             Send notification
         </button>
-    );
-}
-
-function TestState3() {
-    return (
-        <div
-            className="px-4 py-3 text-center bg-slate-700/20 border-slate-400 border rounded shadow" draggable
-            onDragStart={(e) => {
-                e.preventDefault();
-                tmApi.startDrag('drag-and-drop-1.md');
-            }}
-        >
-            Drag me
-        </div>
     );
 }
 

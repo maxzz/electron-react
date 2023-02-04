@@ -4,7 +4,6 @@
 
 type TmApi = {
     sendNotification: (message: string) => void;
-    startDrag: (filename: string) => void;
 }
 
 declare var tmApi: TmApi;

@@ -4,6 +4,8 @@ import { app, BrowserWindow, shell, ipcMain, Notification } from 'electron';
 import { getIniOptions, saveIniOptions } from './app/ini-options';
 import { createTestFiles } from './app/ipcMainHandlers';
 
+console.log('main     __dirname', __dirname);
+
 process.env.DIST_ELECTRON = join(__dirname, '../');
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist');
 process.env.PUBLIC = process.env.VITE_DEV_SERVER_URL ? join(process.env.DIST_ELECTRON, '../public') : process.env.DIST;
