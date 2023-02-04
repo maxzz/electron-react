@@ -2,10 +2,8 @@ import { useState } from 'react';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
 
-const electoronVersion = typeof process !== 'undefined' ? process.versions.electron : 'tm:22.1.0';
-
-console.log('[App.tsx]', `Hello world from Electron ${electoronVersion}.`);
-//console.log('process.env.DIST_ELECTRON', process.env.DIST_ELECTRON);
+// const electoronVersion = typeof process !== 'undefined' ? process.versions.electron : 'tm:22.1.0';
+// console.log('[App.tsx]', `Hello world from Electron ${electoronVersion}.`);
 
 export function App() {
     return (
@@ -20,6 +18,7 @@ export function App() {
                     <TheRest />
                 </div>
             </div>
+
             <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Footer</div>
         </div>
     );
@@ -69,21 +68,6 @@ function TestState2() {
             }}
         >
             Send notification
-        </button>
-    );
-}
-
-function TestState3() {
-    return (
-        <button
-            className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
-            onClick={async () => {
-                //window.sendNotification('My message')
-                await tmApi.confirm('My secure transfered message');
-
-            }}
-        >
-            Confirm
         </button>
     );
 }
