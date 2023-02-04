@@ -77,7 +77,7 @@ function TestState3() {
     return (
         <div
             className="px-4 py-3 text-center bg-slate-700/20 border-slate-400 border rounded shadow" draggable
-            onDrag={(e) => {
+            onDragStart={(e) => {
                 e.preventDefault();
                 tmApi.startDrag('drag-and-drop-1.md');
             }}
