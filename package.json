@@ -5,7 +5,7 @@
     "license": "MIT",
     "description": "Electron Vite React playground",
     "author": "Max Zakharzhevskiy",
-    "main": "dist-electron/main/index.js",
+    "main": "dist-electron/main.js",
     "devDependencies": {
         "@playwright/test": "^1.29.2",
         "@types/react": "^18.0.27",

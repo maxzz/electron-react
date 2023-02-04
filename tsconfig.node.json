@@ -10,6 +10,7 @@
     "include": [
         "vite.config.ts",
         "package.json",
-        "electron"
+        "electron",
+        "vite-electron-env.d.ts"
     ]
 }

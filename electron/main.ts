@@ -1,7 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain, Notification } from 'electron';
 import { release } from 'node:os';
 import { join } from 'node:path';
-import { getIniOptions, saveIniOptions } from './ini-options';
+import { getIniOptions, saveIniOptions } from './app/ini-options';
 
 // The built directory structure
 //
@@ -37,7 +37,7 @@ let win: BrowserWindow | null = null;
 
 // Here, you can also use other preload
 // const preload = join(__dirname, '../preload/index.js');
-const preload = join(__dirname, '../preload.js');
+const preload = join(__dirname, './preload.js');
 const indexHtml = join(process.env.DIST, 'index.html');
 const url = process.env.VITE_DEV_SERVER_URL;
 
