@@ -69,7 +69,7 @@ export default defineConfig(({ command }) => {
                 plugins: electronPlugins(),
             }),
 
-            renderer({ nodeIntegration: true, }), // Use Node.js API in the Renderer-process
+            // renderer({ nodeIntegration: true, }), // Use Node.js API in the Renderer-process
         ],
 
         resolve: {
