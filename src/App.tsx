@@ -2,6 +2,7 @@ import { useState } from 'react';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
 import { FileDisplay } from './components/FileDisplay';
+import { DropArea } from './components/UI/UIDropArea';
 
 // const electoronVersion = typeof process !== 'undefined' ? process.versions.electron : 'tm:22.1.0';
 // console.log('[App.tsx]', `Hello world from Electron ${electoronVersion}.`);
@@ -22,6 +23,7 @@ export function App() {
             </div>
 
             <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Footer</div>
+            <DropArea />
         </div>
     );
 }
