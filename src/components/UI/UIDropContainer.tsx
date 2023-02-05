@@ -1,18 +1,19 @@
-import { HTMLAttributes, useState, useRef } from "react";
+import { HTMLAttributes, useRef } from "react";
+import { PrimitiveAtom, useAtom } from "jotai";
+import { classNames } from "@/utils/classnames";
 
 type UIDropContainerProps = {
     onDropped: (files: FileList) => void;
     accept?: string; // accept = '.png'
-    //activeAtom: PrimitiveAtom<boolean>;
+    activeAtom: PrimitiveAtom<boolean>;
 };
 
-export function UiDropContainer({ onDropped, accept, className, children, ...rest }: UIDropContainerProps & HTMLAttributes<HTMLLabelElement>) {
-    //const [dropActive, setDropActive] = useAtom(activeAtom);
-    const [dropActive, setDropActive] = useState(false);
+export function UIDropContainer({ onDropped, accept, className, children, activeAtom, ...rest }: UIDropContainerProps & HTMLAttributes<HTMLLabelElement>) {
+    const [dropActive, setDropActive] = useAtom(activeAtom);
     const inputRef = useRef<HTMLInputElement>(null);
     return (
         <label
-            className={`inline-block`}
+            className={classNames(`inline-block`, className)}
 
             onDragOver={(event) => {
                 event.preventDefault();
