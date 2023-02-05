@@ -38,5 +38,8 @@
         "build": "tsc && vite build && electron-builder",
         "preview": "vite preview",
         "e2e": "npx playwright test"
+    },
+    "dependencies": {
+        "jotai": "^2.0.0"
     }
 }
