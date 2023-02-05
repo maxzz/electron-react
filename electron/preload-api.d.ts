@@ -4,6 +4,7 @@
 
 type TmApi = {
     sendNotification: (message: string) => void;
+    openFiles: (filenames: string[]) => void;
 }
 
 declare var tmApi: TmApi;
