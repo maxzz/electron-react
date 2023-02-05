@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
+import { FileDisplay } from './components/FileDisplay';
 
 // const electoronVersion = typeof process !== 'undefined' ? process.versions.electron : 'tm:22.1.0';
 // console.log('[App.tsx]', `Hello world from Electron ${electoronVersion}.`);
@@ -15,6 +16,7 @@ export function App() {
                     <Header />
                     <TestState />
                     <TestState2 />
+                    <FileDisplay />
                     <TheRest />
                 </div>
             </div>
