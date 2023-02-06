@@ -6,6 +6,9 @@
     "description": "Electron Vite React playground",
     "author": "Max Zakharzhevskiy",
     "main": "dist-electron/main.js",
+    "engines": {
+        "node": "^14.18.0 || >=16.0.0"
+    },
     "devDependencies": {
         "@playwright/test": "^1.29.2",
         "@types/node": "^18.11.19",
@@ -25,23 +28,19 @@
         "vite-electron-plugin": "^0.7.4",
         "vite-plugin-electron-renderer": "^0.11.4"
     },
-    "engines": {
-        "node": "^14.18.0 || >=16.0.0"
+    "dependencies": {
+        "jotai": "^2.0.0"
     },
     "debug": {
         "env": {
-            "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777/",
-            "VITE_DEV_SERVER_URL1": "http://127.0.0.1:3000/"
+            "VITE_DEV_SERVER_URL": "http://localhost:7777/"
         }
     },
     "scripts": {
         "dev": "vite",
+        "web": "vite --config vite.config.web.ts",
         "build": "tsc && vite build && electron-builder",
         "preview": "vite preview",
-        "e2e": "npx playwright test",
-        "web": "vite --config vite.config.web.ts"
-    },
-    "dependencies": {
-        "jotai": "^2.0.0"
+        "e2e": "npx playwright test"
     }
 }

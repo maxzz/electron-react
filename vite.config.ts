@@ -70,6 +70,7 @@ export default defineConfig(({ command }) => {
             }),
 
             // renderer({ nodeIntegration: true, }), // Use Node.js API in the Renderer-process
+            renderer(),
         ],
 
         resolve: {
