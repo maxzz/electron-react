@@ -4,6 +4,7 @@ import { app, BrowserWindow, shell, ipcMain, Notification, webContents } from 'e
 import { getIniOptions, saveIniOptions } from './app/ini-options';
 import { createTestFiles } from './app/ipcMainHandlers';
 import { readFileSync, statSync } from 'node:fs';
+import { ToMainKeys } from './preload-types';
 
 console.log('main     __dirname', __dirname);
 
@@ -116,11 +117,11 @@ app.on('activate', () => {
 //     }
 // });
 
-ipcMain.on('notify', (_event, message) => {
+ipcMain.on(ToMainKeys.notify, (_event, message) => {
     new Notification({ title: 'My Noti', body: message }).show();
 });
 
-ipcMain.on('tm-open-files', (event, filenames: string[]) => {
+ipcMain.on(ToMainKeys.openFiles, (event, filenames: string[]) => {
     console.log('filenames', filenames);
 
     const files: string[] = [];
