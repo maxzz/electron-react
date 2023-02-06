@@ -1,8 +1,9 @@
 import { join } from 'node:path';
 import { release } from 'node:os';
-import { app, BrowserWindow, shell, ipcMain, Notification } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, Notification, webContents } from 'electron';
 import { getIniOptions, saveIniOptions } from './app/ini-options';
 import { createTestFiles } from './app/ipcMainHandlers';
+import { readFileSync, statSync } from 'node:fs';
 
 console.log('main     __dirname', __dirname);
 
@@ -117,4 +118,37 @@ app.on('activate', () => {
 
 ipcMain.on('notify', (_event, message) => {
     new Notification({ title: 'My Noti', body: message }).show();
+});
+
+ipcMain.on('tm-open-files', (event, filenames: string[]) => {
+    console.log('filenames', filenames);
+
+    const files: string[] = [];
+    const folders: string[] = [];
+    const failed: string[] = [];
+
+    (filenames || []).forEach((filename) => {
+        try {
+            const st = statSync(filename);
+            if (st.isFile()) {
+                files.push(filename);
+            } else if (st.isDirectory()) {
+                folders.push(filename);
+            }
+        } catch (error) {
+            failed.push(filename);
+        }
+    });
+
+    const loaded = files.map((filename) => {
+        const cnt = readFileSync(filename).toString();
+        return {
+            name: filename,
+            cnt,
+        };
+    });
+
+    win?.webContents.send('tm-got-files-content', {
+        files: loaded,
+    })
 });

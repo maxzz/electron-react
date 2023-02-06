@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
 const api: TmApi = {
     sendNotification: (message: string) => {
@@ -6,6 +6,9 @@ const api: TmApi = {
     },
     openFiles: (filenames: string[]) => {
         ipcRenderer.send('tm-open-files', filenames);
+    },
+    gotFilesContent: (callback: (event: IpcRendererEvent, content: FilesContent) => void) => {
+        ipcRenderer.on('tm-got-files-content', callback);
     }
 };
 

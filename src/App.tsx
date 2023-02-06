@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import nodeLogo from "./assets/node.svg";
-import './App.scss';
 import { FileDisplay } from './components/FileDisplay';
 import { DropArea } from './components/UI/UIDropArea';
+import { mainApi } from './store';
+import nodeLogo from "./assets/node.svg";
+import './App.scss';
 
 // const electoronVersion = typeof process !== 'undefined' ? process.versions.electron : 'tm:22.1.0';
 // console.log('[App.tsx]', `Hello world from Electron ${electoronVersion}.`);
@@ -67,7 +68,7 @@ function TestState2() {
             className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
             onClick={() => {
                 //window.sendNotification('My message')
-                tmApi.sendNotification('My secure transfered message');
+                mainApi?.sendNotification('My secure transfered message');
 
             }}
         >
