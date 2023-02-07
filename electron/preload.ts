@@ -1,6 +1,5 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
-
 //vvvvvvvvvvvv this copy of preload-types.ts: cannot be imported wo/ bundler
 //import { ToMainKeys, ToRendererKeys } from "./preload-types";
 enum ToMainKeys {

@@ -4,7 +4,7 @@ import { app, BrowserWindow, shell, ipcMain, Notification, webContents } from 'e
 import { getIniOptions, saveIniOptions } from './app/ini-options';
 import { createTestFiles } from './app/ipcMainHandlers';
 import { readFileSync, statSync } from 'node:fs';
-import { ToMainKeys } from './preload-types';
+import { ToMainKeys, ToRendererKeys } from './preload-types';
 
 console.log('main     __dirname', __dirname);
 
@@ -149,7 +149,7 @@ ipcMain.on(ToMainKeys.openFiles, (event, filenames: string[]) => {
         };
     });
 
-    win?.webContents.send('tm-got-files-content', {
+    win?.webContents.send(ToRendererKeys.gotFilesContent, {
         files: loaded,
     })
 });

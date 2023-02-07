@@ -8,7 +8,8 @@ type FileContent = {
 }
 
 type FilesContent = {
-    files: FileContent[];
+    files?: FileContent[];
+    failed?: FileContent[];
 }
 
 type TmApi = {
