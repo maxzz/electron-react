@@ -1,5 +1,17 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
-import { ToMainKeys, ToRendererKeys } from "./preload-types";
+
+
+//vvvvvvvvvvvv this copy of preload-types.ts: cannot be imported wo/ bundler
+//import { ToMainKeys, ToRendererKeys } from "./preload-types";
+enum ToMainKeys {
+    notify = 'notify',
+    openFiles = 'tm-open-files',
+};
+
+enum ToRendererKeys {
+    gotFilesContent = 'tm-got-files-content',
+};
+//^^^^^^^^^^^^ this copy of preload-types.ts: cannot be imported wo/ bundler
 
 // type ToMainKeys = 'notify' | 'tm-open-files';
 // type ToRendererKeys = 'tm-got-files-content';
