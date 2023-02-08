@@ -25,7 +25,7 @@ export function DragHandlers({ doDroppedFilesAtom, activeAtom }: { doDroppedFile
             event.preventDefault();
             activeListenersRef.current = 0;
             setDropActive(false);
-            event.dataTransfer && droppedFiles(event.dataTransfer.files);
+            event.dataTransfer && droppedFiles([...event.dataTransfer.files]);
         }
 
         const a = document.addEventListener;

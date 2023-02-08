@@ -7,7 +7,7 @@ export var mainApi: TmApi | undefined = typeof tmApi !== 'undefined' ? tmApi : u
 export type DoDroppedFilesAtom = typeof doDroppedFilesAtom;
 export const doDroppedFilesAtom = atom(
     null,
-    async (get, set, files: FileList) => {
+    async (get, set, files: File[]) => {
         const filenames = [...files].map((file) => (file as File & { path: string; }).path).filter(Boolean);
         if (!filenames.length) { return; }
         try {
@@ -28,3 +28,4 @@ mainApi?.gotFilesContent((event: any, content: FilesContent) => {
 // handle files drop
 
 export const filesContentAtom = atom<FilesContent>({});
+
