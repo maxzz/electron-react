@@ -121,12 +121,12 @@ ipcMain.on(ToMainKeys.notify, (_event, message) => {
     new Notification({ title: 'My Noti', body: message }).show();
 });
 
-ipcMain.on(ToMainKeys.openFiles, (event, filenames: string[]) => {
+function loadFilesContent(filenames: string[]): FilesContent {
     console.log('filenames', filenames);
 
     const files: string[] = [];
     const folders: string[] = [];
-    const failed: string[] = [];
+    const failed: FileContent[] = [];
 
     (filenames || []).forEach((filename) => {
         try {
@@ -137,19 +137,31 @@ ipcMain.on(ToMainKeys.openFiles, (event, filenames: string[]) => {
                 folders.push(filename);
             }
         } catch (error) {
-            failed.push(filename);
+            failed.push({
+                path: filename,
+                cnt: error.message,
+            });
         }
     });
 
-    const loaded = files.map((filename) => {
+    const loaded: FileContent[] = files.map((filename) => {
         const cnt = readFileSync(filename).toString();
         return {
-            name: filename,
+            path: filename,
             cnt,
         };
     });
 
-    win?.webContents.send(ToRendererKeys.gotFilesContent, {
+    return {
         files: loaded,
-    })
+        failed,
+    };
+}
+
+ipcMain.on(ToMainKeys.openFiles, (event, filenames: string[]) => {
+    const res = loadFilesContent(filenames);
+
+    win?.webContents.send(ToRendererKeys.gotFilesContent, {
+        files: res.files,
+    });
 });
