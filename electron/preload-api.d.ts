@@ -1,3 +1,7 @@
+// declare namespace tmApi {
+//     function sendNotification(message: string): void;
+// }
+// vs.
 // declare var tmApi: {
 //     sendNotification: (message: string) => void
 // }
@@ -20,7 +24,3 @@ type TmApi = {
 }
 
 declare var tmApi: TmApi;
-
-// declare namespace tmApi {
-//     function sendNotification(message: string): void;
-// }

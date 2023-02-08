@@ -1,9 +1,7 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
-//console.log('preload __dirname', __dirname); // __dirname is not defined
-
-//vvvvvvvvvvvv this copy of preload-types.ts: cannot be imported wo/ bundler
-//import { ToMainKeys, ToRendererKeys } from "./preload-types";
+// vvv....................................................................... // this copy of preload-types.ts: cannot be imported wo/ bundler
+//
 enum ToMainKeys {
     notify = 'notify',
     invokeFilesContent = 'tm-invoke-files-content',
@@ -13,7 +11,8 @@ enum ToMainKeys {
 enum ToRendererKeys {
     gotFilesContent = 'tm-got-files-content',
 };
-//^^^^^^^^^^^^ this copy of preload-types.ts: cannot be imported wo/ bundler
+//
+// ^^^.......................................................................
 
 // type ToMainKeys = 'notify' | 'tm-open-files';
 // type ToRendererKeys = 'tm-got-files-content';
