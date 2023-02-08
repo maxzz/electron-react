@@ -4,7 +4,7 @@
 
 type FileContent = {
     path: string;   // file full path
-    cnt: string;    // file content
+    cnt: string;    // file content or error message
 }
 
 type FilesContent = {
@@ -16,6 +16,7 @@ type TmApi = {
     sendNotification: (message: string) => void;
     openFiles: (filenames: string[]) => void;
     gotFilesContent: (callback: (event: any, content: FilesContent) => void) => void;
+    invokeFilesContent: (filenames: string[]) => Promise<FilesContent>;
 }
 
 declare var tmApi: TmApi;

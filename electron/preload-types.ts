@@ -5,4 +5,5 @@ export const ToMainKeys = {
 
 export const ToRendererKeys = {
     gotFilesContent: 'tm-got-files-content',
+    invokeFilesContent: 'tm-invoke-files-content',
 };
