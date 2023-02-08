@@ -14,9 +14,9 @@ type FilesContent = {
 
 type TmApi = {
     sendNotification: (message: string) => void;
+    invokeFilesContent: (filenames: string[]) => Promise<FilesContent>;
     openFiles: (filenames: string[]) => void;
     gotFilesContent: (callback: (event: any, content: FilesContent) => void) => void;
-    invokeFilesContent: (filenames: string[]) => Promise<FilesContent>;
 }
 
 declare var tmApi: TmApi;

@@ -4,12 +4,12 @@ import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 //import { ToMainKeys, ToRendererKeys } from "./preload-types";
 enum ToMainKeys {
     notify = 'notify',
+    invokeFilesContent = 'tm-invoke-files-content',
     openFiles = 'tm-open-files',
 };
 
 enum ToRendererKeys {
     gotFilesContent = 'tm-got-files-content',
-    invokeFilesContent = 'tm-invoke-files-content',
 };
 //^^^^^^^^^^^^ this copy of preload-types.ts: cannot be imported wo/ bundler
 
@@ -20,15 +20,15 @@ const api: TmApi = {
     sendNotification: (message: string) => {
         ipcRenderer.send(ToMainKeys.notify, message);
     },
+    invokeFilesContent: (filenames: string[]): Promise<FilesContent> => {
+        return ipcRenderer.invoke(ToMainKeys.invokeFilesContent, filenames);
+    },
     openFiles: (filenames: string[]) => {
         ipcRenderer.send(ToMainKeys.openFiles, filenames);
     },
     gotFilesContent: (callback: (event: IpcRendererEvent, content: FilesContent) => void) => {
         ipcRenderer.on(ToRendererKeys.gotFilesContent, callback);
     },
-    invokeFilesContent: (filenames: string[]): Promise<FilesContent> => {
-        return ipcRenderer.invoke(ToRendererKeys.invokeFilesContent, filenames);
-    }
 };
 
 contextBridge.exposeInMainWorld('tmApi', api);
