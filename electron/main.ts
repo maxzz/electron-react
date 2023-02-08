@@ -165,3 +165,8 @@ ipcMain.on(ToMainKeys.openFiles, (event, filenames: string[]) => {
         files: res.files,
     });
 });
+
+ipcMain.handle(ToMainKeys.invokeFilesContent, (event, filenames: string[]) => {
+    const res = loadFilesContent(filenames);
+    return res;
+});
