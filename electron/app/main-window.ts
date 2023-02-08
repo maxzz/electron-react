@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { release } from 'node:os';
 import { app, BrowserWindow, shell } from 'electron';
-import { getIniOptions, saveIniOptions } from './ini-options';
+import { getIniOptions, saveIniOptions } from './utils/ini-options';
 
 process.env.DIST_ELECTRON = join(__dirname, '../');
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist');
