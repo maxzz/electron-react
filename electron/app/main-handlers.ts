@@ -47,14 +47,6 @@ function loadFilesContent(filenames: string[]): FilesContent {
     };
 }
 
-ipcMain.on(ToMainKeys.openFiles, (event, filenames: string[]) => {
-    const res = loadFilesContent(filenames);
-
-    win?.webContents.send(ToRendererKeys.gotFilesContent, {
-        files: res.files,
-    });
-});
-
 ipcMain.handle(ToMainKeys.invokeFilesContent, (event, filenames: string[]) => {
     const res = loadFilesContent(filenames);
     return res;

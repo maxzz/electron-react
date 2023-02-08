@@ -9,27 +9,7 @@ function getPathes(files: File[]): string[] {
     return filenames;
 }
 
-export type DoDroppedFilesAtom = typeof doDroppedFilesAtom;
-export const doDroppedFilesAtom = atom(
-    null,
-    async (get, set, dropFiles: File[]) => {
-        const filenames = getPathes(dropFiles);
-        if (!filenames.length) { return; }
-        try {
-            console.log('files', dropFiles, filenames);
-            mainApi?.openFiles(filenames);
-        } catch (error) {
-            console.log('files error', error, 'files', dropFiles);
-        }
-    }
-);
-
-mainApi?.gotFilesContent((event: any, content: FilesContent) => {
-    console.log('content', content);
-    
-    const setFilesContent = useSetAtom(filesContentAtom);
-    setFilesContent(content);
-});
+export type DoDroppedFilesAtom = typeof doInvokeLoadFilesAtom;
 
 // handle files drop
 

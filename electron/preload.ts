@@ -5,7 +5,6 @@ import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 const ToMainKeys = {
     notify: 'notify',
     invokeFilesContent: 'tm-invoke-files-content',
-    openFiles: 'tm-open-files',
 };
 
 const ToRendererKeys = {
@@ -20,12 +19,6 @@ const api: TmApi = {
     },
     invokeFilesContent: (filenames: string[]): Promise<FilesContent> => {
         return ipcRenderer.invoke(ToMainKeys.invokeFilesContent, filenames);
-    },
-    openFiles: (filenames: string[]) => {
-        ipcRenderer.send(ToMainKeys.openFiles, filenames);
-    },
-    gotFilesContent: (callback: (event: IpcRendererEvent, content: FilesContent) => void) => {
-        ipcRenderer.on(ToRendererKeys.gotFilesContent, callback);
     },
 };
 
