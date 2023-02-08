@@ -9,7 +9,7 @@ export function FileDisplay() {
         <div className="">diplay</div>
         {filesContent.files?.map(({path, cnt}, idx) => {
             return (
-                <div className="">{path}</div>
+                <div className="" key={idx}>{path}</div>
             )
         })}
         </>
