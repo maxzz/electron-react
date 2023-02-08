@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FileDisplay } from './components/FileDisplay';
 import { DropArea } from './components/UI/UIDropArea';
-import { mainApi } from './store';
+import { doDroppedFilesAtom, mainApi } from './store';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
 
@@ -24,7 +24,7 @@ export function App() {
             </div>
 
             <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Footer</div>
-            <DropArea />
+            <DropArea doDroppedFilesAtom={doDroppedFilesAtom} />
         </div>
     );
 }
