@@ -4,11 +4,16 @@ export var mainApi: TmApi | undefined = typeof tmApi !== 'undefined' ? tmApi : u
 
 // main process APIs
 
+function getPathes(files: File[]): string[] {
+    const filenames = [...files].map((file) => (file as File & { path: string; }).path).filter(Boolean);
+    return filenames;
+}
+
 export type DoDroppedFilesAtom = typeof doDroppedFilesAtom;
 export const doDroppedFilesAtom = atom(
     null,
     async (get, set, files: File[]) => {
-        const filenames = [...files].map((file) => (file as File & { path: string; }).path).filter(Boolean);
+        const filenames = getPathes(files);
         if (!filenames.length) { return; }
         try {
             console.log('files', files, filenames);
@@ -29,3 +34,19 @@ mainApi?.gotFilesContent((event: any, content: FilesContent) => {
 
 export const filesContentAtom = atom<FilesContent>({});
 
+// load files with invoke
+
+export const doInvokeLoadFilesAtom = atom(
+    null,
+    async (get, set, files: File[]) => {
+        const filenames = getPathes(files);
+        if (!filenames.length) { return; }
+
+        const filesCnt = await mainApi?.invokeFilesContent(filenames);
+        console.log('invoke files result', filesCnt);
+
+        if (filesCnt) {
+            set(filesContentAtom, filesCnt);
+        }
+    }
+)
