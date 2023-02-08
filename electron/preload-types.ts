@@ -4,7 +4,4 @@ export const ToMainKeys = {
     notify: 'notify',
     invokeFilesContent: 'tm-invoke-files-content',
 };
-
-export const ToRendererKeys = {
-};
 // ^^^.......................................................................
