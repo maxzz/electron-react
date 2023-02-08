@@ -1,5 +1,7 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
+//console.log('preload __dirname', __dirname); // __dirname is not defined
+
 //vvvvvvvvvvvv this copy of preload-types.ts: cannot be imported wo/ bundler
 //import { ToMainKeys, ToRendererKeys } from "./preload-types";
 enum ToMainKeys {
