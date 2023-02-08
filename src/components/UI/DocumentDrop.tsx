@@ -43,18 +43,13 @@ export function DragHandlers({ doDroppedFilesAtom, activeAtom }: { doDroppedFile
         };
 
     }, []);
-
-    return (<></>);
 }
 
-export function DropArea({ doDroppedFilesAtom }: { doDroppedFilesAtom: DoDroppedFilesAtom; }) {
+export function DocumentDrop({ doDroppedFilesAtom }: { doDroppedFilesAtom: DoDroppedFilesAtom; }) {
     const [activeAtom] = useState(atom(false));
     const active = useAtomValue(activeAtom);
-
     DragHandlers({ doDroppedFilesAtom, activeAtom, });
     return (<>
-        {/* <DragHandlers doDroppedFilesAtom={doDroppedFilesAtom} activeAtom={activeAtom} /> */}
-
         {active && <div className={`absolute inset-0 grid place-items-center text-5xl font-bold text-slate-50 bg-slate-800/90 z-10`}>
             Drop it!
         </div>}

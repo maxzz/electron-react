@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { FileDisplay } from './components/FileDisplay';
-import { DropArea } from './components/UI/UIDropArea';
+import { DocumentDrop } from './components/UI/DocumentDrop';
 import { doInvokeLoadFilesAtom, mainApi } from './store';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
 
 export function App() {
-    return (
+    return (<>
         <div className="h-full grid grid-rows-[auto_1fr_auto]">
             <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Header</div>
 
@@ -21,9 +21,10 @@ export function App() {
             </div>
 
             <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Footer</div>
-            <DropArea doDroppedFilesAtom={doInvokeLoadFilesAtom} />
         </div>
-    );
+        
+        <DocumentDrop doDroppedFilesAtom={doInvokeLoadFilesAtom} />
+    </>);
 }
 
 function Header() {
