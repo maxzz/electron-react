@@ -1,3 +1,4 @@
+import { loadFilesContent } from "@/utils/web-load-files";
 import { atom, useSetAtom } from "jotai";
 
 export var mainApi: TmApi | undefined = typeof tmApi !== 'undefined' ? tmApi : undefined;
@@ -20,14 +21,20 @@ export const filesContentAtom = atom<FilesContent>({});
 export const doInvokeLoadFilesAtom = atom(
     null,
     async (get, set, dropFiles: File[]) => {
-        const filenames = getPathes(dropFiles);
-        if (!filenames.length) { return; }
-
-        const filesCnt = await mainApi?.invokeFilesContent(filenames);
-        console.log('invoke files result', filesCnt);
-
-        if (filesCnt) {
-            set(filesContentAtom, filesCnt);
+        if (mainApi) {
+            const filenames = getPathes(dropFiles);
+            if (!filenames.length) { return; }
+    
+            const filesCnt = await mainApi?.invokeFilesContent(filenames);
+            console.log('invoke files result', filesCnt);
+            if (filesCnt) {
+                set(filesContentAtom, filesCnt);
+            }
+        } else {
+            const filesCnt = await loadFilesContent(dropFiles);
+            if (filesCnt) {
+                set(filesContentAtom, filesCnt);
+            }
         }
     }
 )

@@ -9,6 +9,7 @@
 type FileContent = {
     path: string;   // file full path
     cnt: string;    // file content or error message
+    file?: File;    // file handle exist when loaded from web drag and drop
 }
 
 type FilesContent = {
