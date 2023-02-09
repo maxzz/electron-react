@@ -10,7 +10,7 @@ export function App() {
         <div className="h-full grid grid-rows-[auto_1fr_auto]">
             <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Header</div>
 
-            <div className="grid grid-cols-[1fr_minmax(0,64ch)_1fr] bg-green-500">
+            <div className="grid grid-cols-[1fr_minmax(0,64ch)_1fr] text-green-900 bg-green-500">
                 <div className="col-start-2 p-4 flex flex-col space-y-4">
                     <Header />
                     {/* <TestState /> */}
