@@ -1,8 +1,9 @@
 import { app } from 'electron';
 import { createWindow } from './app/main-window';
-import { initHandlers } from './app/main-handlers';
+import { connectHandlers } from './app/main-handlers';
 
 console.log('main    __dirname', __dirname);
 
-initHandlers();
+connectHandlers();
+
 app.whenReady().then(createWindow);
