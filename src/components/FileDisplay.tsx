@@ -12,8 +12,7 @@ export function FileDisplay() {
                 return (
                     <div className="text-xs" key={idx}>
                         <div className="px-2 py-2 bg-slate-900/20">{path}</div>
-                        {/* <div className="px-2 py-2 bg-slate-100/20">{cnt}</div> */}
-                        <textarea className="w-full px-2 py-2 bg-slate-100/20" rows={5}>{cnt}</textarea>
+                        <textarea className="w-full px-2 py-2 bg-slate-100/20 smallscroll" rows={5} value={cnt} readOnly />
                     </div>
                 );
             })}

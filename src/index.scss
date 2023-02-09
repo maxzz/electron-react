@@ -50,6 +50,24 @@ body {
     @apply h-full;
 }
 
+/* Firefox scrollbars */
+.smallscroll {
+    --sb-width: 8px;
+    scrollbar-color: #666b7a transparent;
+    scrollbar-width: thin;
+}
+
+/* Chrome scrollbars */
+.smallscroll::-webkit-scrollbar {
+    width: var(--sb-width);
+    height: var(--sb-width);
+    background-color: transparent;
+}
+
+.smallscroll::-webkit-scrollbar-thumb {
+    background-color: #666b7a;
+}
+
 // a {
 //     font-weight: 500;
 //     color: #646cff;
