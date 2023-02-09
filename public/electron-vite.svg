@@ -20,15 +20,15 @@
 
     <defs>
         <linearGradient id="paint0_linear" 
-            x1="6.00017" y1="32.9999" x2="235" y2="344" 
+            x1="4" y1="4" x2="23" y2="34" 
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="rgba(140,255,176,0.533)" />
-            <stop offset="1" stop-color="rgba(17,136,144,0.521)" />
+            <stop stop-color="rgba(140,255,176,0.5)" />
+            <stop offset="1" stop-color="rgba(17,136,144,0.5)" />
         </linearGradient>
 
         <linearGradient id="paint1_linear" 
-            x1="194.651" y1="8.81818" x2="236.076" y2="292.989" 
+            x1="19" y1="1" x2="23" y2="29" 
             gradientUnits="userSpaceOnUse"
         >
             <stop stop-color="#FFEA83" />
