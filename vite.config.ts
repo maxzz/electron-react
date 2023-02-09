@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 import electron from 'vite-electron-plugin';
 import renderer from 'vite-plugin-electron-renderer';
 import { customStart, loadViteEnv } from 'vite-electron-plugin/plugin';
+import svgr from 'vite-plugin-svgr';
 import pkg from './package.json';
 
 function electronPlugins() {
@@ -71,6 +72,7 @@ export default defineConfig(({ command }) => {
 
             // renderer({ nodeIntegration: true, }), // Use Node.js API in the Renderer-process
             renderer(),
+            svgr(),
         ],
 
         resolve: {
