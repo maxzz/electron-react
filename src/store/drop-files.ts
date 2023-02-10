@@ -22,6 +22,5 @@ export const doInvokeLoadFilesAtom = atom(
         if (filesCnt) {
             set(filesContentAtom, filesCnt);
         }
-        //TODO: handle filesCnt.failed
     }
 );
