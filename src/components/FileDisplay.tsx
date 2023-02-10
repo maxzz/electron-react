@@ -18,7 +18,7 @@ export function FileDisplay() {
             })}
         </div>
 
-        {filesContent.failed && (
+        {!!filesContent.failed?.length && (
             <div className="border-slate-900/20 border rounded">
                 <div className="px-2 py-2 border-slate-900/20 border-b">Failed to Load:</div>
                 {filesContent.failed?.map(({ path, cnt }, idx) => {

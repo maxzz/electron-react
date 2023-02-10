@@ -69,7 +69,8 @@ body {
 }
 
 .smallscroll::-webkit-resizer {
-    background-color: #307540;
+    background: #48cc67;
+    background-image: linear-gradient(to right bottom, transparent 50%, #30754070 60%, #30754070);
 }
 
 // a {
