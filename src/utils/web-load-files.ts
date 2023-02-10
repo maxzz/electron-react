@@ -1,4 +1,4 @@
-export function textFileReader(file: File): Promise<string> {
+function textFileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         const aborted = () => reject(`File (${file.name}) reading was aborted`);
@@ -14,7 +14,6 @@ export async function loadFilesContent(files: File[]): Promise<FilesContent> {
         files: [],
         failed: [],
     };
-
     for (const file of files) {
         try {
             const cnt = await textFileReader(file);
@@ -31,6 +30,10 @@ export async function loadFilesContent(files: File[]): Promise<FilesContent> {
             });
         }
     }
-
     return res;
+}
+
+export function getElectronPathes(files: File[]): string[] {
+    const filenames = [...files].map((file) => (file as File & { path: string; }).path).filter(Boolean);
+    return filenames;
 }
