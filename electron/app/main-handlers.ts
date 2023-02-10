@@ -3,7 +3,7 @@ import { win } from './main-window';
 import { ToMainKeys } from '../preload-types';
 import { loadFilesContent } from './utils/load-files';
 
-export function connectHandlers() {
+export function connectRendererHandlers() {
     ipcMain.on(ToMainKeys.notify, (_event, message) => {
         new Notification({ title: 'My Noti', body: message }).show();
     });
