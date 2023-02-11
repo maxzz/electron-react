@@ -3,6 +3,7 @@ import { FileDisplay } from './components/FileDisplay';
 import { DocumentDrop } from './components/UI/DocumentDrop';
 import { doInvokeLoadFilesAtom, mainApi } from './store';
 import nodeLogo from "./assets/node.svg";
+import { Section2_Title } from './components/Section2_Title';
 import './App.scss';
 
 export function App() {
@@ -12,9 +13,12 @@ export function App() {
 
             <div className="grid grid-cols-[1fr_minmax(0,64ch)_1fr] text-green-900 bg-green-500">
                 <div className="col-start-2 p-4 flex flex-col space-y-4">
-                    <Header />
+                    <div className=" flex items-center justify-between">
+                        <Section2_Title />
+                        <Section2_SendNotification />
+
+                    </div>
                     {/* <TestState /> */}
-                    <TestState2 />
                     {/* <TheRest /> */}
                     <FileDisplay />
                 </div>
@@ -27,27 +31,17 @@ export function App() {
     </>);
 }
 
-import { ReactComponent as ElectronLoad } from './assets/icons/electron-vite.svg';
-
-function Header() {
+function Section2_SendNotification() {
     return (
-        <div className="flex items-center space-x-2">
-            <a
-                href="https://github.com/electron-vite/electron-vite-react"
-                title="Click on the Electron + Vite logo to learn more" target="_blank"
-            >
-                {/* <img className="w-8 h-8" src="./electron-vite.svg" alt="Electron + Vite logo" /> */}
-                <ElectronLoad className="w-16 h-16" />
-            </a>
-
-            <div>
-                <h1 className="font-semibold">Electron, Vite, React</h1>
-
-                <p className="text-[0.55rem]">
-                    Click logo to learn more
-                </p>
-            </div>
-        </div>
+        <button
+            className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
+            onClick={() => {
+                //window.sendNotification('My message')
+                mainApi?.sendNotification('My secure transfered message');
+            }}
+        >
+            Send notification
+        </button>
     );
 }
 
@@ -59,21 +53,6 @@ function TestState() {
             onClick={() => setCount((count) => count + 1)}
         >
             count is {count}
-        </button>
-    );
-}
-
-function TestState2() {
-    return (
-        <button
-            className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
-            onClick={() => {
-                //window.sendNotification('My message')
-                mainApi?.sendNotification('My secure transfered message');
-
-            }}
-        >
-            Send notification
         </button>
     );
 }
