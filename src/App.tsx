@@ -34,7 +34,7 @@ export function App() {
 function Section2_SendNotification() {
     return (
         <button
-            className="place-self-center px-3 py-2 border-slate-400 border rounded shadow active:scale-[.97]"
+            className="place-self-center px-3 py-2 border-slate-900/20 border rounded shadow active:scale-[.97]"
             onClick={() => {
                 //window.sendNotification('My message')
                 mainApi?.sendNotification('My secure transfered message');
