@@ -7,19 +7,15 @@
 // }
 
 type FileContent = {
-    path: string;   // file full path
-    cnt: string;    // file content or error message
-    file?: File;    // file handle exist when loaded from web drag and drop
-}
-
-type FilesContent = {
-    files?: FileContent[];
-    failed?: FileContent[];
+    path: string;       // file full path
+    cnt: string;        // file content or error message
+    file?: File;        // file handle exist when loaded from web drag and drop
+    failed?: boolean;   // if failed the cnt member has error text
 }
 
 type TmApi = {
     sendNotification: (message: string) => void;
-    invokeFilesContent: (filenames: string[]) => Promise<FilesContent>;
+    invokeFilesContent: (filenames: string[]) => Promise<FileContent[]>;
 }
 
 declare var tmApi: TmApi;

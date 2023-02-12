@@ -9,24 +9,22 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-export async function loadFilesContent(files: File[]): Promise<FilesContent> {
-    const res: Required<FilesContent> = {
-        files: [],
-        failed: [],
-    };
+export async function loadFilesContent(files: File[]): Promise<FileContent[]> {
+    const res: FileContent[] = [];
     for (const file of files) {
         try {
             const cnt = await textFileReader(file);
-            res.files.push({
+            res.push({
                 file,
                 path: file.name,
                 cnt,
             });
         } catch (error) {
-            res.failed.push({
+            res.push({
                 file,
                 path: file.name,
                 cnt: error instanceof Error ? error.message : JSON.stringify(error),
+                failed: true,
             });
         }
     }

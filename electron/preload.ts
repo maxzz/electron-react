@@ -13,7 +13,7 @@ const api: TmApi = {
     sendNotification: (message: string) => {
         ipcRenderer.send(ToMainKeys.notify, message);
     },
-    invokeFilesContent: (filenames: string[]): Promise<FilesContent> => {
+    invokeFilesContent: (filenames: string[]): Promise<FileContent[]> => {
         return ipcRenderer.invoke(ToMainKeys.invokeFilesContent, filenames);
     },
 };

@@ -22,9 +22,9 @@ export function FileDisplay() {
     const filesContent = useAtomValue(filesContentAtom);
     return (<>
         <div className="border-slate-900/20 border rounded">
-            <SectionHeader>Loaded content: {!filesContent.files?.length && ' Drop It Here'}</SectionHeader>
+            <SectionHeader>Loaded content: {!filesContent.length && ' Drop It Here'}</SectionHeader>
 
-            {filesContent.files?.map(({ path, cnt }, idx) => (
+            {filesContent.map(({ path, cnt }, idx) => (
                 <div className="text-xs" key={path}>
                     <CardFilename path={path} />
                     <textarea className="w-full px-2 py-2 bg-slate-100/20 smallscroll" rows={5} value={cnt} readOnly />
@@ -32,7 +32,7 @@ export function FileDisplay() {
             ))}
         </div>
 
-        {!!filesContent.failed?.length && (
+        {/* {!!filesContent.failed?.length && (
             <div className="border-slate-900/20 border rounded">
                 <SectionHeader>Failed to Load:</SectionHeader>
 
@@ -43,7 +43,7 @@ export function FileDisplay() {
                     </div>
                 ))}
             </div>
-        )}
+        )} */}
     </>);
 }
 

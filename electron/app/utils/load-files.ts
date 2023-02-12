@@ -1,39 +1,41 @@
 import path from 'node:path';
 import { readFileSync, statSync } from 'node:fs';
 
-export function loadFilesContent(filenames: string[]): FilesContent {
-    console.log('filenames', filenames);
+export function loadFilesContent(filenames: string[]): FileContent[] {
+    console.log('node filenames to load', filenames);
 
-    const files: string[] = [];
+    const files: Partial<FileContent>[] = [];
     const folders: string[] = [];
-    const failed: FileContent[] = [];
 
     (filenames || []).forEach((filename) => {
         try {
             const st = statSync(filename);
             if (st.isFile()) {
-                files.push(filename);
+                files.push({
+                    path: filename,
+                });
             } else if (st.isDirectory()) {
                 folders.push(filename);
             }
         } catch (error) {
-            failed.push({
+            files.push({
+                failed: true,
+                cnt: error instanceof Error ? error.message : JSON.stringify(error),
                 path: filename,
-                cnt: error.message,
             });
         }
     });
 
-    const loaded: FileContent[] = files.map((filename) => {
-        const cnt = readFileSync(filename).toString();
-        return {
-            path: filename,
-            cnt,
-        };
+    files.forEach((file) => {
+        if (!file.failed) {
+            try {
+                file.cnt = readFileSync(file.path).toString();
+            } catch (error) {
+                file.cnt = error instanceof Error ? error.message : JSON.stringify(error);
+                file.failed = true;
+            }
+        }
     });
 
-    return {
-        files: loaded,
-        failed,
-    };
+    return files as Required<FileContent>[];
 }
