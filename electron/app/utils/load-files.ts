@@ -2,8 +2,6 @@ import path from 'node:path';
 import { readFileSync, statSync } from 'node:fs';
 
 export function loadFilesContent(filenames: string[]): FileContent[] {
-    console.log('node filenames to load', filenames);
-
     const files: Partial<FileContent>[] = [];
     const folders: string[] = [];
 
@@ -19,12 +17,14 @@ export function loadFilesContent(filenames: string[]): FileContent[] {
             }
         } catch (error) {
             files.push({
-                failed: true,
-                cnt: error instanceof Error ? error.message : JSON.stringify(error),
                 path: filename,
+                cnt: error instanceof Error ? error.message : JSON.stringify(error),
+                failed: true,
             });
         }
     });
+
+    //TODO: load folders
 
     files.forEach((file) => {
         if (!file.failed) {

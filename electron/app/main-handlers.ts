@@ -9,6 +9,6 @@ export function connectRendererHandlers() {
     });
     
     ipcMain.handle(ToMainKeys.invokeFilesContent, (event, filenames: string[]) => {
-        return loadFilesContent(filenames);
+        return loadFilesContent(filenames) as FileContent[];
     });
 }
