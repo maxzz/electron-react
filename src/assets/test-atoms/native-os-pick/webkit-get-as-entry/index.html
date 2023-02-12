@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us"> <!-- https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry -->
+
+<head>
+    <title>Complete file example</title>
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+
+        .form {
+            width: 600px;
+            background: #ccc;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid black;
+        }
+
+        #dropzone {
+            text-align: center;
+            width: 300px;
+            height: 100px;
+            margin: 10px;
+            padding: 10px;
+            border: 4px dashed red;
+            border-radius: 10px;
+        }
+
+        #boxtitle {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            color: black;
+            font: bold 2em "Arial", sans-serif;
+            width: 300px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Drag files and/or directories to the box below!</p>
+
+    <div id="dropzone">
+        <div id="boxtitle">Drop Files Here</div>
+    </div>
+
+    <h2>Directory tree:</h2>
+
+    <ul id="listing"></ul>
+
+    <script>
+        let dropzone = document.getElementById("dropzone");
+        let listing = document.getElementById("listing");
+
+        dropzone.addEventListener("dragover", (event) => event.preventDefault(), false);
+
+        dropzone.addEventListener("drop", (event) => {
+            event.preventDefault();
+
+            let items = event.dataTransfer.items;
+
+            listing.textContent = "";
+
+            for (let i = 0; i < items.length; i++) {
+                let item = items[i].webkitGetAsEntry();
+                if (item) {
+                    scanFiles(item, listing);
+                }
+            }
+        }, false);
+
+        function scanFiles(item, container) {
+            let elm = document.createElement("li");
+            elm.textContent = item.name;
+            container.appendChild(elm);
+            console.log('item', item);
+
+            if (item.isDirectory) {
+                let directoryContainer = document.createElement("ul");
+                container.appendChild(directoryContainer);
+
+                let directoryReader = item.createReader();
+                directoryReader.readEntries((entries) => {
+                    entries.forEach((entry) => {
+                        scanFiles(entry, directoryContainer);
+                    });
+                });
+            }
+        }
+
+    </script>
+</body>
+
+</html>
