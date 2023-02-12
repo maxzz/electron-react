@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { FileDisplay } from './components/FileDisplay';
-import { DocumentDrop } from './components/UI/DocumentDrop';
 import { doInvokeLoadFilesAtom, mainApi } from './store';
-import nodeLogo from "./assets/node.svg";
+import { DocumentDrop } from './components/UI/DocumentDrop';
 import { Section2_Title } from './components/Section2_Title';
+import { FileContentViews } from './components/FileContentViews';
+import nodeLogo from "./assets/node.svg";
 import './App.scss';
 
 export function App() {
@@ -20,7 +20,7 @@ export function App() {
                     </div>
                     {/* <TestState /> */}
                     {/* <TheRest /> */}
-                    <FileDisplay />
+                    <FileContentViews />
                 </div>
             </div>
 

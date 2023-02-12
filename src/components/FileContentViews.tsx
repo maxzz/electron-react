@@ -18,11 +18,16 @@ function CardFilename({ path, ...rest }: { path: string; } & HTMLAttributes<HTML
     );
 }
 
-export function FileDisplay() {
+export function FileContentViews() {
     const filesContent = useAtomValue(filesContentAtom);
     return (<>
         <div className="border-slate-900/20 border rounded">
-            <SectionHeader>Loaded content: {!filesContent.length && ' Drop It Here'}</SectionHeader>
+            <SectionHeader>
+                <div className="flex items-center justify-between">
+                    <div className="">Loaded content: {!filesContent.length && ' Drop It Here'}</div>
+                    <div className="">clear</div>
+                </div>
+            </SectionHeader>
 
             {filesContent.map(({ path, cnt }, idx) => (
                 <div className="text-xs" key={path}>
@@ -31,19 +36,6 @@ export function FileDisplay() {
                 </div>
             ))}
         </div>
-
-        {/* {!!filesContent.failed?.length && (
-            <div className="border-slate-900/20 border rounded">
-                <SectionHeader>Failed to Load:</SectionHeader>
-
-                {filesContent.failed?.map(({ path, cnt }, idx) => (
-                    <div className="text-xs" key={path}>
-                        <CardFilename path={path} />
-                        <textarea className="w-full px-2 py-2 bg-slate-100/20 smallscroll" rows={5} value={cnt} readOnly />
-                    </div>
-                ))}
-            </div>
-        )} */}
     </>);
 }
 
