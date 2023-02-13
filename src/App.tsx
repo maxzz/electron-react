@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import { doInvokeLoadFilesAtom, mainApi } from './store';
 import { DocumentDrop } from './components/UI/DocumentDrop';
 import { Section2_Title } from './components/Section2_Title';
@@ -19,10 +18,8 @@ export function App() {
                         <Section2_SendNotification />
 
                     </div>
-                    {/* <TestState /> */}
                     {/* <TheRest /> */}
                     <FileContentViews />
-                    <TheDrop />
                 </div>
             </div>
 
@@ -47,51 +44,11 @@ function Section2_SendNotification() {
     );
 }
 
-function TestState() {
-    const [count, setCount] = useState(0);
-    return (
-        <button
-            className="place-self-center px-3 py-2 border-neutral-400 border rounded shadow active:scale-[.97]"
-            onClick={() => setCount((count) => count + 1)}
-        >
-            count is {count}
-        </button>
-    );
-}
-
 function TheRest() {
     return (
         <div className="text-xs">
             Place static files into the <span className="font-semibold">/public</span> folder
             <img className="inline-block w-4 h-4 fill-red-500" src={nodeLogo} alt="Node logo" />
-        </div>
-    );
-}
-
-function TheDrop() {
-    const filesAtom = useState(atom<string[]>([]))[0];
-    const [files, setFiles] = useAtom(filesAtom);
-    const inputRef = useRef<HTMLInputElement>(null);
-    useEffect(() => {
-        inputRef.current?.setAttribute('webkitdirectory', ''); // This will work only for folder drop, not for files, but will have item.webkitRelativePath
-    }, []);
-    return (
-        <div className="text-xs">
-            <input ref={inputRef} type="file" multiple
-                onChange={(event) => {
-                    const files = event.target.files;
-                    if (files) {
-                        console.log('input drop', files);
-
-                        // setFiles([...files].map((file) => file.webkitRelativePath))
-                        setFiles([...files].map((file) => JSON.stringify(file.name)));
-                    }
-                }}
-            />
-            {files.map((file, idx) => (
-                <div className="" key={idx}>{file}</div>
-            ))}
-
         </div>
     );
 }
