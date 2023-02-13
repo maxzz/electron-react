@@ -11,7 +11,7 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-export async function loadWebFilesContent(dropItems: DropItem[]): Promise<FileContent[]> {
+export async function webLoadFilesContent(dropItems: DropItem[]): Promise<FileContent[]> {
     const res: FileContent[] = [];
     for (const item of dropItems) {
         try {
@@ -40,7 +40,7 @@ export async function loadWebFilesContent(dropItems: DropItem[]): Promise<FileCo
     return res;
 }
 
-export function getElectronPathes(files: File[]): string[] {
+export function electronGetPathes(files: File[]): string[] {
     const filenames = [...files].map((file) => (file as File & { path: string; }).path).filter(Boolean);
     return filenames;
 }

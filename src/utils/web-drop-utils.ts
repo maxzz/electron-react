@@ -8,7 +8,7 @@ export type DropItem = {
     file: File;                    // File object from async entry.file() call
 };
 
-export async function getFilesFromList(dataTransferItemList: DataTransferItemList): Promise<DropItem[]> {
+export async function webGetFilesTransferItems(dataTransferItemList: DataTransferItemList): Promise<DropItem[]> {
     const entries = await getAllFileEntries(dataTransferItemList);
     let rv: DropItem[] = [];
     try {

@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { mainApi } from ".";
-import { getElectronPathes, loadWebFilesContent } from "@/utils/web-load-files";
-import { DropItem, getFilesFromList } from "@/utils/web-drop-utils";
+import { electronGetPathes, webLoadFilesContent } from "@/utils/web-load-files";
+import { DropItem, webGetFilesTransferItems } from "@/utils/web-drop-utils";
 
 // handle files drop for web and electron environments
 
@@ -16,13 +16,13 @@ export const doInvokeLoadFilesAtom = atom(
 
         if (mainApi) {
             const dropFiles: File[] = [...dataTransfer.files];
-            const filenames = getElectronPathes(dropFiles);
+            const filenames = electronGetPathes(dropFiles);
             if (!filenames.length) { return; }
 
             filesCnt = await mainApi?.invokeFilesContent(filenames);
         } else {
-            const items: DropItem[] = await getFilesFromList(dataTransfer.items);
-            filesCnt = await loadWebFilesContent(items);
+            const items: DropItem[] = await webGetFilesTransferItems(dataTransfer.items);
+            filesCnt = await webLoadFilesContent(items);
         }
 
         if (filesCnt) {
