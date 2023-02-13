@@ -1,17 +1,15 @@
-export type DropItem = {
-    name: string;
-    fullPath: string;
-    isDir?: boolean;
-    entry: FileSystemFileEntry;    // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
-    file: File;                    // File object from async entry.file() call
-};
-
 // Adapted from https://stackoverflow.com/a/53058574
 // Adapted from https://github.com/sanjibnarzary/bodo_music_server/blob/main/resources/assets/js/utils/directoryReader.ts
 // Adapted from https://github.com/sanjibnarzary/bodo_music_server/blob/main/resources/assets/js/composables/useUpload.ts
 
+export async function fileEntryToFile(entry: FileSystemFileEntry): Promise<File> {
+    return new Promise<File>((resolve, reject): void => {
+        entry.file(resolve, reject);
+    });
+}
+
 async function readEntriesPromise(directoryReader: FileSystemDirectoryReader): Promise<FileSystemEntry[]> {
-    return await new Promise((resolve, reject): void => {
+    return new Promise((resolve, reject): void => {
         directoryReader.readEntries(resolve, reject);
     });
 }
@@ -50,8 +48,4 @@ export async function getAllFileEntries(dataTransferItemList: DataTransferItemLi
     }
 
     return fileEntries;
-}
-
-export async function fileEntryToFile(entry: FileSystemFileEntry) {
-    return new Promise<File>((resolve, reject) => entry.file(resolve, reject));
 }
