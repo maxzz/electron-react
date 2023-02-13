@@ -1,4 +1,12 @@
-import { DropItem, fileEntryToFile, getAllFileEntries } from "./web-data-transfer-item-list";
+import { fileEntryToFile, getAllFileEntries } from "./web-data-transfer-item-list";
+
+export type DropItem = {
+    name: string;
+    fullPath: string;
+    isDir?: boolean;
+    entry: FileSystemFileEntry;    // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
+    file: File;                    // File object from async entry.file() call
+};
 
 export async function getFilesFromList(dataTransferItemList: DataTransferItemList): Promise<DropItem[]> {
     const entries = await getAllFileEntries(dataTransferItemList);

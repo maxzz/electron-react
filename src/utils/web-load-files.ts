@@ -1,6 +1,6 @@
 import { DropItem } from "./web-drop-utils";
 
-function textFileReader(file: FileSystemEntry): Promise<string> {
+function textFileReader(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         const aborted = () => reject(`File (${file.name}) reading was aborted`);
@@ -14,18 +14,24 @@ function textFileReader(file: FileSystemEntry): Promise<string> {
 export async function loadWebFilesContent(dropItems: DropItem[]): Promise<FileContent[]> {
     const res: FileContent[] = [];
     for (const item of dropItems) {
-        const file = item.item;
         try {
-            const cnt = await textFileReader(item.item);
+            if (!item.entry || !item.file) {
+                throw new Error('Empty entry or file');
+            }
+            const cnt = await textFileReader(item.file);
             res.push({
-                file: item.item,
-                path: item.name,
+                entry: item.entry,
+                file: item.file,
+                name: item.name,
+                fullPath: item.fullPath,
                 cnt,
             });
         } catch (error) {
             res.push({
-                file: item.item,
-                path: item.name,
+                entry: item.entry,
+                file: item.file,
+                name: item.name,
+                fullPath: item.fullPath,
                 cnt: error instanceof Error ? error.message : JSON.stringify(error),
                 failed: true,
             });

@@ -22,23 +22,15 @@ export const doInvokeLoadFilesAtom = atom(
             filesCnt = await mainApi?.invokeFilesContent(filenames);
         } else {
             const items: DropItem[] = await getFilesFromList(dataTransfer.items);
-
-
-
-            const fileEntryToFile = async (entry: FileSystemEntry) => new Promise<File>(resolve => entry.file(resolve));
-
-            const files = await Promise.all(items.map(async (entry) => await fileEntryToFile(entry.item)));
-            
-            console.log('handles', files);
-
-
-            console.log('items arr', items);
-
-            //filesCnt = await loadWebFilesContent(items);
+            filesCnt = await loadWebFilesContent(items);
         }
 
-        // if (filesCnt) {
-        //     set(filesContentAtom, filesCnt);
-        // }
+        if (filesCnt) {
+            set(filesContentAtom, filesCnt);
+        }
     }
 );
+
+//TODO: drop zone 100% of document not view port
+//TODO: filter files by valid types
+//TODO: show errors in UI

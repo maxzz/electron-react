@@ -10,14 +10,14 @@ export function loadFilesContent(filenames: string[]): FileContent[] {
             const st = statSync(filename);
             if (st.isFile()) {
                 files.push({
-                    path: filename,
+                    name: filename,
                 });
             } else if (st.isDirectory()) {
                 folders.push(filename);
             }
         } catch (error) {
             files.push({
-                path: filename,
+                name: filename,
                 cnt: error instanceof Error ? error.message : JSON.stringify(error),
                 failed: true,
             });
@@ -29,7 +29,7 @@ export function loadFilesContent(filenames: string[]): FileContent[] {
     files.forEach((file) => {
         if (!file.failed) {
             try {
-                file.cnt = readFileSync(file.path).toString();
+                file.cnt = readFileSync(file.name).toString();
             } catch (error) {
                 file.cnt = error instanceof Error ? error.message : JSON.stringify(error);
                 file.failed = true;

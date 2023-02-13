@@ -38,9 +38,9 @@ export function FileContentViews() {
                 </div>
             </SectionHeader>
 
-            {filesContent.map(({ path, cnt, failed }, idx) => (
-                <div className="text-xs" key={path}>
-                    <CardFilename path={path} failed={failed} />
+            {filesContent.map(({ name, cnt, failed }, idx) => (
+                <div className="text-xs" key={name}>
+                    <CardFilename path={name} failed={failed} />
                     <div className="flex bg-neutral-100/20">
                         <textarea className="w-full px-2 py-2 bg-neutral-100/20 smallscroll" rows={5} value={cnt} readOnly />
                     </div>
@@ -49,5 +49,3 @@ export function FileContentViews() {
         </div>
     </>);
 }
-
-// TODO: clear list
