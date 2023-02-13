@@ -21,9 +21,9 @@ export const doInvokeLoadFilesAtom = atom(
 
             filesCnt = await mainApi?.invokeFilesContent(filenames);
         } else {
-            const items: DropItem[] = getFilesAndDirsFromItems([...dataTransfer.items]);
+            const items: DropItem[] = await getFilesAndDirsFromItems(dataTransfer.items);
             console.log('items arr', JSON.stringify(items));
-            
+
             const files = items.filter((item) => {
                 console.log('i', item);
                 return !item.isDir

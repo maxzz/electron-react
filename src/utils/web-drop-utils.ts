@@ -87,18 +87,16 @@ async function getAllFileEntries(dataTransferItemList: DataTransferItemList): Pr
     return fileEntries;
 }
 
-export function getFilesAndDirsFromItems(items: DataTransferItem[]): DropItem[] {
-    const rv: DropItem[] = [];
+export async function getFilesAndDirsFromItems(dataTransferItemList: DataTransferItemList): Promise<DropItem[]> {
 
-    // for (let i = 0; i < items.length; i++) {
-    //     let item = items[i].webkitGetAsEntry();
+    const entries = await getAllFileEntries(dataTransferItemList);
 
-    //     if (item) {
-    //         scanFiles(item, rv);
-    //     }
-    // }
-
-    // console.log('rv', rv);
+    const rv: DropItem[] = entries.map((entry) => ({
+        name: entry.name,
+        fullPath: entry.fullPath,
+        isDir: entry.isDirectory,
+        item: entry,
+    }));
 
     return rv;
 }
