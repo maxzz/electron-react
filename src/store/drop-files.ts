@@ -1,7 +1,6 @@
 import { atom } from "jotai";
 import { mainApi } from ".";
-import { electronGetPathes, webLoadFilesContent } from "@/utils/web-load-files";
-import { DropItem, webGetFilesTransferItems } from "@/utils/web-drop-utils";
+import { DropItem, electronGetPathes, webGetFilesTransferItems, webLoadFilesContent } from "@/utils";
 
 // handle files drop for web and electron environments
 

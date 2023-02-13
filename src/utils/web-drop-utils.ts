@@ -3,7 +3,6 @@ import { fileEntryToFile, getAllFileEntries } from "./web-data-transfer-item-lis
 export type DropItem = {
     name: string;
     fullPath: string;
-    isDir?: boolean;
     entry: FileSystemFileEntry;    // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
     file: File;                    // File object from async entry.file() call
 };
@@ -15,12 +14,11 @@ export async function webGetFilesTransferItems(dataTransferItemList: DataTransfe
         rv = await Promise.all(entries.map(async (entry) => ({
             name: entry.name,
             fullPath: entry.fullPath,
-            isDir: entry.isDirectory,
             entry,
             file: await fileEntryToFile(entry),
         })));
     } catch (error) {
-        console.error('cannot read from dataTransferItemList', dataTransferItemList);
+        console.error('cannot read from DataTransferItemList', dataTransferItemList);
     }
     return rv;
 }

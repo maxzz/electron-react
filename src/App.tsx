@@ -4,7 +4,6 @@ import { Section2_Title } from './components/Section2_Title';
 import { FileContentViews } from './components/FileContentViews';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
-import { atom, useAtom } from 'jotai';
 
 export function App() {
     return (<>
@@ -16,7 +15,6 @@ export function App() {
                     <div className=" flex items-center justify-between">
                         <Section2_Title />
                         <Section2_SendNotification />
-
                     </div>
                     {/* <TheRest /> */}
                     <FileContentViews />
