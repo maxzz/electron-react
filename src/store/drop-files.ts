@@ -23,13 +23,22 @@ export const doInvokeLoadFilesAtom = atom(
         } else {
             const items: DropItem[] = await getFilesFromList(dataTransfer.items);
 
-            console.log('items arr', items);
+
+
+            const fileEntryToFile = async (entry: FileSystemEntry) => new Promise<File>(resolve => entry.file(resolve));
+
+            const files = await Promise.all(items.map(async (entry) => await fileEntryToFile(entry.item)));
             
-            filesCnt = await loadWebFilesContent(items);
+            console.log('handles', files);
+
+
+            console.log('items arr', items);
+
+            //filesCnt = await loadWebFilesContent(items);
         }
 
-        if (filesCnt) {
-            set(filesContentAtom, filesCnt);
-        }
+        // if (filesCnt) {
+        //     set(filesContentAtom, filesCnt);
+        // }
     }
 );
