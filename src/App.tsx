@@ -73,7 +73,7 @@ function TheDrop() {
     const [files, setFiles] = useAtom(filesAtom);
     const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
-        inputRef.current?.setAttribute('webkitdirectory', '');
+        inputRef.current?.setAttribute('webkitdirectory', ''); // This will work only for folder drop, not for files, but will have item.webkitRelativePath
     }, []);
     return (
         <div className="text-xs">
