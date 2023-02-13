@@ -13,7 +13,7 @@ function scanFiles(item: FileSystemEntry, rv: DropItem[]) {
         item,
     });
 
-    console.log('item', item);
+    //console.log('item', item);
 
     if (item.isDirectory) {
         let directoryReader = (item as FileSystemDirectoryEntry).createReader();
@@ -25,7 +25,7 @@ function scanFiles(item: FileSystemEntry, rv: DropItem[]) {
     }
 }
 
-export function getFilesFromFiles(items: DataTransferItem[]) {
+export function getFilesAndDirsFromItems(items: DataTransferItem[]) {
     const rv: DropItem[] = [];
 
     for (let i = 0; i < items.length; i++) {
@@ -35,17 +35,8 @@ export function getFilesFromFiles(items: DataTransferItem[]) {
             scanFiles(item, rv);
         }
     }
-}
 
-export function getFilesFromEvent(dataTransfer: DataTransfer) {
-    const rv: DropItem[] = [];
-    
-    const items = dataTransfer.items;
-    for (let i = 0; i < items.length; i++) {
-        let item = items[i].webkitGetAsEntry();
+    console.log('rv', rv);
 
-        if (item) {
-            scanFiles(item, rv);
-        }
-    }
+    return rv;
 }
