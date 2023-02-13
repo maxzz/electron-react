@@ -9,7 +9,7 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-export async function loadFilesContent(files: File[]): Promise<FileContent[]> {
+export async function loadWebFilesContent(files: File[]): Promise<FileContent[]> {
     const res: FileContent[] = [];
     for (const file of files) {
         try {

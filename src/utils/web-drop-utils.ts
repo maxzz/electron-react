@@ -25,11 +25,22 @@ function scanFiles(item: FileSystemEntry, rv: DropItem[]) {
     }
 }
 
-export function getFilesFromevent(dataTransfer: DataTransfer) {
-    const items = dataTransfer.items;
-
+export function getFilesFromFiles(items: DataTransferItem[]) {
     const rv: DropItem[] = [];
 
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i].webkitGetAsEntry();
+
+        if (item) {
+            scanFiles(item, rv);
+        }
+    }
+}
+
+export function getFilesFromEvent(dataTransfer: DataTransfer) {
+    const rv: DropItem[] = [];
+    
+    const items = dataTransfer.items;
     for (let i = 0; i < items.length; i++) {
         let item = items[i].webkitGetAsEntry();
 
