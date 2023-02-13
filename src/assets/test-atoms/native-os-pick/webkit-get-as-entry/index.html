@@ -53,7 +53,7 @@
         let dropzone = document.getElementById("dropzone");
         let listing = document.getElementById("listing");
 
-        dropzone.addEventListener("dragover", (event) => {event.preventDefault(); event.dataTransfer.dropEffect = "link"}, false);
+        dropzone.addEventListener("dragover", (event) => { event.preventDefault(); event.dataTransfer.dropEffect = "link"; }, false);
 
         dropzone.addEventListener("drop", (event) => {
             event.preventDefault();
@@ -72,7 +72,8 @@
 
         function scanFiles(item, container) {
             let elm = document.createElement("li");
-            elm.textContent = item.name + '\n' + (item.webkitRelativePath ? item.webkitRelativePath : '?');
+            elm.style.whiteSpace = 'pre';
+            elm.innerText = item.name + '\n' + (item.fullPath ? item.fullPath : '?');
             container.appendChild(elm);
             console.log('item', item);
 
