@@ -73,7 +73,7 @@
         function scanFiles(item, container) {
             let elm = document.createElement("li");
             elm.style.whiteSpace = 'pre';
-            elm.innerText = item.name + '\n' + (item.fullPath ? item.fullPath : '?');
+            elm.innerHTML = item.name + '<br/>' + `<div style='font-size:0.7rem'>${(item.fullPath ? item.fullPath : '?')}</div>`;
             container.appendChild(elm);
             console.log('item', item);
 
