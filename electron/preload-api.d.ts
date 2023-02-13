@@ -7,10 +7,10 @@
 // }
 
 type FileContent = {
-    path: string;       // file full path
-    cnt: string;        // file content or error message
-    file?: File;        // file handle exist when loaded from web drag and drop
-    failed?: boolean;   // if failed the cnt member has error text
+    path: string;           // file full path
+    cnt: string;            // file content or error message
+    file?: FileSystemEntry; // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
+    failed?: boolean;       // if failed the cnt member has error text
 }
 
 type TmApi = {
