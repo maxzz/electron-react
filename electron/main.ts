@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { app, Menu } from 'electron';
 import { createWindow, connectMainHandlers } from './app/main-window';
 import { connectRendererHandlers } from './app/main-handlers';
-import { buildMenu } from './app/menu';
+import { buildMenuTemplate } from './app/menu';
 
 process.env.DIST_ELECTRON = join(__dirname, '../');
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist');
@@ -15,7 +15,7 @@ connectRendererHandlers();
 
 // app.whenReady().then(createWindow);
 app.whenReady().then(() => {
-    const menu = buildMenu();
+    const menu = buildMenuTemplate();
 
     const appMenu = Menu.buildFromTemplate(menu);
     Menu.setApplicationMenu(appMenu);
