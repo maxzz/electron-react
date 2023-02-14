@@ -6,6 +6,8 @@
 //     sendNotification: (message: string) => void
 // }
 
+//import type { IpcRendererEvent } from "electron";
+
 type FileContent = {
     name: string;                   // file name
     fullPath: string;               // file full path
@@ -18,6 +20,8 @@ type FileContent = {
 type TmApi = {
     sendNotification: (message: string) => void;
     invokeFilesContent: (filenames: string[]) => Promise<FileContent[]>;
+
+    menuCommand: (callback: (event: /*IpcRendererEvent*/any, data: any) => void) => void;
 }
 
 declare var tmApi: TmApi;
