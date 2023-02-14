@@ -4,6 +4,7 @@ import { Section2_Title } from './components/Section2_Title';
 import { FileContentViews } from './components/FileContentViews';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
+import { ExternalListener } from './store/ExternalListener';
 
 export function App() {
     return (<>
@@ -18,6 +19,7 @@ export function App() {
                     </div>
                     {/* <TheRest /> */}
                     <FileContentViews />
+                    <ExternalListener />
                 </div>
             </div>
 

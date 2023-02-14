@@ -28,24 +28,27 @@ export const ExternalListener = () => {
 
     useEffect(
         () => {
-            const callback = () => {
+            function callback() {
                 setLocation({
                     latitude: store.latitude,
                     longitude: store.longitude,
                 });
-            };
+            }
 
             store.listeners.add(callback);
             callback();
 
             return () => {
-                store.listeners.delete(callback)
+                store.listeners.delete(callback);
             };
         },
         [setLocation]
     );
 
     return (
-        <>{location.latitude} {location.longitude}</>
+        <div className="flex items-center space-x-4">
+            <div className="text-sm">{location.latitude}</div>
+            <div className="text-sm">{location.longitude}</div>
+        </div>
     );
 };
