@@ -1,15 +1,15 @@
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
 
-const store = {
+export const store = {
     latitude: 0,
     longitude: 0,
     listeners: new Set<Function>(),
 
-    update: (nextLatitude: number, nextLongitude: number) => {
+    update(nextLatitude: number, nextLongitude: number) {
         store.latitude = nextLatitude;
         store.longitude = nextLongitude;
-        listeners.forEach((listener) => listener());
+        this.listeners.forEach((listener) => listener());
     },
 };
 
@@ -23,7 +23,7 @@ const locationAtom = atom<Location>({
     longitude: 0,
 });
 
-const Component = () => {
+export const ExternalListener = () => {
     const [location, setLocation] = useAtom(locationAtom);
 
     useEffect(
@@ -34,8 +34,8 @@ const Component = () => {
                     longitude: store.longitude,
                 });
             };
-            
-            store.listners.add(callback);
+
+            store.listeners.add(callback);
             callback();
 
             return () => {
