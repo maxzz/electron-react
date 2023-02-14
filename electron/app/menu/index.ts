@@ -1,4 +1,4 @@
-import { MenuItemConstructorOptions } from "electron";
+import { BrowserWindow, MenuItem, MenuItemConstructorOptions } from "electron";
 
 export function buildMenuTemplate(): MenuItemConstructorOptions[] {
     const fileMenu: MenuItemConstructorOptions[] = [
@@ -23,50 +23,25 @@ export function buildMenuTemplate(): MenuItemConstructorOptions[] {
             label: 'View',
             submenu: [
                 {
-                    label: 'Toggle DevTools',
+                    role: 'toggleDevTools',
                     accelerator: 'F12',
-                    click: () => {
-                        console.log('click1');
-                    }
                 },
+                { type: 'separator' },
                 {
                     label: 'Dark Theme',
                     id: 'dark-theme',
                     type: 'checkbox',
-                    click() {
-                        console.log('dark');
+                    click(item: MenuItem, focusedWindow: BrowserWindow) {
+                        console.log('%c-------------- dark item', 'color:red', item);
+                        console.log('%c-------------- dark window', 'color:orange', focusedWindow);
                     },
                 },
                 { type: 'separator' },
-                {
-                    label: 'Reset Zoom',
-                    accelerator: 'Control+0',
-                    click: () => {
-                        console.log('zoom +');
-                    },
-                },
-                {
-                    label: 'Zoom In',
-                    accelerator: 'Control+=',
-                    click: () => {
-                        console.log('zoom +');
-                    },
-                },
-                {
-                    label: 'Zoom Out',
-                    accelerator: 'Control+-',
-                    click: () => {
-                        console.log('zoom +');
-                    },
-                },
+                { role: 'resetZoom', },
+                { role: 'zoomIn', accelerator: 'Control+=' },
+                { role: 'zoomOut', },
                 { type: 'separator' },
-                {
-                    label: 'Full Screen',
-                    accelerator: 'F11',
-                    click: () => {
-                        console.log('fullScreen');
-                    },
-                },
+                { role: 'togglefullscreen', },
             ]
         }
     ];
