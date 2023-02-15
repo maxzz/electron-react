@@ -3,7 +3,7 @@ import { release } from 'node:os';
 import { app, BrowserWindow, shell } from 'electron';
 import { getIniOptions, saveIniOptions } from './utils/ini-options';
 
-export let win: BrowserWindow | null = null;
+export let appWin: BrowserWindow | null = null;
 
 export async function createWindow() {
     const iniOptions = getIniOptions();
@@ -12,7 +12,7 @@ export async function createWindow() {
     const indexHtml = join(process.env.DIST, 'index.html');
     const hmrServerUrl = process.env.VITE_DEV_SERVER_URL;
 
-    win = new BrowserWindow({
+    appWin = new BrowserWindow({
         title: 'Main window',
         icon: join(process.env.PUBLIC, 'favicon.ico'),
         ...(iniOptions?.bounds),
@@ -24,27 +24,27 @@ export async function createWindow() {
     });
 
     if (hmrServerUrl) { //https://github.com/electron-vite/electron-vite-vue/issues/298
-        win.loadURL(hmrServerUrl);
-        iniOptions?.devTools && win.webContents.openDevTools(); // Open devTool if the app is not packaged
+        appWin.loadURL(hmrServerUrl);
+        iniOptions?.devTools && appWin.webContents.openDevTools(); // Open devTool if the app is not packaged
     } else {
-        win.loadFile(indexHtml);
+        appWin.loadFile(indexHtml);
     }
 
     // Test actively push message to the Electron-Renderer
-    win.webContents.on('did-finish-load', () => {
-        win?.webContents.send('main-process-message', new Date().toLocaleString());
+    appWin.webContents.on('did-finish-load', () => {
+        appWin?.webContents.send('main-process-message', new Date().toLocaleString());
     });
 
     // Make all links open with the browser, not with the application
-    win.webContents.setWindowOpenHandler(({ url }) => {
+    appWin.webContents.setWindowOpenHandler(({ url }) => {
         if (url.startsWith('https:')) {
             shell.openExternal(url);
         }
         return { action: 'deny' };
     });
 
-    win.on('close', () => {
-        saveIniOptions(win);
+    appWin.on('close', () => {
+        saveIniOptions(appWin);
     });
 }
 
@@ -58,17 +58,17 @@ export function connectMainHandlers() {
     }
 
     app.on('window-all-closed', () => {
-        win = null;
+        appWin = null;
         if (process.platform !== 'darwin') app.quit();
     });
 
     app.on('second-instance', () => {
-        if (win) {
+        if (appWin) {
             // Focus on the main window if the user tried to open another
-            if (win.isMinimized()) {
-                win.restore();
+            if (appWin.isMinimized()) {
+                appWin.restore();
             }
-            win.focus();
+            appWin.focus();
         }
     });
 

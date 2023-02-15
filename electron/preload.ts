@@ -19,7 +19,7 @@ const api: TmApi = {
         return ipcRenderer.invoke(ToMainKeys.invokeFilesContent, filenames);
     },
 
-    menuCommand: (callback: (event: /*IpcRendererEvent*/any, data: any) => void) => {
+    menuCommand: (callback: (event: IpcRendererEvent, data: any) => void) => {
         ipcRenderer.on(ToRendererKeys.menuCommand, callback);
     }
 };

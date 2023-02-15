@@ -1,5 +1,5 @@
 import { ipcMain, Notification } from 'electron';
-import { win } from './main-window';
+import { appWin } from './main-window';
 import { ToMainKeys } from '../preload-enums';
 import { loadFilesContent } from './utils/load-files';
 

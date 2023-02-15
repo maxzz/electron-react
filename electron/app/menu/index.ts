@@ -1,6 +1,5 @@
 import { BrowserWindow, MenuItem, MenuItemConstructorOptions } from "electron";
-import { mainToRanderer } from "../../main-to-renderer";
-import { ToRendererKeys } from "../../preload-enums";
+import { mainToRanderer, ToRendererKeys } from "../../main-to-renderer";
 
 const fileMenu: MenuItemConstructorOptions[] = [
     {
@@ -31,10 +30,8 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 enabled: true,
                 type: 'checkbox',
                 accelerator: 'F4',
-                click(item: MenuItem, focusedWindow: BrowserWindow) {
-                    console.log('send', item.id);
-                    //focusedWindow && focusedWindow.webContents.send(ToRendererKeys.menuCommand, { data: { command: item.id } });
-                    mainToRanderer(focusedWindow, ToRendererKeys.menuCommand, { data: { command: item.id } });
+                click(item: MenuItem, _focusedWindow: BrowserWindow) {
+                    mainToRanderer(ToRendererKeys.menuCommand, { data: { command: item.id } });
                 },
             },
             { type: 'separator' },
