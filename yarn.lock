@@ -1409,10 +1409,10 @@ electron-to-chromium@^1.4.251:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.284.tgz#61046d1e4cab3a25238f6bf7413795270f125592"
   integrity sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==
 
-electron@22.2.0:
-  version "22.2.0"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-22.2.0.tgz#1aa321415d8b8021a4b0807641f0ad56028feaf5"
-  integrity sha512-puRZSF2vWJ4pz3oetL5Td8LcuivTWz3MoAk/gjImHSN1B/2VJNEQlw1jGdkte+ppid2craOswE2lmCOZ7SwF1g==
+electron@23.0.0:
+  version "23.0.0"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-23.0.0.tgz#4da457d7585149bb1a98ea8bddb286e72322a309"
+  integrity sha512-S6hVtTAjauMiiWP9sBVR5RpcUC464cNZ06I2EMUjeZBq+KooS6tLmNsfw0zLpAXDp1qosjlBP3v71NTZ3gd9iA==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^16.11.26"
@@ -2797,10 +2797,10 @@ vite-electron-plugin@^0.7.4:
     notbundle "~0.3.4"
     vite-plugin-electron "~0.11.1"
 
-vite-plugin-electron-renderer@^0.11.4:
-  version "0.11.4"
-  resolved "https://registry.yarnpkg.com/vite-plugin-electron-renderer/-/vite-plugin-electron-renderer-0.11.4.tgz#1abacd440bcd425b05134d340532029a4a7f784c"
-  integrity sha512-uYSrAuZbHYGd5SXUPaFfqpCxp1Q1zEHTn8N3a5PCYOCsgVH+0w87FnHyKP0yMizNr7FSfliQP7Xnzif0nEm7cQ==
+vite-plugin-electron-renderer@0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-electron-renderer/-/vite-plugin-electron-renderer-0.12.1.tgz#0f70ad159d6cbb6f2c2173824a57a1dbda040b2d"
+  integrity sha512-n0w8vrQFafaY1tmIPIQAck4zLanGLYcthvGttH00KRJg47Sjh2mp5Hb8VJ3l8FmpnYTobnl949+N4sunTR1WBA==
   dependencies:
     lib-esm "~0.3.0"
 
