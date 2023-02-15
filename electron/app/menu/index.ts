@@ -27,6 +27,7 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 label: 'Dark Theme',
                 id: 'dark-theme',
                 enabled: true,
+                checked: true,
                 type: 'checkbox',
                 accelerator: 'CommandOrControl+F4',
                 click(item: MenuItem) { mainToRanderer({ type: 'dark-mode', active: item.checked }); },
@@ -50,7 +51,7 @@ export function buildMenuTemplate(): MenuItemConstructorOptions[] {
             id: 'reload-files',
             enabled: true,
             accelerator: 'F4',
-            click(item: MenuItem) { mainToRanderer({ type: 'reload-files' }); },
+            click() { mainToRanderer({ type: 'reload-files' }); },
         },
     ];
 }

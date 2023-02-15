@@ -1,38 +1,37 @@
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useSetAtom } from "jotai";
 import { useEffect } from "react";
 import { mainApi } from ".";
 import { RendererCalls } from '../../electron/main-to-renderer';
 
 export const worldStore = {
-    latitude: 0,
-    longitude: 0,
-    listeners: new Set<Function>(),
-
-    update(nextLatitude: number, nextLongitude: number) {
-        worldStore.latitude = nextLatitude;
-        worldStore.longitude = nextLongitude;
-        this.listeners.forEach((listener) => listener());
-    },
+    listeners: new Set<(data: any) => void>(),
+    update(data?: any) {
+        data && this.listeners.forEach((listener) => listener(data));
+    }
 };
 
-let num = 5;
-
-function fromMainCallback(event: any, data: unknown) {
-    const d = data as RendererCalls;
-    switch (d.type) {
-        case 'dark-mode': {
-            console.log('case dark-mode, active', d.active);
-            break;
-        }
-        case 'reload-files': {
-            console.log('reload-files');
-            break;
-        }
-        default: {
-            console.log('content', data);
+const doFromMainAtom = atom(
+    null,
+    (get, set, data: any) => {
+        const d = data as RendererCalls;
+        switch (d.type) {
+            case 'dark-mode': {
+                console.log('case dark-mode, active', d.active);
+                break;
+            }
+            case 'reload-files': {
+                console.log('reload-files');
+                break;
+            }
+            default: {
+                console.log('content', data);
+            }
         }
     }
-    worldStore.update(num++, num + 5);
+);
+
+function fromMainCallback(event: any, data: unknown) {
+    worldStore.update(data);
 }
 
 mainApi?.menuCommand(fromMainCallback);
@@ -48,15 +47,12 @@ export const locationAtom = atom<Location>({
 });
 
 export const WorldToReactListener = () => {
-    const [location, setLocation] = useAtom(locationAtom);
+    const setLocation = useSetAtom(doFromMainAtom);
 
     useEffect(
         () => {
-            function callback() {
-                setLocation({
-                    latitude: worldStore.latitude,
-                    longitude: worldStore.longitude,
-                });
+            function callback(data?: any) {
+                data && setLocation(data);
             }
 
             worldStore.listeners.add(callback);
