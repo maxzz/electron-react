@@ -1,4 +1,4 @@
-import { store } from './ExternalListener';
+import { worldStore } from './ExternalListener';
 
 export * from './drop-files';
 
@@ -11,5 +11,5 @@ let num = 5;
 console.log('------------');
 mainApi?.menuCommand((event: any, data: any) => {
     console.log('content', data);
-    store.update(num++, num + 5);
+    worldStore.update(num++, num + 5);
 });

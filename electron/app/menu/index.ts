@@ -1,6 +1,6 @@
 import { BrowserWindow, MenuItem, MenuItemConstructorOptions } from "electron";
-import { sendToRanderer } from "../../types/main-to-renderer";
-import { ToRendererKeys } from "../../types/preload-enums";
+import { mainToRanderer } from "../../main-to-renderer";
+import { ToRendererKeys } from "../../preload-enums";
 
 const fileMenu: MenuItemConstructorOptions[] = [
     {
@@ -34,7 +34,7 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 click(item: MenuItem, focusedWindow: BrowserWindow) {
                     console.log('send', item.id);
                     //focusedWindow && focusedWindow.webContents.send(ToRendererKeys.menuCommand, { data: { command: item.id } });
-                    sendToRanderer(focusedWindow, ToRendererKeys.menuCommand, { data: { command: item.id } });
+                    mainToRanderer(focusedWindow, ToRendererKeys.menuCommand, { data: { command: item.id } });
                 },
             },
             { type: 'separator' },

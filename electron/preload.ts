@@ -1,16 +1,15 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
-// vvv....................................................................... // this copy of preload-types.ts: cannot be imported wo/ bundler
-//
+//....................................................................... // this copy of preload-types.ts: cannot be imported wo/ bundler
 const ToMainKeys = {
     notify: 'notify',
     invokeFilesContent: 'tm-invoke-files-content',
 };
+
 const ToRendererKeys = {
     menuCommand: 'tm-menu-command',
 };
-//
-// ^^^.......................................................................
+//.......................................................................
 
 const api: TmApi = {
     sendNotification: (message: string) => {
