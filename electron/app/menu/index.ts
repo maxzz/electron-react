@@ -1,5 +1,5 @@
 import { BrowserWindow, MenuItem, MenuItemConstructorOptions } from "electron";
-import { mainToRanderer, ToRendererKeys } from "../../main-to-renderer";
+import { mainToRanderer } from "../../main-to-renderer";
 
 const fileMenu: MenuItemConstructorOptions[] = [
     {
@@ -8,10 +8,9 @@ const fileMenu: MenuItemConstructorOptions[] = [
             {
                 label: 'Click',
                 accelerator: 'CommandOrControl+Shift+L',
-                click: () => {
-                    console.log('click');
-                }
+                click: () => { console.log('click'); }
             },
+            { role: 'reload', accelerator: 'F5', },
             { type: 'separator' },
             { role: 'quit' },
         ]
@@ -30,9 +29,7 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 enabled: true,
                 type: 'checkbox',
                 accelerator: 'F4',
-                click(item: MenuItem, _focusedWindow: BrowserWindow) {
-                    mainToRanderer(ToRendererKeys.sendToRenderer, { type: 'dark-mode', active: item.checked });
-                },
+                click(item: MenuItem) { mainToRanderer({ type: 'dark-mode', active: item.checked }); },
             },
             { type: 'separator' },
             { role: 'resetZoom', },
@@ -48,5 +45,13 @@ export function buildMenuTemplate(): MenuItemConstructorOptions[] {
     return [
         ...fileMenu,
         ...viewMenu,
+        {
+            label: 'DoTest',
+            id: 'dark-theme',
+            enabled: true,
+            type: 'checkbox',
+            accelerator: 'F4',
+            click(item: MenuItem) { mainToRanderer({ type: 'dark-mode', active: item.checked }); },
+        },
     ];
 }
