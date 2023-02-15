@@ -1,5 +1,6 @@
-import { atom, useAtom, useAtomValue } from "jotai";
+import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
+import { mainApi } from ".";
 
 export const worldStore = {
     latitude: 0,
@@ -12,6 +13,14 @@ export const worldStore = {
         this.listeners.forEach((listener) => listener());
     },
 };
+
+let num = 5;
+
+console.log('------------');
+mainApi?.menuCommand((event: any, data: any) => {
+    console.log('content', data);
+    worldStore.update(num++, num + 5);
+});
 
 type Location = {
     latitude: number;
