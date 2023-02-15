@@ -22,7 +22,7 @@
     },
     "include": [
         "src", 
-        "electron/preload-types.d.ts",
+        "electron/types/preload-types.d.ts",
         "vite.config.web.ts"
     ],
     "references": [

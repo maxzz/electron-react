@@ -1,5 +1,6 @@
 import { BrowserWindow, MenuItem, MenuItemConstructorOptions } from "electron";
-import { ToRendererKeys } from "../../preload-enums";
+import { sendToRanderer } from "../../types/main-to-renderer";
+import { ToRendererKeys } from "../../types/preload-enums";
 
 const fileMenu: MenuItemConstructorOptions[] = [
     {
@@ -22,10 +23,7 @@ const viewMenu: MenuItemConstructorOptions[] = [
     {
         label: 'View',
         submenu: [
-            {
-                role: 'toggleDevTools',
-                accelerator: 'F12',
-            },
+            { role: 'toggleDevTools', accelerator: 'F12', },
             { type: 'separator' },
             {
                 label: 'Dark Theme',
@@ -35,7 +33,8 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 accelerator: 'F4',
                 click(item: MenuItem, focusedWindow: BrowserWindow) {
                     console.log('send', item.id);
-                    focusedWindow && focusedWindow.webContents.send(ToRendererKeys.menuCommand, item.id);
+                    //focusedWindow && focusedWindow.webContents.send(ToRendererKeys.menuCommand, { data: { command: item.id } });
+                    sendToRanderer(focusedWindow, ToRendererKeys.menuCommand, { data: { command: item.id } });
                 },
             },
             { type: 'separator' },

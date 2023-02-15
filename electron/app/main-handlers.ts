@@ -1,6 +1,6 @@
 import { ipcMain, Notification } from 'electron';
 import { win } from './main-window';
-import { ToMainKeys } from '../preload-enums';
+import { ToMainKeys } from '../types/preload-enums';
 import { loadFilesContent } from './utils/load-files';
 
 export function connectRendererHandlers() {
