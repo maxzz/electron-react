@@ -19,7 +19,7 @@ const api: TmApi = {
         return ipcRenderer.invoke(ToMainKeys.invokeFilesContent, filenames);
     },
 
-    menuCommand: (callback: (event: IpcRendererEvent, data: any) => void) => {
+    setRendererCbToMain: (callback: (event: IpcRendererEvent, data: any) => void) => {
         ipcRenderer.removeAllListeners(ToRendererKeys.sendToRenderer);
         ipcRenderer.on(ToRendererKeys.sendToRenderer, callback);
     }

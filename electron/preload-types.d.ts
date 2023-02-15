@@ -22,7 +22,7 @@ type TmApi = {
     sendNotification: (message: string) => void;
     invokeFilesContent: (filenames: string[]) => Promise<FileContent[]>;
 
-    menuCommand: (callback: (event: /*IpcRendererEvent*/any, data: unknown) => void) => void;
+    setRendererCbToMain: (callback: (event: /*IpcRendererEvent*/any, data: unknown) => void) => void;
 }
 
 declare var tmApi: TmApi;

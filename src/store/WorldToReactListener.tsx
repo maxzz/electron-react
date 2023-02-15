@@ -3,39 +3,27 @@ import { useEffect } from "react";
 import { mainApi } from ".";
 import { doFromMainAtom } from "./doFromMain";
 
-export const worldStore = {
-    listeners: new Set<(data: any) => void>(),
-    update(data?: any) {
+const worldStore = {
+    listeners: new Set<(data: unknown) => void>(),
+    update(data?: unknown) {
         data && this.listeners.forEach((listener) => listener(data));
     }
 };
 
-export const WorldToReactListener = () => {
-    const setLocation = useSetAtom(doFromMainAtom);
-
-    useEffect(
-        () => {
-            function callback(data?: any) {
-                data && setLocation(data);
-            }
-
-            worldStore.listeners.add(callback);
-            callback();
-
-            return () => {
-                worldStore.listeners.delete(callback);
-            };
-        },
-        [setLocation]
-    );
-
-    return null;
-};
-
 // Subscribe to main process calls
 
-function fromMainCallback(event: any, data: unknown) {
-    worldStore.update(data);
-}
+mainApi?.setRendererCbToMain((_event: unknown, data: unknown) => worldStore.update(data));
 
-mainApi?.menuCommand(fromMainCallback);
+// React connector
+
+export const WorldToReactListener = () => {
+    const doFromMain = useSetAtom(doFromMainAtom);
+    useEffect(() => {
+        const cb = (data?: unknown) => data && doFromMain(data);
+        worldStore.listeners.add(cb);
+        return () => {
+            worldStore.listeners.delete(cb); // TODO: we can remove all listeners from HMR.
+        };
+    }, [doFromMain]);
+    return null;
+};
