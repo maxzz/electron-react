@@ -1,5 +1,5 @@
 import { BrowserWindow, MenuItem, MenuItemConstructorOptions } from "electron";
-import { ToRendererKeys } from "../../preload-types";
+import { ToRendererKeys } from "../../preload-enums";
 
 const fileMenu: MenuItemConstructorOptions[] = [
     {
