@@ -31,7 +31,7 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 type: 'checkbox',
                 accelerator: 'F4',
                 click(item: MenuItem, _focusedWindow: BrowserWindow) {
-                    mainToRanderer(ToRendererKeys.menuCommand, { data: { command: item.id } });
+                    mainToRanderer(ToRendererKeys.menuCommand, { type: 'dark-mode', active: item.checked });
                 },
             },
             { type: 'separator' },

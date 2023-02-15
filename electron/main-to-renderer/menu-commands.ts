@@ -1,3 +1,4 @@
-export type RendererDarkMode = {
-    command: string;
+export type DarkMode = {
+    type: 'dark-mode';
+    active: boolean;
 };
