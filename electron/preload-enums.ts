@@ -5,6 +5,6 @@ export const ToMainKeys = {
 };
 
 export const ToRendererKeys = {
-    menuCommand: 'tm-menu-command',
+    sendToRenderer: 'tm-to-renderer',
 };
 //.......................................................................

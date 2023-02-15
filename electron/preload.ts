@@ -7,7 +7,7 @@ const ToMainKeys = {
 };
 
 const ToRendererKeys = {
-    menuCommand: 'tm-menu-command',
+    sendToRenderer: 'tm-to-renderer',
 };
 //.......................................................................
 
@@ -20,8 +20,8 @@ const api: TmApi = {
     },
 
     menuCommand: (callback: (event: IpcRendererEvent, data: any) => void) => {
-        ipcRenderer.removeAllListeners(ToRendererKeys.menuCommand);
-        ipcRenderer.on(ToRendererKeys.menuCommand, callback);
+        ipcRenderer.removeAllListeners(ToRendererKeys.sendToRenderer);
+        ipcRenderer.on(ToRendererKeys.sendToRenderer, callback);
     }
 };
 

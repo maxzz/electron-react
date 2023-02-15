@@ -19,7 +19,15 @@ let num = 5;
 
 function fromMainCallback(event: any, data: unknown) {
     const d = data as RendererCalls;
-    console.log('content', data);
+    switch (d.type) {
+        case 'dark-mode': {
+            console.log('case dark-mode, active', d.active);
+            break;
+        }
+        default: {
+            console.log('content', data);
+        }
+    }
     worldStore.update(num++, num + 5);
 }
 
