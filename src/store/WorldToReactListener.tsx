@@ -1,7 +1,7 @@
-import { atom, useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { useEffect } from "react";
 import { mainApi } from ".";
-import { RendererCalls } from '../../electron/main-to-renderer';
+import { doFromMainAtom } from "./doFromMain";
 
 export const worldStore = {
     listeners: new Set<(data: any) => void>(),
@@ -9,42 +9,6 @@ export const worldStore = {
         data && this.listeners.forEach((listener) => listener(data));
     }
 };
-
-const doFromMainAtom = atom(
-    null,
-    (get, set, data: any) => {
-        const d = data as RendererCalls;
-        switch (d.type) {
-            case 'dark-mode': {
-                console.log('case dark-mode, active', d.active);
-                break;
-            }
-            case 'reload-files': {
-                console.log('reload-files');
-                break;
-            }
-            default: {
-                console.log('content', data);
-            }
-        }
-    }
-);
-
-function fromMainCallback(event: any, data: unknown) {
-    worldStore.update(data);
-}
-
-mainApi?.menuCommand(fromMainCallback);
-
-type Location = {
-    latitude: number;
-    longitude: number;
-};
-
-export const locationAtom = atom<Location>({
-    latitude: 0,
-    longitude: 0,
-});
 
 export const WorldToReactListener = () => {
     const setLocation = useSetAtom(doFromMainAtom);
@@ -67,3 +31,11 @@ export const WorldToReactListener = () => {
 
     return null;
 };
+
+// Subscribe to main process calls
+
+function fromMainCallback(event: any, data: unknown) {
+    worldStore.update(data);
+}
+
+mainApi?.menuCommand(fromMainCallback);
