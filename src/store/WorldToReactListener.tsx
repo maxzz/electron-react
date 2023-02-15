@@ -1,6 +1,7 @@
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
 import { mainApi } from ".";
+import { RendererCalls } from '../../electron/main-to-renderer';
 
 export const worldStore = {
     latitude: 0,
@@ -16,11 +17,13 @@ export const worldStore = {
 
 let num = 5;
 
-console.log('------------');
-mainApi?.menuCommand((event: any, data: any) => {
+function fromMainCallback(event: any, data: unknown) {
+    const d = data as RendererCalls;
     console.log('content', data);
     worldStore.update(num++, num + 5);
-});
+}
+
+mainApi?.menuCommand(fromMainCallback);
 
 type Location = {
     latitude: number;

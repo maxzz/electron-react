@@ -20,6 +20,7 @@ const api: TmApi = {
     },
 
     menuCommand: (callback: (event: IpcRendererEvent, data: any) => void) => {
+        ipcRenderer.removeAllListeners(ToRendererKeys.menuCommand);
         ipcRenderer.on(ToRendererKeys.menuCommand, callback);
     }
 };
