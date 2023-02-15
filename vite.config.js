@@ -9,6 +9,28 @@ import svgr from 'vite-plugin-svgr';
 import pkg from './package.json';
 
 function electronPlugins() {
+    function debounce(fn, delay = 299) {
+        let t;
+        return ((...args) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn(...args), delay);
+        });
+    }
+
+    function startWithOrwithoutDebug() {
+        return !!process.env.VSCODE_DEBUG // Will start Electron via VSCode Debug
+            ? [customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),]
+            : [];
+    }
+
+    return [
+        ...startWithOrwithoutDebug(),
+        loadViteEnv(), // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
+    ];
+}
+
+/*ts
+function electronPlugins() {
     function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
         let t: NodeJS.Timeout;
         return ((...args: Parameters<Fn>) => {
@@ -19,7 +41,7 @@ function electronPlugins() {
 
     function startWithOrwithoutDebug() {
         return !!process.env.VSCODE_DEBUG // Will start Electron via VSCode Debug
-            ? [customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),]
+            ? [customStart(() => debounce(() => console.log(/* For `.vscode/.debug.script.mjs` * /'[startup] Electron App'))),]
             : [];
     }
 
@@ -42,14 +64,14 @@ function original() {
         ...(!!process.env.VSCODE_DEBUG
             ? [
                 // Will start Electron via VSCode Debug
-                customStart(debounce(() => console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App'))),
+                customStart(debounce(() => console.log(/* For `.vscode/.debug.script.mjs` * /'[startup] Electron App'))),
             ]
             : []),
         // Allow use `import.meta.env.VITE_SOME_KEY` in Electron-Main
         loadViteEnv(),
     ];
 }
-
+*/
 // console.log('process.env.VSCODE_DEBUG', process.env.VSCODE_DEBUG);
 // console.log('pkg.debug.env.VITE_DEV_SERVER_URL', pkg.debug.env.VITE_DEV_SERVER_URL);
 

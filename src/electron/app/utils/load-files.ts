@@ -29,7 +29,7 @@ export function loadFilesContent(filenames: string[]): FileContent[] {
     files.forEach((file) => {
         if (!file.failed) {
             try {
-                file.cnt = readFileSync(file.name).toString();
+                file.cnt = readFileSync(file.name!).toString();
             } catch (error) {
                 file.cnt = error instanceof Error ? error.message : JSON.stringify(error);
                 file.failed = true;
