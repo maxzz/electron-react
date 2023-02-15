@@ -1,4 +1,4 @@
-import { BrowserWindow, MenuItem, MenuItemConstructorOptions } from "electron";
+import { MenuItem, MenuItemConstructorOptions } from "electron";
 import { mainToRanderer } from "../../main-to-renderer";
 
 const fileMenu: MenuItemConstructorOptions[] = [
@@ -28,7 +28,7 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 id: 'dark-theme',
                 enabled: true,
                 type: 'checkbox',
-                accelerator: 'F4',
+                accelerator: 'CommandOrControl+F4',
                 click(item: MenuItem) { mainToRanderer({ type: 'dark-mode', active: item.checked }); },
             },
             { type: 'separator' },
@@ -46,12 +46,11 @@ export function buildMenuTemplate(): MenuItemConstructorOptions[] {
         ...fileMenu,
         ...viewMenu,
         {
-            label: 'DoTest',
-            id: 'dark-theme',
+            label: 'Reload Files',
+            id: 'reload-files',
             enabled: true,
-            type: 'checkbox',
             accelerator: 'F4',
-            click(item: MenuItem) { mainToRanderer({ type: 'dark-mode', active: item.checked }); },
+            click(item: MenuItem) { mainToRanderer({ type: 'reload-files' }); },
         },
     ];
 }

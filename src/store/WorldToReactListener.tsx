@@ -24,6 +24,10 @@ function fromMainCallback(event: any, data: unknown) {
             console.log('case dark-mode, active', d.active);
             break;
         }
+        case 'reload-files': {
+            console.log('reload-files');
+            break;
+        }
         default: {
             console.log('content', data);
         }
