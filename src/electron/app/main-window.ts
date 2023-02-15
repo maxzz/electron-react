@@ -5,16 +5,18 @@ import { getIniOptions, saveIniOptions } from './utils/ini-options';
 
 export let appWin: BrowserWindow | null = null;
 
+console.log('process.env.DIST', process.env.DIST);
+
 export async function createWindow() {
     const iniOptions = getIniOptions();
 
     const preload = join(__dirname, '../preload.js');
-    const indexHtml = join(process.env.DIST, 'index.html');
+    const indexHtml = join(process.env.DIST || '', 'index.html');
     const hmrServerUrl = process.env.VITE_DEV_SERVER_URL;
 
     appWin = new BrowserWindow({
         title: 'Main window',
-        icon: join(process.env.PUBLIC, 'favicon.ico'),
+        icon: join(process.env.PUBLIC || '', 'favicon.ico'),
         ...(iniOptions?.bounds),
         webPreferences: {
             preload,
@@ -44,7 +46,7 @@ export async function createWindow() {
     });
 
     appWin.on('close', () => {
-        saveIniOptions(appWin);
+        appWin && saveIniOptions(appWin);
     });
 }
 

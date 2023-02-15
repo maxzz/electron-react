@@ -5,7 +5,7 @@
     "license": "MIT",
     "description": "Electron Vite React playground",
     "author": "Max Zakharzhevskiy",
-    "main": "dist-electron/main.js",
+    "main": "dist-electron/electron/main.js",
     "engines": {
         "node": "^14.18.0 || >=16.0.0"
     },

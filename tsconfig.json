@@ -22,8 +22,8 @@
     },
     "include": [
         "src", 
-        "electron/preload-types.d.ts",
-        "electron/main-from-renderer/main-handlers-types.d.ts",
+        "src/electron/preload-types.d.ts",
+        "src/electron/main-from-renderer/main-handlers-types.d.ts",
         "vite.config.web.ts"
     ],
     "references": [
