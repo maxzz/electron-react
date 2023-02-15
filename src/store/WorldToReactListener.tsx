@@ -1,4 +1,4 @@
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useAtomValue } from "jotai";
 import { useEffect } from "react";
 
 export const worldStore = {
@@ -18,7 +18,7 @@ type Location = {
     longitude: number;
 };
 
-const locationAtom = atom<Location>({
+export const locationAtom = atom<Location>({
     latitude: 0,
     longitude: 0,
 });
@@ -45,10 +45,5 @@ export const WorldToReactListener = () => {
         [setLocation]
     );
 
-    return (
-        <div className="flex items-center space-x-4">
-            <div className="text-sm">{location.latitude}</div>
-            <div className="text-sm">{location.longitude}</div>
-        </div>
-    );
+    return null;
 };

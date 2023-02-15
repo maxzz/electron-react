@@ -1,4 +1,4 @@
-import { worldStore } from './ExternalListener';
+import { worldStore } from './WorldToReactListener';
 
 export * from './drop-files';
 

@@ -1,10 +1,11 @@
+import { useAtomValue } from 'jotai';
 import { doInvokeLoadFilesAtom, mainApi } from './store';
+import { locationAtom, WorldToReactListener } from './store/WorldToReactListener';
 import { DocumentDrop } from './components/UI/DocumentDrop';
 import { Section2_Title } from './components/Section2_Title';
 import { FileContentViews } from './components/FileContentViews';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
-import { WorldToReactListener } from './store/ExternalListener';
 
 export function App() {
     return (<>
@@ -19,7 +20,7 @@ export function App() {
                     </div>
                     {/* <TheRest /> */}
                     <FileContentViews />
-                    <WorldToReactListener />
+                    <WorldToReactListenerTest />
                 </div>
             </div>
 
@@ -27,6 +28,7 @@ export function App() {
         </div>
 
         <DocumentDrop doDroppedFilesAtom={doInvokeLoadFilesAtom} />
+        <WorldToReactListener />
     </>);
 }
 
@@ -52,3 +54,13 @@ function TheRest() {
         </div>
     );
 }
+
+const WorldToReactListenerTest = () => {
+    const location = useAtomValue(locationAtom);
+    return (
+        <div className="flex items-center space-x-4">
+            <div className="text-sm">{location.latitude}</div>
+            <div className="text-sm">{location.longitude}</div>
+        </div>
+    );
+};
