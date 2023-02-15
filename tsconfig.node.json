@@ -11,6 +11,6 @@
         "vite.config.ts",
         "package.json",
         "electron",
-        "vite-electron-env.d.ts"
+        "vite-electron-env.d.ts",
     ]
 }

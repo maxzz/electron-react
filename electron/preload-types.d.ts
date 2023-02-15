@@ -22,6 +22,8 @@ type TmApi = {
     sendNotification: (message: string) => void;
     invokeFilesContent: (filenames: string[]) => Promise<FileContent[]>;
 
+    sendToMain: (data: any) => void;
+
     setRendererCbToMain: (callback: (event: /*IpcRendererEvent*/any, data: unknown) => void) => void;
 }
 

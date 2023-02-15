@@ -2,9 +2,11 @@
 export const ToMainKeys = {
     notify: 'notify',
     invokeFilesContent: 'tm-invoke-files-content',
+    
+    sendToMain: 'renderer-to-main',
 };
 
 export const ToRendererKeys = {
-    sendToRenderer: 'tm-to-renderer',
+    sendToRenderer: 'main-to-renderer',
 };
 //.......................................................................

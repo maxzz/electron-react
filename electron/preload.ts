@@ -4,10 +4,12 @@ import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 const ToMainKeys = {
     notify: 'notify',
     invokeFilesContent: 'tm-invoke-files-content',
+
+    sendToMain: 'renderer-to-main',
 };
 
 const ToRendererKeys = {
-    sendToRenderer: 'tm-to-renderer',
+    sendToRenderer: 'main-to-renderer',
 };
 //.......................................................................
 
@@ -17,6 +19,10 @@ const api: TmApi = {
     },
     invokeFilesContent: (filenames: string[]): Promise<FileContent[]> => {
         return ipcRenderer.invoke(ToMainKeys.invokeFilesContent, filenames);
+    },
+
+    sendToMain: (data: any): void => {
+        ipcRenderer.send(ToMainKeys.sendToMain, data);
     },
 
     setRendererCbToMain: (callback: (event: IpcRendererEvent, data: any) => void) => {
