@@ -12,7 +12,8 @@ const worldStore = {
 
 // Subscribe to main process calls
 
-mainApi?.setRendererCbToMain((_event: unknown, data: unknown) => worldStore.update(data));
+//mainApi?.setRendererCbToMain((_event: unknown, data: unknown) => worldStore.update(data));
+mainApi?.setCbCallFromMain((_event: unknown, data: unknown) => worldStore.update(data));
 
 // React connector
 

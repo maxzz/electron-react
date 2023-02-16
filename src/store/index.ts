@@ -6,6 +6,10 @@ export * from './dropFiles';
 
 export var mainApi: TmApi | undefined = typeof tmApi !== 'undefined' ? tmApi : undefined;
 
-export function sendToMain(data: ToMainCalls) {
-    mainApi?.sendToMain(data);
+export function hasMain(): boolean {
+    return !!mainApi;
+}
+
+export function sendToMain(data: ToMainCalls): void {
+    mainApi?.callMain(data);
 }

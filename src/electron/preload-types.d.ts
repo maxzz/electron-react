@@ -19,12 +19,16 @@ type FileContent = {
 }
 
 type TmApi = {
-    sendNotification: (message: string) => void;
-    invokeFilesContent: (filenames: string[]) => Promise<FileContent[]>;
+    // sendNotification: (message: string) => void;
+    // invokeFilesContent: (filenames: string[]) => Promise<FileContent[]>;
 
-    sendToMain: (data: any) => void;
+    // sendToMain: (data: any) => void;
 
-    setRendererCbToMain: (callback: (event: /*IpcRendererEvent*/any, data: unknown) => void) => void;
+    callMain: (data: any) => void;
+    invokeMain: (data: any) => any;
+    setCbCallFromMain: (callback: (event: /*IpcRendererEvent*/any, data: any) => void) => void;
+
+    // setRendererCbToMain: (callback: (event: /*IpcRendererEvent*/any, data: unknown) => void) => void;
 }
 
 declare var tmApi: TmApi;

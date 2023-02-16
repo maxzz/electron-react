@@ -14,21 +14,37 @@ const ToRendererKeys = {
 //.......................................................................
 
 const api: TmApi = {
-    sendNotification: (message: string) => {
-        ipcRenderer.send(ToMainKeys.notify, message);
-    },
-    invokeFilesContent: (filenames: string[]): Promise<FileContent[]> => {
-        return ipcRenderer.invoke(ToMainKeys.invokeFilesContent, filenames);
+    // sendNotification: (message: string) => {
+    //     ipcRenderer.send(ToMainKeys.notify, message);
+    // },
+    // invokeFilesContent: (filenames: string[]): Promise<FileContent[]> => {
+    //     return ipcRenderer.invoke(ToMainKeys.invokeFilesContent, filenames);
+    // },
+
+    // sendToMain: (data: any): void => {
+    //     ipcRenderer.send(ToMainKeys.sendToMain, data);
+    // },
+
+    callMain: (data: any): void => {
+        const channel: PreloadChannels = 'call-main';
+        ipcRenderer.send(channel, data);
     },
 
-    sendToMain: (data: any): void => {
-        ipcRenderer.send(ToMainKeys.sendToMain, data);
+    invokeMain: (data: any): any => {
+        const channel: PreloadChannels = 'invoke-main';
+        return ipcRenderer.invoke(channel, data);
     },
 
-    setRendererCbToMain: (callback: (event: IpcRendererEvent, data: any) => void) => {
-        ipcRenderer.removeAllListeners(ToRendererKeys.sendToRenderer);
-        ipcRenderer.on(ToRendererKeys.sendToRenderer, callback);
-    }
+    setCbCallFromMain: (callback: (event: IpcRendererEvent, data: any) => void) => {
+        const channel: PreloadChannels = 'send-to-renderer';
+        ipcRenderer.removeAllListeners(channel);
+        ipcRenderer.on(channel, callback);
+    },
+
+    // setRendererCbToMain: (callback: (event: IpcRendererEvent, data: any) => void) => {
+    //     ipcRenderer.removeAllListeners(ToRendererKeys.sendToRenderer);
+    //     ipcRenderer.on(ToRendererKeys.sendToRenderer, callback);
+    // }
 };
 
 contextBridge.exposeInMainWorld('tmApi', api);

@@ -1,4 +1,4 @@
-import { doInvokeLoadFilesAtom, mainApi, sendToMain } from './store';
+import { doInvokeLoadFilesAtom, sendToMain } from './store';
 import { WorldToReactListener } from './store/WorldToReactListener';
 import { DocumentDrop } from './components/UI/DocumentDrop';
 import { Section2_Title } from './components/Section2_Title';
