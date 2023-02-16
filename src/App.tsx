@@ -1,4 +1,4 @@
-import { doInvokeLoadFilesAtom, mainApi } from './store';
+import { doInvokeLoadFilesAtom, mainApi, sendToMain } from './store';
 import { WorldToReactListener } from './store/WorldToReactListener';
 import { DocumentDrop } from './components/UI/DocumentDrop';
 import { Section2_Title } from './components/Section2_Title';
@@ -36,7 +36,7 @@ function Section2_SendNotification() {
             className="place-self-center px-3 py-2 border-neutral-900/20 border rounded shadow active:scale-[.97]"
             onClick={() => {
                 //window.sendNotification('My message')
-                mainApi?.sendNotification('My secure transfered message');
+                sendToMain({ type: 'notify', message: 'My secure transfered message. new' });
             }}
         >
             Send notification

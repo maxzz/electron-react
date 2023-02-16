@@ -5,8 +5,6 @@ import { getIniOptions, saveIniOptions } from './utils/ini-options';
 
 export let appWin: BrowserWindow | null = null;
 
-console.log('process.env.DIST', process.env.DIST);
-
 export async function createWindow() {
     const iniOptions = getIniOptions();
 

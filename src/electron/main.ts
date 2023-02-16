@@ -13,7 +13,6 @@ console.log('........................ main __dirname', __dirname);
 connectMainHandlers();
 connectRendererHandlers();
 
-// app.whenReady().then(createWindow);
 app.whenReady().then(() => {
     const menu = buildMenuTemplate();
 
