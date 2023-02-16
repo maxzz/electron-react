@@ -24,6 +24,7 @@
         "src", 
         "src/electron/preload-types.d.ts",
         "src/electron/main-from-renderer/main-handlers-types.d.ts",
+        "vite-preload-calls.d.ts",
         //"vite.config.web.js"
     ],
     "references": [
