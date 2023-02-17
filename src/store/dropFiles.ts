@@ -1,17 +1,18 @@
 import { atom } from "jotai";
 import { invokeLoadFiles, invokeMain, mainApi } from ".";
 import { DropItem, electronGetPathes, webGetFilesTransferItems, webLoadFilesContent } from "@/utils";
+import { FileContent2 } from "@/electron/app/main-handlers";
 
 // handle files drop for web and electron environments
 
-export const filesContentAtom = atom<FileContent[]>([]);
+export const filesContentAtom = atom<FileContent2[]>([]);
 
 export type DoDroppedFilesAtom = typeof doInvokeLoadFilesAtom;
 
 export const doInvokeLoadFilesAtom = atom(
     null,
     async (get, set, dataTransfer: DataTransfer) => {
-        let filesCnt: FileContent[];
+        let filesCnt: FileContent2[];
 
         if (mainApi) {
             const dropFiles: File[] = [...dataTransfer.files];

@@ -1,3 +1,4 @@
+import { FileContent2 } from '@/electron/app/main-handlers';
 import { InvokeParamsLoadFiles, ToMainCalls } from '@/electron/main-from-renderer';
 
 export * from './dropFiles';
@@ -18,10 +19,10 @@ export function invokeMain(data: any): void {
     return mainApi?.invokeMain(data);
 }
 
-export function invokeLoadFiles(filenames: string[]): Promise<FileContent[]> {
+export function invokeLoadFiles(filenames: string[]): Promise<FileContent2[]> {
     const d: InvokeParamsLoadFiles = {
         type: 'load-files',
         filenames,
     }
-    return mainApi?.invokeMain(d) as Promise<FileContent[]>;
+    return mainApi?.invokeMain(d) as Promise<FileContent2[]>;
 }

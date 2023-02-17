@@ -1,5 +1,5 @@
-import { RendererCalls } from "electron/main-to-renderer";
 import { atom } from "jotai";
+import { RendererCalls } from "@/electron/main-to-renderer";
 
 export const doFromMainAtom = atom(
     null,

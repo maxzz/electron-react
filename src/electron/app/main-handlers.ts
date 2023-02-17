@@ -3,7 +3,7 @@ import { ToMainKeys } from '../preload-enums';
 import { ToMainCalls } from '../main-from-renderer';
 import { loadFilesContent } from './utils/load-files';
 
-type FileContent2 = {
+export type FileContent2 = {
     name: string;                   // file name
     fullPath: string;               // file full path
     cnt: string;                    // file content or error message

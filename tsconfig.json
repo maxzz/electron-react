@@ -27,6 +27,9 @@
         "vite-preload-calls.d.ts",
         //"vite.config.web.js"
     ],
+    "exclude": [
+        "node_modules",
+    ],
     "references": [
         {
             "path": "./tsconfig.node.json"

@@ -1,3 +1,4 @@
+import { FileContent2 } from "@/electron/app/main-handlers";
 import { DropItem } from "./web-drop-utils";
 
 function textFileReader(file: File): Promise<string> {
@@ -11,8 +12,8 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-export async function webLoadFilesContent(dropItems: DropItem[]): Promise<FileContent[]> {
-    const res: FileContent[] = [];
+export async function webLoadFilesContent(dropItems: DropItem[]): Promise<FileContent2[]> {
+    const res: FileContent2[] = [];
     for (const item of dropItems) {
         try {
             if (!item.entry || !item.file) {

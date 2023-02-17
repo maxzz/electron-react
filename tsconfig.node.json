@@ -13,5 +13,8 @@
         "electron",
         "vite-electron-env.d.ts",
         "vite-preload-calls.d.ts",
+    ],
+    "exclude": [
+        "node_modules",
     ]
 }

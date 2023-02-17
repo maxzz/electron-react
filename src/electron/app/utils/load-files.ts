@@ -1,8 +1,9 @@
 import path from 'node:path';
 import { readFileSync, statSync } from 'node:fs';
+import { FileContent2 } from '../main-handlers';
 
-export function loadFilesContent(filenames: string[]): FileContent[] {
-    const files: Partial<FileContent>[] = [];
+export function loadFilesContent(filenames: string[]): FileContent2[] {
+    const files: Partial<FileContent2>[] = [];
     const folders: string[] = [];
 
     (filenames || []).forEach((filename) => {
@@ -37,5 +38,5 @@ export function loadFilesContent(filenames: string[]): FileContent[] {
         }
     });
 
-    return files as Required<FileContent>[];
+    return files as Required<FileContent2>[];
 }
