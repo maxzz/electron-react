@@ -3,14 +3,14 @@ import { hasMain, invokeLoadFiles } from ".";
 import { DropItem, electronGetPathes, webGetFilesTransferItems, webLoadFilesContent } from "@/utils";
 import { M4RInvoke } from "@/electron/app/ipc-main";
 
-export const filesContentAtom = atom<M4RInvoke.FileContent2[]>([]);
+export const filesContentAtom = atom<M4RInvoke.FileContent[]>([]);
 
 // handle files drop for web and electron environments
 
 export const doDroppedFilesAtom = atom(
     null,
     async (get, set, dataTransfer: DataTransfer) => {
-        let filesCnt: M4RInvoke.FileContent2[];
+        let filesCnt: M4RInvoke.FileContent[];
 
         if (hasMain()) {
             const dropFiles: File[] = [...dataTransfer.files];

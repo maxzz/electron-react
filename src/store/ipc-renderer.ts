@@ -9,15 +9,15 @@ export function hasMain(): boolean {
     return !!mainApi;
 }
 
+// Subscribe to main process calls
+
+mainApi?.setCbCallFromMain((_event: unknown, data: unknown) => worldStore.update(data));
+
 // call
 
 export function sendToMain(data: M4R.ToMainCalls): void {
     mainApi?.callMain(data);
 }
-
-// Subscribe to main process calls
-
-mainApi?.setCbCallFromMain((_event: unknown, data: unknown) => worldStore.update(data));
 
 // invoke
 
@@ -25,10 +25,10 @@ export function invokeMain(data: any): void {
     return mainApi?.invokeMain(data);
 }
 
-export function invokeLoadFiles(filenames: string[]): Promise<M4RInvoke.FileContent2[]> {
+export function invokeLoadFiles(filenames: string[]): Promise<M4RInvoke.FileContent[]> {
     const d: M4RInvoke.InvokeCalls = {
         type: 'load-files',
         filenames,
     }
-    return mainApi?.invokeMain(d) as Promise<M4RInvoke.FileContent2[]>;
+    return mainApi?.invokeMain(d) as Promise<M4RInvoke.FileContent[]>;
 }

@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { release } from 'node:os';
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, shell } from 'electron';
-import { getIniOptions, saveIniOptions } from './utils/ini-options';
+import { getIniOptions, saveIniOptions } from './utils/app-ini-options';
 import { callFromRendererToMain } from './ipc-main/ipc-calls';
 import { invokeFromRendererToMain } from './ipc-main/ipc-invoke';
 import { M4R, M4RInvoke } from './ipc-main';
@@ -107,8 +107,7 @@ export function connect_MainWindowListeners() {
 export function connect_ListenersForCallFromRenderer() {
     // call
     function cc(_event: IpcMainEvent, data: any) {
-        const d = data as M4R.ToMainCalls;
-        callFromRendererToMain(d);
+        callFromRendererToMain(data as M4R.ToMainCalls);
     }
     function connect_CallMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => void) {
         ipcMain.on(channel, handler);
@@ -117,8 +116,7 @@ export function connect_ListenersForCallFromRenderer() {
 
     // invoke
     function ii(_event: IpcMainInvokeEvent, data: any): any {
-        const d = data as M4RInvoke.InvokeCalls;
-        return invokeFromRendererToMain(d);
+        return invokeFromRendererToMain(data as M4RInvoke.InvokeCalls);
     }
     function connect_InvokeMain(channel: PreloadChannels, handler: (event: IpcMainInvokeEvent, data: any) => any) {
         ipcMain.handle(channel, handler);

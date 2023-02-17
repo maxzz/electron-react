@@ -12,8 +12,8 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-export async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.FileContent2[]> {
-    const res: M4RInvoke.FileContent2[] = [];
+export async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.FileContent[]> {
+    const res: M4RInvoke.FileContent[] = [];
     for (const item of dropItems) {
         try {
             if (!item.entry || !item.file) {
