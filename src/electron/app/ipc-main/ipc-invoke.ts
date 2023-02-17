@@ -1,9 +1,7 @@
-import { IpcMainInvokeEvent } from "electron";
 import { M4RInvoke } from ".";
 import { loadFilesContent } from "../utils/load-files";
 
-export function invokeFromRenderer(_event: IpcMainInvokeEvent, data: any): any {
-    const d = data as M4RInvoke.InvokeCalls;
+export function invokeFromRendererToMain(d: M4RInvoke.InvokeCalls): any {
     switch (d.type) {
         case 'load-files': {
             return loadFilesContent(d.filenames);

@@ -1,7 +1,10 @@
 import { join } from 'node:path';
 import { release } from 'node:os';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, shell } from 'electron';
 import { getIniOptions, saveIniOptions } from './utils/ini-options';
+import { callFromRendererToMain } from './ipc-main/ipc-calls';
+import { invokeFromRendererToMain } from './ipc-main/ipc-invoke';
+import { M4R, M4RInvoke } from './ipc-main';
 
 export let appWin: BrowserWindow | null = null;
 
@@ -99,4 +102,26 @@ export function connect_MainWindowListeners() {
     //         childWindow.loadFile(indexHtml, { hash: arg });
     //     }
     // });
+}
+
+export function connect_ListenersForCallFromRenderer() {
+    // call
+    function cc(_event: IpcMainEvent, data: any) {
+        const d = data as M4R.ToMainCalls;
+        callFromRendererToMain(d);
+    }
+    function connect_CallMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => void) {
+        ipcMain.on(channel, handler);
+    }
+    connect_CallMain('call-main', cc);
+
+    // invoke
+    function ii(_event: IpcMainInvokeEvent, data: any): any {
+        const d = data as M4RInvoke.InvokeCalls;
+        return invokeFromRendererToMain(d);
+    }
+    function connect_InvokeMain(channel: PreloadChannels, handler: (event: IpcMainInvokeEvent, data: any) => any) {
+        ipcMain.handle(channel, handler);
+    }
+    connect_InvokeMain('invoke-main', ii);
 }

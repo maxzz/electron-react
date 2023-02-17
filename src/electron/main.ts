@@ -1,7 +1,6 @@
 import { join } from 'node:path';
 import { app, Menu } from 'electron';
-import { createWindow, connect_MainWindowListeners } from './app/main-window';
-import { connect_ListenersForCallFromRenderer } from './app/main-handlers';
+import { createWindow, connect_MainWindowListeners, connect_ListenersForCallFromRenderer } from './app/main-window';
 import { buildMenuTemplate } from './app/menu';
 
 process.env.DIST_ELECTRON = join(__dirname, '../');
