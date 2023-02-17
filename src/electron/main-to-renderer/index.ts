@@ -5,5 +5,6 @@ import {ToRendererKeys} from '../preload-enums';
 export type RendererCalls = DarkMode | ReloadFiles;
 
 export function mainToRanderer(data: RendererCalls) {
-    appWin?.webContents.send(ToRendererKeys.sendToRenderer, data);
+    const channel: PreloadChannels = 'send-to-renderer';
+    appWin?.webContents.send(channel, data);
 }
