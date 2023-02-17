@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { filesContentAtom } from '@/store';
 
@@ -19,10 +19,11 @@ function ButtonClear() {
     );
 }
 
-function CardFilename({ path, failed, ...rest }: { path: string; failed?: boolean; } & HTMLAttributes<HTMLElement>) {
+function CardFilename({ path, fullPath, failed, ...rest }: { path: string; fullPath: string; failed?: boolean; } & HTMLAttributes<HTMLElement>) {
     return (
         <div className={`px-2 py-2 ${failed ? 'bg-red-600':'bg-neutral-900/20'}`} {...rest}>
             {path}
+            <div className="text-[.55rem]">{fullPath}</div>
         </div>
     );
 }
@@ -38,9 +39,9 @@ export function FileContentViews() {
                 </div>
             </SectionHeader>
 
-            {filesContent.map(({ name, cnt, failed }, idx) => (
+            {filesContent.map(({ name, fullPath, cnt, failed }, idx) => (
                 <div className="text-xs" key={name}>
-                    <CardFilename path={name} failed={failed} />
+                    <CardFilename path={name} fullPath={fullPath} failed={failed} />
                     <div className="flex bg-neutral-100/20">
                         <textarea className="w-full px-2 py-2 bg-neutral-100/20 smallscroll" rows={5} value={cnt} readOnly />
                     </div>
