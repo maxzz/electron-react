@@ -1,4 +1,4 @@
-import { ToMainCalls } from '@/electron/main-from-renderer';
+import { InvokeParamsLoadFiles, ToMainCalls } from '@/electron/main-from-renderer';
 
 export * from './dropFiles';
 
@@ -12,4 +12,16 @@ export function hasMain(): boolean {
 
 export function sendToMain(data: ToMainCalls): void {
     mainApi?.callMain(data);
+}
+
+export function invokeMain(data: any): void {
+    return mainApi?.invokeMain(data);
+}
+
+export function invokeLoadFiles(filenames: string[]): Promise<FileContent[]> {
+    const d: InvokeParamsLoadFiles = {
+        type: 'load-files',
+        filenames,
+    }
+    return mainApi?.invokeMain(d) as Promise<FileContent[]>;
 }

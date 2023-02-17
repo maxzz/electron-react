@@ -37,11 +37,7 @@ export function connectRendererHandlers() {
     //     }
     // );
 
-    function connectCallMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => void) {
-        ipcMain.on(channel, handler);
-    }
-
-    function connectInvokeMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => Promise<any>) {
+    function connect_CallMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => void) {
         ipcMain.on(channel, handler);
     }
 
@@ -66,7 +62,7 @@ export function connectRendererHandlers() {
         console.log('on ToMainKeys.sendToMain', data);
     }
 
-    connectCallMain('call-main', callFromRendererToMain);
+    connect_CallMain('call-main', callFromRendererToMain);
     //ipcMain.on(ToMainKeys.sendToMain, callFromRendererToMain);
 
     function invokeMain(event: IpcMainInvokeEvent, data: any): any {
@@ -87,7 +83,11 @@ export function connectRendererHandlers() {
         }
     }
 
-    connectInvokeMain('invoke-main', invokeMain);
+    function connect_InvokeMain(channel: PreloadChannels, handler: (event: IpcMainInvokeEvent, data: any) => any) {
+        ipcMain.handle(channel, handler);
+    }
+
+    connect_InvokeMain('invoke-main', invokeMain);
 
     //ipcMain.handle(ToMainKeys.invokeFilesContent, invokeMain);
 
