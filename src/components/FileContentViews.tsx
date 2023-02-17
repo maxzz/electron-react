@@ -32,7 +32,8 @@ function CardFilename({ path, fullPath, failed, ...rest }: { path: string; fullP
                 {/* <IconFolderOpen className="w-5 h-5" /> */}
                 <div className="text-[.55rem]">{fullPath}</div>
             </div>
-            <div className="w-24 h-24 border-gray-900 border" style={{backgroundImage: `linear-gradient(135deg, 
+            <div className="w-24 h-24 border-gray-900 border" style={{
+                backgroundImage: `linear-gradient(135deg, 
                 transparent 50%, 50%, #2a7137 54%, 54%, 
                 transparent 54%, 54%, #42bc58 58%, 58%, 
 
@@ -41,7 +42,8 @@ function CardFilename({ path, fullPath, failed, ...rest }: { path: string; fullP
 
                 transparent 83%, 83%, #2a7137 87%, 87%,
                 transparent 87%, 87%, #42bc58 91%, 91%, 
-                transparent)`}}></div>
+                transparent)`}}>
+            </div>
         </div>
     );
 }

@@ -68,9 +68,42 @@ body {
     background-color: #307540; // #666b7a
 }
 
-.smallscroll::-webkit-resizer { //TODO: http://jsfiddle.net/1n0d529p https://stackoverflow.com/questions/13126917/can-i-style-the-resize-grabber-of-textarea
+.smallscroll::-webkit-resizer {
+    //TODO: http://jsfiddle.net/1n0d529p https://stackoverflow.com/questions/13126917/can-i-style-the-resize-grabber-of-textarea
     //background: #48cc67;
     //background-image: linear-gradient(to right bottom, transparent 50%, #30754070 60%, #30754070);
+
+    background: #7fd593;
+    border: 1px solid transparent;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+        135deg,
+        transparent 50%,
+        50%,
+        #2a7137 54%,
+        54%,
+        transparent 54%,
+        54%,
+        #42bc58 58%,
+        58%,
+        transparent 66%,
+        66%,
+        #2a7137 70%,
+        70%,
+        transparent 70%,
+        70%,
+        #42bc58 74%,
+        74%,
+        transparent 83%,
+        83%,
+        #2a7137 87%,
+        87%,
+        transparent 87%,
+        87%,
+        #42bc58 91%,
+        91%,
+        transparent
+    );
 }
 
 // a {
