@@ -1,16 +1,16 @@
 import { atom } from "jotai";
 import { hasMain, invokeLoadFiles } from ".";
 import { DropItem, electronGetPathes, webGetFilesTransferItems, webLoadFilesContent } from "@/utils";
-import { FileContent2 } from "@/electron/app/main-handlers";
+import { M4R } from "@/electron/app/ipc-main";
 
-export const filesContentAtom = atom<FileContent2[]>([]);
+export const filesContentAtom = atom<M4R.FileContent2[]>([]);
 
 // handle files drop for web and electron environments
 
 export const doDroppedFilesAtom = atom(
     null,
     async (get, set, dataTransfer: DataTransfer) => {
-        let filesCnt: FileContent2[];
+        let filesCnt: M4R.FileContent2[];
 
         if (hasMain()) {
             const dropFiles: File[] = [...dataTransfer.files];

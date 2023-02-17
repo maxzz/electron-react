@@ -1,33 +1,7 @@
 import { ipcMain, IpcMainEvent, IpcMainInvokeEvent, Notification } from 'electron';
 import { ToMainCalls } from '../main-from-renderer';
+import { M4R } from './ipc-main';
 import { loadFilesContent } from './utils/load-files';
-
-export type FileContent2 = {
-    name: string;                   // file name
-    fullPath: string;               // file full path
-    cnt: string;                    // file content or error message
-    failed?: boolean;               // if failed the cnt member has error text
-
-    entry?: FileSystemFileEntry;    // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
-    file?: File;                    // File object from async entry.file() call
-};
-
-type DoLoadfiles = {
-    type: 'load-files';
-    filenames: string[];
-};
-
-type DoLoadfiles2 = {
-    type: 'load-files2';
-    filenames: string[];
-};
-
-type DoLoadfiles3 = {
-    type: 'load-files3';
-    filenames: string[];
-};
-
-type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/;
 
 export function connectRendererHandlers() {
     
@@ -59,7 +33,7 @@ export function connectRendererHandlers() {
     // invoke
 
     function invokeMain(event: IpcMainInvokeEvent, data: any): any {
-        const d = data as InvokeCalls;
+        const d = data as M4R.InvokeCalls;
         switch (d.type) {
             case 'load-files': {
                 return loadFilesContent(d.filenames);

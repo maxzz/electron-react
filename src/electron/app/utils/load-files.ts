@@ -1,9 +1,9 @@
 import path from 'node:path';
 import { readFileSync, statSync } from 'node:fs';
-import { FileContent2 } from '../main-handlers';
+import { M4R } from '../ipc-main';
 
-export function loadFilesContent(filenames: string[]): FileContent2[] {
-    const files: Partial<FileContent2>[] = [];
+export function loadFilesContent(filenames: string[]): M4R.FileContent2[] {
+    const files: Partial<M4R.FileContent2>[] = [];
     const folders: string[] = [];
 
     (filenames || []).forEach((filename) => {
@@ -38,5 +38,5 @@ export function loadFilesContent(filenames: string[]): FileContent2[] {
         }
     });
 
-    return files as Required<FileContent2>[];
+    return files as Required<M4R.FileContent2>[];
 }

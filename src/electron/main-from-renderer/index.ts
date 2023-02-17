@@ -4,9 +4,12 @@
 
 export type ToMainCalls = NotifyMessage | DarkMode;
 
-export type InvokeParamsLoadFiles = {
-    type: 'load-files',
-    filenames: string[];
-}
+// export type InvokeParamsLoadFiles = {
+//     type: 'load-files',
+//     filenames: string[];
+// };
 
-export type InvokeCalls = InvokeParamsLoadFiles;
+// export namespace M4R {
+//     export type InvokeCalls = InvokeParamsLoadFiles;
+// }
+

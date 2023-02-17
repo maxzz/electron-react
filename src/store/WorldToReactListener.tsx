@@ -1,6 +1,6 @@
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { doFromMainAtom } from "./doFromMain";
+import { doFromMainAtom } from "./ipc-handlers-atom";
 
 export const worldStore = {
     listeners: new Set<(data: unknown) => void>(),
