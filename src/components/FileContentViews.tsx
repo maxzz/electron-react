@@ -29,9 +29,19 @@ function CardFilename({ path, fullPath, failed, ...rest }: { path: string; fullP
             </div>
             <div className="flex items-center space-x-1">
                 <IconFolderClosed className="w-5 h-5" />
-                <IconFolderOpen className="w-5 h-5" />
+                {/* <IconFolderOpen className="w-5 h-5" /> */}
                 <div className="text-[.55rem]">{fullPath}</div>
             </div>
+            <div className="w-24 h-24 border-gray-900 border" style={{backgroundImage: `linear-gradient(135deg, 
+                transparent 50%, 50%, #2a7137 54%, 54%, 
+                transparent 54%, 54%, #42bc58 58%, 58%, 
+
+                transparent 66%, 66%, #2a7137 70%, 70%, 
+                transparent 70%, 70%, #42bc58 74%, 74%, 
+
+                transparent 83%, 83%, #2a7137 87%, 87%,
+                transparent 87%, 87%, #42bc58 91%, 91%, 
+                transparent)`}}></div>
         </div>
     );
 }
