@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { filesContentAtom } from '@/store';
+import { IconFile } from './UI/UIIcons';
 
 function SectionHeader({ children, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
@@ -21,8 +22,11 @@ function ButtonClear() {
 
 function CardFilename({ path, fullPath, failed, ...rest }: { path: string; fullPath: string; failed?: boolean; } & HTMLAttributes<HTMLElement>) {
     return (
-        <div className={`px-2 py-2 ${failed ? 'bg-red-600':'bg-neutral-900/20'}`} {...rest}>
-            {path}
+        <div className={`px-2 py-2 ${failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
+            <div className="flex items-center space-x-1">
+                <IconFile className="w-5 h-5" />
+                <div className="">{path}</div>
+            </div>
             <div className="text-[.55rem]">{fullPath}</div>
         </div>
     );
