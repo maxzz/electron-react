@@ -1,4 +1,4 @@
-import { M4R, QQ } from "@/electron/app/ipc-main";
+import { M4RInvoke, M4R } from "@/electron/app/ipc-main";
 import { worldStore } from "./WorldToReactListener";
 
 // main process APIs
@@ -11,7 +11,7 @@ export function hasMain(): boolean {
 
 // call
 
-export function sendToMain(data: QQ.ToMainCalls): void {
+export function sendToMain(data: M4R.ToMainCalls): void {
     mainApi?.callMain(data);
 }
 
@@ -25,10 +25,10 @@ export function invokeMain(data: any): void {
     return mainApi?.invokeMain(data);
 }
 
-export function invokeLoadFiles(filenames: string[]): Promise<M4R.FileContent2[]> {
-    const d: M4R.InvokeCalls = {
+export function invokeLoadFiles(filenames: string[]): Promise<M4RInvoke.FileContent2[]> {
+    const d: M4RInvoke.InvokeCalls = {
         type: 'load-files',
         filenames,
     }
-    return mainApi?.invokeMain(d) as Promise<M4R.FileContent2[]>;
+    return mainApi?.invokeMain(d) as Promise<M4RInvoke.FileContent2[]>;
 }

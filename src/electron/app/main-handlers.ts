@@ -1,5 +1,5 @@
 import { ipcMain, IpcMainEvent, IpcMainInvokeEvent, Notification } from 'electron';
-import { M4R, QQ } from './ipc-main';
+import { M4RInvoke, M4R } from './ipc-main';
 import { loadFilesContent } from './utils/load-files';
 
 export function connect_ListenersForCallFromRenderer() {
@@ -7,7 +7,7 @@ export function connect_ListenersForCallFromRenderer() {
     // call
 
     function callFromRendererToMain(_event: IpcMainEvent, data: any) {
-        const d = data as QQ.ToMainCalls;
+        const d = data as M4R.ToMainCalls;
         switch (d.type) {
             case 'notify': {
                 new Notification({ title: 'My Noti', body: d.message }).show();
@@ -32,7 +32,7 @@ export function connect_ListenersForCallFromRenderer() {
     // invoke
 
     function invokeMain(event: IpcMainInvokeEvent, data: any): any {
-        const d = data as M4R.InvokeCalls;
+        const d = data as M4RInvoke.InvokeCalls;
         switch (d.type) {
             case 'load-files': {
                 return loadFilesContent(d.filenames);

@@ -1,4 +1,4 @@
-import { M4R } from "@/electron/app/ipc-main";
+import { M4RInvoke } from "@/electron/app/ipc-main";
 import { DropItem } from "./web-drop-utils";
 
 function textFileReader(file: File): Promise<string> {
@@ -12,8 +12,8 @@ function textFileReader(file: File): Promise<string> {
     });
 }
 
-export async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4R.FileContent2[]> {
-    const res: M4R.FileContent2[] = [];
+export async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.FileContent2[]> {
+    const res: M4RInvoke.FileContent2[] = [];
     for (const item of dropItems) {
         try {
             if (!item.entry || !item.file) {
