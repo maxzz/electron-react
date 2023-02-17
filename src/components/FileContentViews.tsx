@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { filesContentAtom } from '@/store';
-import { IconFile } from './UI/UIIcons';
+import { IconFile, IconFolderClosed } from './UI/UIIcons';
 
 function SectionHeader({ children, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
@@ -27,7 +27,10 @@ function CardFilename({ path, fullPath, failed, ...rest }: { path: string; fullP
                 <IconFile className="w-5 h-5" />
                 <div className="">{path}</div>
             </div>
-            <div className="text-[.55rem]">{fullPath}</div>
+            <div className="flex items-center space-x-1">
+                <IconFolderClosed className="w-5 h-5" />
+                <div className="text-[.55rem]">{fullPath}</div>
+            </div>
         </div>
     );
 }
