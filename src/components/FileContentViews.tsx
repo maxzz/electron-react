@@ -2,6 +2,7 @@ import { HTMLAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { filesContentAtom } from '@/store';
 import { IconFile, IconFolderClosed, IconFolderOpen } from './UI/UIIcons';
+import { M4RInvoke } from '@/electron/app/ipc-main';
 
 function SectionHeader({ children, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
@@ -20,7 +21,7 @@ function ButtonClear() {
     );
 }
 
-function CardFilename({ path, fullPath, failed, ...rest }: { path: string; fullPath: string; failed?: boolean; } & HTMLAttributes<HTMLElement>) {
+function CardFilename({fileContent: { name: path, fullPath, failed}, ...rest }: { fileContent: M4RInvoke.FileContent; } & HTMLAttributes<HTMLElement>) {
     return (
         <div className={`px-2 py-2 ${failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
             <div className="flex items-center space-x-1">
@@ -36,6 +37,17 @@ function CardFilename({ path, fullPath, failed, ...rest }: { path: string; fullP
     );
 }
 
+function CardBody({ fileContent: {cnt} }: { fileContent: M4RInvoke.FileContent; }) {
+    return (
+        <div className="flex bg-neutral-100/20">
+            <textarea
+                className="w-full px-2 py-1 text-[.5rem] bg-neutral-100/20 outline-none cursor-default smallscroll"
+                rows={5} value={cnt} readOnly
+            />
+        </div>
+    );
+}
+
 export function FileContentViews() {
     const filesContent = useAtomValue(filesContentAtom);
     return (<>
@@ -47,16 +59,11 @@ export function FileContentViews() {
                 </div>
             </SectionHeader>
 
-            {filesContent.map(({ name, fullPath, cnt, failed }, idx) => (
-                <div className="mx-2 rounded overflow-hidden" key={name}>
-                    <CardFilename path={name} fullPath={fullPath} failed={failed} />
-
-                    <div className="flex bg-neutral-100/20">
-                        <textarea
-                            className="w-full px-2 py-1 text-[.5rem] bg-neutral-100/20 outline-none cursor-default smallscroll"
-                            rows={5} value={cnt} readOnly
-                        />
-                    </div>
+            {filesContent.map((fileContent, idx) => (
+                // Card
+                <div className="mx-2 rounded overflow-hidden" key={`${idx}=${name}`}>
+                    <CardFilename fileContent={fileContent} />
+                    <CardBody fileContent={fileContent} />
                 </div>
             ))}
         </div>

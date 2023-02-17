@@ -53,7 +53,7 @@ body {
 /* Firefox scrollbars */
 .smallscroll {
     --sb-width: 8px;
-    scrollbar-color: #307540 transparent; // #666b7a
+    scrollbar-color: #57c470 transparent; // #666b7a
     scrollbar-width: thin;
 }
 
@@ -65,7 +65,7 @@ body {
 }
 
 .smallscroll::-webkit-scrollbar-thumb {
-    background-color: #307540; // #666b7a
+    background-color: #57c470; // #666b7a
 }
 
 .smallscroll::-webkit-resizer {
