@@ -39,7 +39,7 @@
     },
     "scripts": {
         "dev": "vite",
-        "web": "vite --config vite.config.web.ts",
+        "web": "vite --config vite.config.web.js",
         "build": "tsc && vite build && electron-builder",
         "build-no-check": "vite build && electron-builder",
         "preview": "vite preview",
