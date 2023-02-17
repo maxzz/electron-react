@@ -1,14 +1,13 @@
 import { ipcMain, IpcMainEvent, IpcMainInvokeEvent, Notification } from 'electron';
-import { ToMainCalls } from '../main-from-renderer';
-import { M4R } from './ipc-main';
+import { M4R, QQ } from './ipc-main';
 import { loadFilesContent } from './utils/load-files';
 
-export function connectRendererHandlers() {
+export function connect_ListenersForCallFromRenderer() {
     
     // call
 
     function callFromRendererToMain(_event: IpcMainEvent, data: any) {
-        const d = data as ToMainCalls;
+        const d = data as QQ.ToMainCalls;
         switch (d.type) {
             case 'notify': {
                 new Notification({ title: 'My Noti', body: d.message }).show();

@@ -48,7 +48,7 @@ export async function createWindow() {
     });
 }
 
-export function connectMainHandlers() {
+export function connect_MainWindowListeners() {
     if (release().startsWith('6.1')) app.disableHardwareAcceleration(); // Disable GPU Acceleration for Windows 7
     if (process.platform === 'win32') app.setAppUserModelId(app.getName()); // Set application name for Windows 10+ notifications
 

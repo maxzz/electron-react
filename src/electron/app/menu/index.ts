@@ -1,5 +1,5 @@
 import { MenuItem, MenuItemConstructorOptions } from "electron";
-import { mainToRanderer } from "../../main-to-renderer";
+import { M2R } from "../ipc-main";
 
 const fileMenu: MenuItemConstructorOptions[] = [
     {
@@ -30,7 +30,7 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 checked: true,
                 type: 'checkbox',
                 accelerator: 'CommandOrControl+F4',
-                click(item: MenuItem) { mainToRanderer({ type: 'dark-mode', active: item.checked }); },
+                click(item: MenuItem) { M2R.mainToRanderer({ type: 'dark-mode', active: item.checked }); },
             },
             { type: 'separator' },
             { role: 'resetZoom', },
@@ -51,7 +51,7 @@ export function buildMenuTemplate(): MenuItemConstructorOptions[] {
             id: 'reload-files',
             enabled: true,
             accelerator: 'F4',
-            click() { mainToRanderer({ type: 'reload-files' }); },
+            click() { M2R.mainToRanderer({ type: 'reload-files' }); },
         },
     ];
 }

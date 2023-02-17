@@ -1,5 +1,4 @@
-import { ToMainCalls } from "@/electron/main-from-renderer";
-import { M4R } from "@/electron/app/ipc-main";
+import { M4R, QQ } from "@/electron/app/ipc-main";
 import { worldStore } from "./WorldToReactListener";
 
 // main process APIs
@@ -12,7 +11,7 @@ export function hasMain(): boolean {
 
 // call
 
-export function sendToMain(data: ToMainCalls): void {
+export function sendToMain(data: QQ.ToMainCalls): void {
     mainApi?.callMain(data);
 }
 

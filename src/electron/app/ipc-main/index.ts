@@ -1,3 +1,5 @@
+import { appWin } from "../main-window";
+
 export namespace M4R {
     type DoLoadfiles = {
         type: 'load-files';
@@ -25,4 +27,39 @@ export namespace M4R {
         entry?: FileSystemFileEntry;    // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
         file?: File;                    // File object from async entry.file() call
     };
+}
+
+export namespace M2R {
+
+    // menu commands
+
+    export type DarkMode = {
+        type: 'dark-mode';
+        active: boolean;
+    };
+    
+    export type ReloadFiles = {
+        type: 'reload-files';
+    };
+
+    export type RendererCalls = DarkMode | ReloadFiles;
+
+    export function mainToRanderer(data: RendererCalls) {
+        const channel: PreloadChannels = 'send-to-renderer';
+        appWin?.webContents.send(channel, data);
+    }
+}
+
+export namespace QQ {
+    export type NotifyMessage = {
+        type: 'notify';
+        message: string;
+    }
+    
+    export type DarkMode = {
+        type: 'dark-mode';
+        active: boolean;
+    }
+
+    export type ToMainCalls = NotifyMessage | DarkMode;
 }
