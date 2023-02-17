@@ -1,4 +1,4 @@
-import { doInvokeLoadFilesAtom, sendToMain } from './store';
+import { doDroppedFilesAtom, sendToMain } from './store';
 import { WorldToReactListener } from './store/WorldToReactListener';
 import { DocumentDrop } from './components/UI/DocumentDrop';
 import { Section2_Title } from './components/Section2_Title';
@@ -25,7 +25,7 @@ export function App() {
             <div className="px-1 py-2 text-xs text-green-900 bg-green-600">Footer</div>
         </div>
 
-        <DocumentDrop doDroppedFilesAtom={doInvokeLoadFilesAtom} />
+        <DocumentDrop doDroppedFilesAtom={doDroppedFilesAtom} />
         <WorldToReactListener />
     </>);
 }

@@ -1,25 +1,23 @@
 import { atom } from "jotai";
-import { invokeLoadFiles, invokeMain, mainApi } from ".";
+import { hasMain, invokeLoadFiles } from ".";
 import { DropItem, electronGetPathes, webGetFilesTransferItems, webLoadFilesContent } from "@/utils";
 import { FileContent2 } from "@/electron/app/main-handlers";
 
-// handle files drop for web and electron environments
-
 export const filesContentAtom = atom<FileContent2[]>([]);
 
-export type DoDroppedFilesAtom = typeof doInvokeLoadFilesAtom;
+// handle files drop for web and electron environments
 
-export const doInvokeLoadFilesAtom = atom(
+export const doDroppedFilesAtom = atom(
     null,
     async (get, set, dataTransfer: DataTransfer) => {
         let filesCnt: FileContent2[];
 
-        if (mainApi) {
+        if (hasMain()) {
             const dropFiles: File[] = [...dataTransfer.files];
             const filenames = electronGetPathes(dropFiles);
-            if (!filenames.length) { return; }
-
-            // filesCnt = await mainApi?.invokeFilesContent(filenames);
+            if (!filenames.length) {
+                return;
+            }
             filesCnt = await invokeLoadFiles(filenames);
         } else {
             const items: DropItem[] = await webGetFilesTransferItems(dataTransfer.items);
@@ -31,6 +29,7 @@ export const doInvokeLoadFilesAtom = atom(
         }
     }
 );
+export type DoDroppedFilesAtom = typeof doDroppedFilesAtom;
 
 //TODO: drop zone 100% of document not view port
 //TODO: filter files by valid types

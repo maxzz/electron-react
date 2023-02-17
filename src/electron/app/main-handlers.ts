@@ -1,5 +1,4 @@
 import { ipcMain, IpcMainEvent, IpcMainInvokeEvent, Notification } from 'electron';
-import { ToMainKeys } from '../preload-enums';
 import { ToMainCalls } from '../main-from-renderer';
 import { loadFilesContent } from './utils/load-files';
 
@@ -31,15 +30,8 @@ type DoLoadfiles3 = {
 type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/;
 
 export function connectRendererHandlers() {
-    // ipcMain.on(ToMainKeys.notify,
-    //     (_event, message) => {
-    //         new Notification({ title: 'My Noti', body: message }).show();
-    //     }
-    // );
-
-    function connect_CallMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => void) {
-        ipcMain.on(channel, handler);
-    }
+    
+    // call
 
     function callFromRendererToMain(_event: IpcMainEvent, data: any) {
         const d = data as ToMainCalls;
@@ -57,13 +49,14 @@ export function connectRendererHandlers() {
                 throw new Error(really);
             }
         }
-
-        // const handlers = {}
-        console.log('on ToMainKeys.sendToMain', data);
     }
 
+    function connect_CallMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => void) {
+        ipcMain.on(channel, handler);
+    }
     connect_CallMain('call-main', callFromRendererToMain);
-    //ipcMain.on(ToMainKeys.sendToMain, callFromRendererToMain);
+
+    // invoke
 
     function invokeMain(event: IpcMainInvokeEvent, data: any): any {
         const d = data as InvokeCalls;
@@ -86,14 +79,5 @@ export function connectRendererHandlers() {
     function connect_InvokeMain(channel: PreloadChannels, handler: (event: IpcMainInvokeEvent, data: any) => any) {
         ipcMain.handle(channel, handler);
     }
-
     connect_InvokeMain('invoke-main', invokeMain);
-
-    //ipcMain.handle(ToMainKeys.invokeFilesContent, invokeMain);
-
-    // ipcMain.handle(ToMainKeys.invokeFilesContent,
-    //     (_event, filenames: string[]) => {
-    //         return loadFilesContent(filenames) as FileContent[];
-    //     }
-    // );
 }

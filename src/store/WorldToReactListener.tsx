@@ -1,19 +1,13 @@
 import { useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { mainApi } from ".";
 import { doFromMainAtom } from "./doFromMain";
 
-const worldStore = {
+export const worldStore = {
     listeners: new Set<(data: unknown) => void>(),
     update(data?: unknown) {
         data && this.listeners.forEach((listener) => listener(data));
     }
 };
-
-// Subscribe to main process calls
-
-//mainApi?.setRendererCbToMain((_event: unknown, data: unknown) => worldStore.update(data));
-mainApi?.setCbCallFromMain((_event: unknown, data: unknown) => worldStore.update(data));
 
 // React connector
 
