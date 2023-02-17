@@ -54,8 +54,8 @@ export namespace M4RInvoke {
     export type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/;
 
     export type FileContent = {
-        name: string;                   // file name
-        fullPath: string;               // file full path
+        name: string;                   // file name wo/ path
+        fullPath: string;               // file full path and filename
         cnt: string;                    // file content or error message
         failed?: boolean;               // if failed the cnt member has error text
     
