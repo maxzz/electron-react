@@ -23,13 +23,13 @@ function ButtonClear() {
 
 function CardFilename({ fileContent: { name, fullPath, failed }, ...rest }: { fileContent: M4RInvoke.FileContent; } & HTMLAttributes<HTMLElement>) {
     return (
-        <div className={`px-2 py-2 ${failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
+        <div className={`px-2 py-2 h-1/2 ${failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
             <div className="flex items-center space-x-1">
-                <IconFile className="w-5 h-5" />
+                <IconFile className="w-5 h-5 flex-none" />
                 <div className="text-xs font-semibold">{name}</div>
             </div>
             <div className="flex items-center space-x-1">
-                <IconFolderClosed className="w-5 h-3" />
+                <IconFolderClosed className="w-5 h-3 flex-none" />
                 {/* <IconFolderOpen className="w-5 h-5" /> */}
                 <div className="text-[.5rem]">{fullPath}</div>
             </div>

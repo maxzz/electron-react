@@ -2,6 +2,8 @@
 
 Electron app with vite HMR
 
+![](src/assets/previews/2023-02-17_16-25-10.png)
+
 ### Refs, links, credits
 
 * Started with [electron-vite](https://github.com/alex8088/electron-vite)
