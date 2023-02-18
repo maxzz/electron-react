@@ -20,7 +20,7 @@ export const doDroppedFilesAtom = atom(
             }
             filesCnt = await invokeLoadFiles(filenames);
         } else {
-            filesCnt = await webLoadDataTransferContent(dataTransfer.items);
+            filesCnt = await webLoadDataTransferContent(dataTransfer.items, ['dpm']);
         }
 
         if (filesCnt) {

@@ -1,4 +1,5 @@
 import { M4RInvoke } from "@/electron/app/ipc-main";
+import { ext } from "./os-utils";
 import { fileEntryToFile, getAllFileEntries } from "./web-data-transfer-item-list";
 
 type DropItem = {
@@ -64,8 +65,9 @@ async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.Fil
     return res;
 }
 
-export async function webLoadDataTransferContent(dataTransferItemList: DataTransferItemList): Promise<M4RInvoke.FileContent[]> {
-    const items: DropItem[] = await webGetFilesTransferItems(dataTransferItemList);
+export async function webLoadDataTransferContent(dataTransferItemList: DataTransferItemList, allowedExt?: string[]): Promise<M4RInvoke.FileContent[]> {
+    let items: DropItem[] = await webGetFilesTransferItems(dataTransferItemList);
+    items = allowedExt ? items.filter((item) => allowedExt.includes(ext(item.name).toLowerCase())) : items;
     return webLoadFilesContent(items);
 }
 

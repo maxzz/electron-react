@@ -9,3 +9,12 @@ export function returnFileSize(number: number): string {
         return (number / 1073741824).toFixed(1) + 'GB';
     }
 }
+
+// function fileExt(filename: string): string {
+//     const ss = filename.split('.');
+//     return ss.length > 1 ? ss[ss.length - 1] : '';          // a.b -> b; a.b/c -> 'b/c'
+// }
+
+export function ext(filename: string): string {
+    return /(?:\.([^./\\]+))?$/.exec(filename)?.[1] || '';  // a.b -> b; a.b/c -> ''
+}
