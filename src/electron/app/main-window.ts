@@ -19,7 +19,9 @@ export async function createWindow() {
         title: 'Main window',
         icon: join(process.env.PUBLIC || '', 'favicon.ico'),
         ...(iniOptions?.bounds),
+        show: false,
         backgroundColor: 'rgb(20 83 45)',
+        //transparent: true,
         webPreferences: {
             preload,
             nodeIntegration: false, //https://www.electronjs.org/docs/latest/tutorial/security process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
@@ -33,6 +35,8 @@ export async function createWindow() {
     } else {
         appWin.loadFile(indexHtml);
     }
+
+    appWin.once('ready-to-show', () => appWin?.show());
 
     // Test actively push message to the Electron-Renderer
     appWin.webContents.on('did-finish-load', () => {
