@@ -21,12 +21,12 @@ function ButtonClear() {
     );
 }
 
-function CardFilename({fileContent: { name: path, fullPath, failed}, ...rest }: { fileContent: M4RInvoke.FileContent; } & HTMLAttributes<HTMLElement>) {
+function CardFilename({ fileContent: { name, fullPath, failed }, ...rest }: { fileContent: M4RInvoke.FileContent; } & HTMLAttributes<HTMLElement>) {
     return (
         <div className={`px-2 py-2 ${failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
             <div className="flex items-center space-x-1">
                 <IconFile className="w-5 h-5" />
-                <div className="text-xs font-semibold">{path}</div>
+                <div className="text-xs font-semibold">{name}</div>
             </div>
             <div className="flex items-center space-x-1">
                 <IconFolderClosed className="w-5 h-3" />
@@ -37,7 +37,7 @@ function CardFilename({fileContent: { name: path, fullPath, failed}, ...rest }: 
     );
 }
 
-function CardBody({ fileContent: {cnt} }: { fileContent: M4RInvoke.FileContent; }) {
+function CardBody({ fileContent: { cnt } }: { fileContent: M4RInvoke.FileContent; }) {
     return (
         <div className="flex bg-neutral-100/20">
             <textarea
@@ -48,10 +48,20 @@ function CardBody({ fileContent: {cnt} }: { fileContent: M4RInvoke.FileContent; 
     );
 }
 
+function Card({ fileContent }: { fileContent: M4RInvoke.FileContent; }) {
+    return (
+        <div className="border-neutral-900/20 border rounded shadow overflow-hidden">
+            <CardFilename fileContent={fileContent} />
+            <CardBody fileContent={fileContent} />
+        </div>
+
+    );
+}
+
 export function FileContentViews() {
     const filesContent = useAtomValue(filesContentAtom);
     return (<>
-        <div className="border-neutral-900/20 border rounded shadow-sm space-y-2">
+        <div className="border-neutral-900/20 border rounded shadow-sm">
             <SectionHeader>
                 <div className="flex items-center justify-between">
                     <div className="">Loaded content: {!filesContent.length && ' Drop It Here'}</div>
@@ -59,13 +69,11 @@ export function FileContentViews() {
                 </div>
             </SectionHeader>
 
-            {filesContent.map((fileContent, idx) => (
-                // Card
-                <div className="mx-2 rounded overflow-hidden" key={`${idx}=${name}`}>
-                    <CardFilename fileContent={fileContent} />
-                    <CardBody fileContent={fileContent} />
-                </div>
-            ))}
+            <div className="p-2 grid gap-2 grid-cols-[repeat(auto-fill,minmax(20ch,1fr))]">
+                {filesContent.map((fileContent, idx) => (
+                    <Card fileContent={fileContent} key={`${idx}=${fileContent.name}`} />
+                ))}
+            </div>
         </div>
     </>);
 }
