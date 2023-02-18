@@ -39,7 +39,7 @@ function CardFilename({ fileContent: { name, fullPath, failed }, ...rest }: { fi
 
 function CardBody({ fileContent: { cnt } }: { fileContent: M4RInvoke.FileContent; }) {
     return (
-        <div className="flex bg-neutral-100/20">
+        <div className="h-1/2 flex bg-neutral-100/20">
             <textarea
                 className="w-full px-2 py-1 text-[.5rem] bg-neutral-100/20 outline-none cursor-default smallscroll"
                 rows={5} value={cnt} readOnly
