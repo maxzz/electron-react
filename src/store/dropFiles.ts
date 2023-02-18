@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { hasMain, invokeLoadFiles } from ".";
-import { DropItem, electronGetPathes, webGetFilesTransferItems, webLoadFilesContent } from "@/utils";
+import { electronGetPathes, webLoadDataTransferContent } from "@/utils";
 import { M4RInvoke } from "@/electron/app/ipc-main";
 
 export const filesContentAtom = atom<M4RInvoke.FileContent[]>([]);
@@ -20,8 +20,7 @@ export const doDroppedFilesAtom = atom(
             }
             filesCnt = await invokeLoadFiles(filenames);
         } else {
-            const items: DropItem[] = await webGetFilesTransferItems(dataTransfer.items);
-            filesCnt = await webLoadFilesContent(items);
+            filesCnt = await webLoadDataTransferContent(dataTransfer.items);
         }
 
         if (filesCnt) {
