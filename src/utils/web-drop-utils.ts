@@ -5,8 +5,9 @@ import { fileEntryToFile, getAllFileEntries } from "./web-data-transfer-item-lis
 type DropItem = {
     name: string;
     fullPath: string;
-    entry: FileSystemFileEntry;    // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
-    file: File;                    // File object from async entry.file() call
+    notOur?: boolean;           // load of file content was blocked by allowedExt list.
+    entry: FileSystemFileEntry; // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
+    file: File;                 // File object from async entry.file() call
 };
 
 async function webGetFilesTransferItems(dataTransferItemList: DataTransferItemList): Promise<DropItem[]> {
@@ -43,6 +44,18 @@ async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.Fil
             if (!item.entry || !item.file) {
                 throw new Error('Empty entry or file');
             }
+            if (item.notOur) {
+                res.push({
+                    entry: item.entry,
+                    file: item.file,
+                    name: item.name,
+                    fullPath: item.fullPath,
+                    cnt: 'Not our file',
+                    failed: true,
+                    notOur: true,
+                });
+                continue;
+            }
             const cnt = await textFileReader(item.file);
             res.push({
                 entry: item.entry,
@@ -67,7 +80,7 @@ async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.Fil
 
 export async function webLoadDataTransferContent(dataTransferItemList: DataTransferItemList, allowedExt?: string[]): Promise<M4RInvoke.FileContent[]> {
     let items: DropItem[] = await webGetFilesTransferItems(dataTransferItemList);
-    items = allowedExt ? items.filter((item) => allowedExt.includes(ext(item.name).toLowerCase())) : items;
+    items = allowedExt ? items.map((item) => allowedExt.includes(ext(item.name).toLowerCase()) ? item : { ...item, notOur: true, failed: true }) : items;
     return webLoadFilesContent(items);
 }
 
