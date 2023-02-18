@@ -6,7 +6,7 @@ import { callFromRendererToMain } from './ipc-main/ipc-calls';
 import { invokeFromRendererToMain } from './ipc-main/ipc-invoke';
 import { M4R, M4RInvoke } from './ipc-main';
 
-export let appWin: BrowserWindow | null = null;
+export let appWin: BrowserWindow | null | undefined = null;
 
 export async function createWindow() {
     const iniOptions = getIniOptions();
@@ -19,6 +19,7 @@ export async function createWindow() {
         title: 'Main window',
         icon: join(process.env.PUBLIC || '', 'favicon.ico'),
         ...(iniOptions?.bounds),
+        backgroundColor: 'rgb(20 83 45)',
         webPreferences: {
             preload,
             nodeIntegration: false, //https://www.electronjs.org/docs/latest/tutorial/security process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'

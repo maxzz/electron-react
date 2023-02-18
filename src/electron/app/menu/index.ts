@@ -1,5 +1,10 @@
-import { MenuItem, MenuItemConstructorOptions } from "electron";
+import { BrowserWindow, globalShortcut, MenuItem, MenuItemConstructorOptions } from "electron";
 import { M2R } from "../ipc-main";
+
+export function buildGlobalShortcuts(win?: BrowserWindow | null) {
+    globalShortcut.register('CommandOrControl+R', () => { win?.reload(); });
+    globalShortcut.register('CommandOrControl+Shift+I', () => { win?.webContents.toggleDevTools(); });
+}
 
 const fileMenu: MenuItemConstructorOptions[] = [
     {

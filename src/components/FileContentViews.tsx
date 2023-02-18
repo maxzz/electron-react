@@ -23,7 +23,7 @@ function ButtonClear() {
 
 function CardFilename({ fileContent: { name, fullPath, failed }, ...rest }: { fileContent: M4RInvoke.FileContent; } & HTMLAttributes<HTMLElement>) {
     return (
-        <div className={`px-2 py-2 h-1/2 ${failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
+        <div className={`px-2 py-2 ${failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
             <div className="flex items-center space-x-1">
                 <IconFile className="w-5 h-5 flex-none" />
                 <div className="text-xs font-semibold">{name}</div>
@@ -39,7 +39,7 @@ function CardFilename({ fileContent: { name, fullPath, failed }, ...rest }: { fi
 
 function CardBody({ fileContent: { cnt } }: { fileContent: M4RInvoke.FileContent; }) {
     return (
-        <div className="h-1/2 flex bg-neutral-100/20">
+        <div className="flex bg-neutral-100/20">
             <textarea
                 className="w-full px-2 py-1 text-[.5rem] bg-neutral-100/20 outline-none cursor-default smallscroll"
                 rows={5} value={cnt} readOnly
@@ -50,7 +50,7 @@ function CardBody({ fileContent: { cnt } }: { fileContent: M4RInvoke.FileContent
 
 function Card({ fileContent }: { fileContent: M4RInvoke.FileContent; }) {
     return (
-        <div className="border-neutral-900/20 border rounded shadow overflow-hidden">
+        <div className="border-neutral-900/20 border rounded shadow overflow-hidden grid grid-rows-2">
             <CardFilename fileContent={fileContent} />
             <CardBody fileContent={fileContent} />
         </div>
