@@ -1,5 +1,7 @@
 import { BrowserWindow, globalShortcut, MenuItem, MenuItemConstructorOptions } from "electron";
+import { appWin } from "../main-window";
 import { M2R } from "../ipc-main";
+import { openFileDialog } from "../ipc-main/ipc-main-commands";
 
 export function buildGlobalShortcuts(win?: BrowserWindow | null) {
     globalShortcut.register('CommandOrControl+R', () => { win?.reload(); });
@@ -13,7 +15,8 @@ const fileMenu: MenuItemConstructorOptions[] = [
             {
                 label: 'Click',
                 accelerator: 'CommandOrControl+Shift+L',
-                click: () => { console.log('click'); }
+                // click: () => { console.log('click'); }
+                click: async () => { openFileDialog(appWin); }
             },
             { role: 'reload', accelerator: 'F5', },
             { type: 'separator' },
