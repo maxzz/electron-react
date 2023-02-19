@@ -7,6 +7,7 @@ import nodeLogo from "./assets/node.svg";
 import './App.scss';
 import { IconMenu } from './components/UI/UIIcons';
 import { Section1_Header } from './components/Section1_Header';
+import { Section2_SendNotification } from './components/Section2_SendNotification';
 
 export function App() {
     return (<>
@@ -30,20 +31,6 @@ export function App() {
         <DocumentDrop doDroppedFilesAtom={doDroppedFilesAtom} />
         <WorldToReactListener />
     </>);
-}
-
-function Section2_SendNotification() {
-    return (
-        <button
-            className="place-self-center px-3 py-2 border-neutral-900/20 border rounded shadow active:scale-[.97]"
-            onClick={() => {
-                //window.sendNotification('My message')
-                sendToMain({ type: 'notify', message: 'My secure transfered message. new' });
-            }}
-        >
-            Send notification
-        </button>
-    );
 }
 
 function TheRest() {
