@@ -12,17 +12,19 @@ export async function openFileDialog(appWin: BrowserWindow | null | undefined, w
     if (!appWin) {
         return;
     }
-    const { canceled, filePaths } = await dialog.showOpenDialog(appWin, {
-        properties: [what.openDirs ? 'openDirectory' : 'openFile', 'multiSelections'],
-    });
-    if (canceled) {
-        return;
+
+    try {
+        const { canceled, filePaths } = await dialog.showOpenDialog(appWin, {
+            properties: [what.openDirs ? 'openDirectory' : 'openFile', 'multiSelections'],
+        });
+        if (canceled) {
+            return;
+        }
+
+        const filesCnt = loadFilesContent(filePaths, M4RInvoke.allowedExt);
+        mainToRanderer({ type: 'opened-files', filesCnt });
+            
+    } catch (error) {
+        console.error(error);
     }
-
-    console.log('filePaths', filePaths);
-
-    const filesCnt = loadFilesContent(filePaths, M4RInvoke.allowedExt);
-
-    console.log('filesCnt', filesCnt.map((cnt) => ({ notOur: !!cnt.notOur, name: cnt.name })));
-    mainToRanderer({ type: 'opened-files', filesCnt });
 }
