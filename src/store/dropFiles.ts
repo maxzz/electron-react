@@ -12,15 +12,17 @@ export const doDroppedFilesAtom = atom(
     async (get, set, dataTransfer: DataTransfer) => {
         let filesCnt: M4RInvoke.FileContent[];
 
+        const allowedExt = ['dpm', 'dpn'];
+
         if (hasMain()) {
             const dropFiles: File[] = [...dataTransfer.files];
             const filenames = electronGetPathes(dropFiles);
             if (!filenames.length) {
                 return;
             }
-            filesCnt = await invokeLoadFiles(filenames);
+            filesCnt = await invokeLoadFiles(filenames, allowedExt);
         } else {
-            filesCnt = await webLoadDataTransferContent(dataTransfer.items, ['dpm']);
+            filesCnt = await webLoadDataTransferContent(dataTransfer.items, allowedExt);
         }
 
         if (filesCnt) {

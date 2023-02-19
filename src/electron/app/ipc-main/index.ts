@@ -39,6 +39,7 @@ export namespace M4RInvoke {
     type DoLoadfiles = {
         type: 'load-files';
         filenames: string[];
+        allowedExt?: string[];
     };
     
     type DoLoadfiles2 = {

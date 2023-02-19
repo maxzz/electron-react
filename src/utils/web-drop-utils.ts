@@ -50,7 +50,7 @@ async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.Fil
                     file: item.file,
                     name: item.name,
                     fullPath: item.fullPath,
-                    cnt: 'Not our file',
+                    cnt: '',
                     failed: true,
                     notOur: true,
                 });
@@ -80,7 +80,11 @@ async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.Fil
 
 export async function webLoadDataTransferContent(dataTransferItemList: DataTransferItemList, allowedExt?: string[]): Promise<M4RInvoke.FileContent[]> {
     let items: DropItem[] = await webGetFilesTransferItems(dataTransferItemList);
-    items = allowedExt ? items.map((item) => allowedExt.includes(ext(item.name).toLowerCase()) ? item : { ...item, notOur: true, failed: true }) : items;
+    items = allowedExt
+        ? items.map((item) => allowedExt.includes(ext(item.name).toLowerCase())
+            ? item
+            : { ...item, notOur: true, failed: true })
+        : items;
     return webLoadFilesContent(items);
 }
 

@@ -1,4 +1,4 @@
-import { basename, join, normalize } from 'node:path';
+import { basename, extname, join, normalize } from 'node:path';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { M4RInvoke } from '../ipc-main';
 
@@ -27,12 +27,18 @@ function collect(filenames: string[], rv: Partial<M4RInvoke.FileContent>[]) {
     });
 }
 
-export function loadFilesContent(filenames: string[]): M4RInvoke.FileContent[] {
-    const files: Partial<M4RInvoke.FileContent>[] = [];
+export function loadFilesContent(filenames: string[], allowedExt?: string[]): M4RInvoke.FileContent[] {
+    let files: Partial<M4RInvoke.FileContent>[] = [];
     collect(filenames, files);
 
+    files = allowedExt
+        ? files.map((file) => allowedExt.includes(extname(file.name || '').replace('.', '').toLowerCase())
+            ? file
+            : { ...file, notOur: true, failed: true })
+        : files;
+
     files.forEach((file) => {
-        if (!file.failed) {
+        if (!file.failed && !file.notOur) {
             try {
                 file.cnt = readFileSync(file.fullPath!).toString();
             } catch (error) {

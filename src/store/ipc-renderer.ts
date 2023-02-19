@@ -25,10 +25,11 @@ export function invokeMain(data: any): void {
     return mainApi?.invokeMain(data);
 }
 
-export function invokeLoadFiles(filenames: string[]): Promise<M4RInvoke.FileContent[]> {
+export function invokeLoadFiles(filenames: string[], allowedExt?: string[]): Promise<M4RInvoke.FileContent[]> {
     const d: M4RInvoke.InvokeCalls = {
         type: 'load-files',
         filenames,
-    }
+        ...(allowedExt && { allowedExt }),
+    };
     return mainApi?.invokeMain(d) as Promise<M4RInvoke.FileContent[]>;
 }
