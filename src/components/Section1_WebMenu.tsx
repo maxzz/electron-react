@@ -17,7 +17,15 @@ export function Section1_WebMenu() {
                             setOpen((v) => !v);
                         }}
                     >
-                        <div className="">Open File...</div>
+                        <label className="cursor-pointer">
+                            <input className="hidden" type="file" multiple
+                                /* @ts-expect-error */
+                                webkitdirectory=""
+                            />
+                            <div className="">Open File...</div>
+                        </label>
+
+
                     </li>
                     <li
                         className="mx-1 px-4 py-1 hover:text-green-100 hover:bg-green-700 rounded-sm cursor-pointer"
