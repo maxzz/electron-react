@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { IconMenu } from './UI/UIIcons';
 
+function FileInput({openFolder}:{openFolder?: boolean}) {
+    return (
+        <input
+            className="hidden" type="file" multiple
+            /* @ts-expect-error */
+            webkitdirectory=""
+            onChange={(e) => console.log('e', e)}
+        />
+    );
+}
+
 export function Section1_WebMenu() {
     const [open, setOpen] = useState(true);
     return (
@@ -18,10 +29,7 @@ export function Section1_WebMenu() {
                         }}
                     >
                         <label className="cursor-pointer">
-                            <input className="hidden" type="file" multiple
-                                /* @ts-expect-error */
-                                webkitdirectory=""
-                            />
+                            <FileInput />
                             <div className="">Open File...</div>
                         </label>
 
@@ -33,7 +41,10 @@ export function Section1_WebMenu() {
                             setOpen((v) => !v);
                         }}
                     >
-                        <div className="">Open Folder...</div>
+                        <label className="cursor-pointer">
+                            <FileInput openFolder={true} />
+                            <div className="">Open Folder...</div>
+                        </label>
                     </li>
                 </ul>
             }
