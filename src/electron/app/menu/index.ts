@@ -1,7 +1,7 @@
 import { BrowserWindow, globalShortcut, MenuItem, MenuItemConstructorOptions } from "electron";
 import { appWin } from "../main-window";
 import { M2R } from "../ipc-main";
-import { openFileDialog } from "../ipc-main/ipc-main-commands";
+import { mainToRanderer, openFileDialog } from "../ipc-main/ipc-main-commands";
 
 export function buildGlobalShortcuts(win?: BrowserWindow | null) {
     globalShortcut.register('CommandOrControl+R', () => { win?.reload(); });
@@ -46,7 +46,7 @@ const viewMenu: MenuItemConstructorOptions[] = [
                 checked: true,
                 type: 'checkbox',
                 accelerator: 'CommandOrControl+F4',
-                click(item: MenuItem) { M2R.mainToRanderer({ type: 'dark-mode', active: item.checked }); },
+                click(item: MenuItem) { mainToRanderer({ type: 'dark-mode', active: item.checked }); },
             },
             { type: 'separator' },
             { role: 'resetZoom', },
@@ -67,7 +67,7 @@ export function buildMenuTemplate(): MenuItemConstructorOptions[] {
             id: 'reload-files',
             enabled: true,
             accelerator: 'F4',
-            click() { M2R.mainToRanderer({ type: 'reload-files' }); },
+            click() { mainToRanderer({ type: 'reload-files' }); },
         },
     ];
 }

@@ -1,5 +1,6 @@
 import { M2R } from "@/electron/app/ipc-main";
 import { atom } from "jotai";
+import { filesContentAtom } from "./dropFiles";
 
 export const doFromMainAtom = atom(
     null,
@@ -14,8 +15,13 @@ export const doFromMainAtom = atom(
                 console.log('reload-files');
                 break;
             }
+            case 'opened-files': {
+                set(filesContentAtom, d.filesCnt);
+                break;
+            }
             default: {
-                console.log('content', data);
+                const really: never = d;
+                throw new Error(really);
             }
         }
     }

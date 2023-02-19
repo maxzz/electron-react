@@ -1,5 +1,3 @@
-import { appWin } from "../main-window";
-
 export namespace M2R {
 
     // menu commands
@@ -13,12 +11,12 @@ export namespace M2R {
         type: 'reload-files';
     };
 
-    export type RendererCalls = DarkMode | ReloadFiles;
+    export type OpenedFiles = {
+        type: 'opened-files';
+        filesCnt: M4RInvoke.FileContent[];
+    };
 
-    export function mainToRanderer(data: RendererCalls) {
-        const channel: PreloadChannels = 'send-to-renderer';
-        appWin?.webContents.send(channel, data);
-    }
+    export type RendererCalls = DarkMode | ReloadFiles | OpenedFiles;
 }
 
 export namespace M4R {
@@ -64,4 +62,6 @@ export namespace M4RInvoke {
         entry?: FileSystemFileEntry;    // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
         file?: File;                    // File object from async entry.file() call
     };
+
+    export const allowedExt = ['dpm', 'dpn'];
 }
