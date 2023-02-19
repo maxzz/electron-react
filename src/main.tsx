@@ -8,3 +8,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <App />
     </React.StrictMode>,
 );
+
+//TODO: drop zone 100% of document not view port - done
+//TODO: filter files by valid types - done
+//TODO: show errors in UI
+
