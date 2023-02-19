@@ -1,10 +1,10 @@
 import React from 'react';
-import { IconMenu } from './UI/UIIcons';
+import { Section1_WebMenu } from './Section1_WebMenu';
 
 export function Section1_Header() {
     return (
         <div className="px-2 py-2 text-xs text-green-900 bg-green-600 flex items-center space-x-2">
-            <IconMenu className="w-4 h-4 flex-none fill-current" />
+            <Section1_WebMenu />
             <div className="">Header</div>
         </div>
     );
