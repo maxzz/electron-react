@@ -31,7 +31,3 @@ export const doDroppedFilesAtom = atom(
     }
 );
 export type DoDroppedFilesAtom = typeof doDroppedFilesAtom;
-
-//TODO: drop zone 100% of document not view port
-//TODO: filter files by valid types
-//TODO: show errors in UI

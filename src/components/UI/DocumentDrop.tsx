@@ -50,7 +50,7 @@ export function DocumentDrop({ doDroppedFilesAtom }: { doDroppedFilesAtom: DoDro
     const active = useAtomValue(activeAtom);
     DragHandlers({ doDroppedFilesAtom, activeAtom, });
     return (<>
-        {active && <div className={`absolute inset-0 grid place-items-center text-5xl font-bold text-slate-50 bg-slate-800/90 z-10`}>
+        {active && <div className={`fixed inset-0 grid place-items-center text-5xl font-bold text-slate-50 bg-slate-800/90 z-10`}>
             Drop it!
         </div>}
     </>);
