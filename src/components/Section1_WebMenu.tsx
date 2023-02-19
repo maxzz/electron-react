@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { IconMenu } from './UI/UIIcons';
 
 function FileInput({openFolder}:{openFolder?: boolean}) {
+    const doDir = {
+        ...(openFolder && {webkitdirectory: ''})
+    }
     return (
         <input
             className="hidden" type="file" multiple
-            /* @ts-expect-error */
-            webkitdirectory=""
+            {...doDir}
+            // /* @ts-expect-error */
+            // webkitdirectory=""
             onChange={(e) => console.log('e', e)}
         />
     );
