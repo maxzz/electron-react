@@ -6,14 +6,12 @@ import { FileContentViews } from './components/FileContentViews';
 import nodeLogo from "./assets/node.svg";
 import './App.scss';
 import { IconMenu } from './components/UI/UIIcons';
+import { Section1_Header } from './components/Section1_Header';
 
 export function App() {
     return (<>
         <div className="h-full grid grid-rows-[auto_1fr_auto]">
-            <div className="px-2 py-2 text-xs text-green-900 bg-green-600 flex items-center space-x-2">
-                <IconMenu className="w-4 h-4 flex-none fill-current" />
-                <div className="">Header</div>
-            </div>
+            <Section1_Header />
 
             <div className="grid grid-cols-[1fr_minmax(0,124ch)_1fr] text-green-900 bg-green-500">
                 <div className="col-start-2 p-4 flex flex-col space-y-4">
