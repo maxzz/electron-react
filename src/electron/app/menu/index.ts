@@ -13,11 +13,19 @@ const fileMenu: MenuItemConstructorOptions[] = [
         label: 'File',
         submenu: [
             {
-                label: 'Click',
-                accelerator: 'CommandOrControl+Shift+L',
-                // click: () => { console.log('click'); }
-                click: async () => { openFileDialog(appWin); }
+                label: 'Open File...',
+                accelerator: 'CommandOrControl+O',
+                click: async () => { openFileDialog(appWin, {openDirs: false}); }
             },
+            {
+                label: 'Open Folder...',
+                accelerator: 'CommandOrControl+Shift+O',
+                click: async () => { openFileDialog(appWin, {openDirs: true}); }
+            },
+            // {
+            //     label: 'Click',
+            //     click: () => { console.log('click'); }
+            // },
             { role: 'reload', accelerator: 'F5', },
             { type: 'separator' },
             { role: 'quit' },
