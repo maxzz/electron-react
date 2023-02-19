@@ -15,15 +15,18 @@ function SectionHeader({ children, ...rest }: HTMLAttributes<HTMLElement>) {
 function ButtonClear() {
     const setFilesContent = useSetAtom(filesContentAtom);
     return (
-        <button className="px-2 py-1 text-green-900 bg-neutral-100/10 border-neutral-900/20 border rounded shadow-sm active:scale-[.97]" onClick={() => setFilesContent([])}>
+        <button
+            className="px-2 py-1 text-green-900 bg-neutral-100/10 border-neutral-900/20 border rounded shadow-sm active:scale-[.97]"
+            onClick={() => setFilesContent([])}
+        >
             clear
         </button>
     );
 }
 
-function CardFilename({ fileContent: { name, fullPath, failed }, ...rest }: { fileContent: M4RInvoke.FileContent; } & HTMLAttributes<HTMLElement>) {
+function CardTitle({ fileContent: { name, fullPath, failed, notOur }, ...rest }: { fileContent: M4RInvoke.FileContent; } & HTMLAttributes<HTMLElement>) {
     return (
-        <div className={`px-2 py-2 ${failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
+        <div className={`px-2 py-2 ${notOur ? 'bg-violet-600 text-violet-100' : failed ? 'bg-red-600' : 'bg-neutral-900/20'}`} {...rest}>
             <div className="flex items-center space-x-1">
                 <IconFile className="w-5 h-5 flex-none" />
                 <div className="text-xs font-semibold">{name}</div>
@@ -37,12 +40,12 @@ function CardFilename({ fileContent: { name, fullPath, failed }, ...rest }: { fi
     );
 }
 
-function CardBody({ fileContent: { cnt } }: { fileContent: M4RInvoke.FileContent; }) {
+function CardBody({ fileContent: { cnt, notOur } }: { fileContent: M4RInvoke.FileContent; }) {
     return (
         <div className="flex bg-neutral-100/20">
             <textarea
                 className="w-full px-2 py-1 text-[.5rem] bg-neutral-100/20 outline-none cursor-default smallscroll"
-                rows={5} value={cnt} readOnly
+                rows={5} value={notOur ? 'Not our file' : cnt} readOnly
             />
         </div>
     );
@@ -51,7 +54,7 @@ function CardBody({ fileContent: { cnt } }: { fileContent: M4RInvoke.FileContent
 function Card({ fileContent }: { fileContent: M4RInvoke.FileContent; }) {
     return (
         <div className="border-neutral-900/20 border rounded shadow overflow-hidden grid grid-rows-2">
-            <CardFilename fileContent={fileContent} />
+            <CardTitle fileContent={fileContent} />
             <CardBody fileContent={fileContent} />
         </div>
 
