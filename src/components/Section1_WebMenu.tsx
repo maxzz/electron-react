@@ -1,23 +1,37 @@
 import React, { useState } from 'react';
 import { IconMenu } from './UI/UIIcons';
 
-function FileInput({openFolder}:{openFolder?: boolean}) {
+function FileInput({ openFolder }: { openFolder?: boolean; }) {
     const doDir = {
-        ...(openFolder && {webkitdirectory: ''})
-    }
+        ...(openFolder && { webkitdirectory: '' })
+    };
     return (
         <input
-            className="hidden" type="file" multiple
-            {...doDir}
-            // /* @ts-expect-error */
-            // webkitdirectory=""
-            onChange={(e) => console.log('e', e)}
+            type="file"
+            className="hidden1"
+            // multiple
+            // {...doDir}
+            value=""
+            onClick={(e) => {
+                //e.target.value = null;
+                console.log('-------------e click', e);
+            }}
+            onChange={({target}) => {
+                //e.preventDefault();
+                console.log('-------------e change', target.files);
+            }}
+            // onChange={(e) => {
+            //     //e.preventDefault();
+            //     console.log('-------------e change', e.target.files);
+            // }}
         />
     );
 }
 
 export function Section1_WebMenu() {
     const [open, setOpen] = useState(true);
+    console.log('11111111111');
+
     return (
         <div className="relative">
             <button onClick={() => setOpen((v) => !v)}>
@@ -25,32 +39,37 @@ export function Section1_WebMenu() {
             </button>
 
             {open &&
-                <ul className="absolute w-max py-2 text-green-900 bg-green-300 border-neutral-900/50 border rounded grid space-y-1">
-                    <li
-                        className="mx-1 px-4 py-1 hover:text-green-100 hover:bg-green-700 rounded-sm cursor-pointer"
-                        onClick={() => {
-                            setOpen((v) => !v);
-                        }}
-                    >
-                        <label className="cursor-pointer">
-                            <FileInput />
-                            <div className="">Open File...</div>
-                        </label>
+                <form>
+                    <ul className="absolute w-max py-2 text-green-900 bg-green-300 border-neutral-900/50 border rounded grid space-y-1">
+                        <li
+                            className="mx-1 px-4 py-1 hover:text-green-100 hover:bg-green-700 rounded-sm cursor-pointer"
+                            onClick={() => {
+                                //setOpen((v) => !v);
+                            }}
+                        >
+                            <label className="cursor-pointer" onChange={(e) => {
+                                //e.preventDefault();
+                                console.log('-------------e change', e);
+                            }}>
+                                <FileInput />
+                                <div className="">Open File...</div>
+                            </label>
 
 
-                    </li>
-                    <li
-                        className="mx-1 px-4 py-1 hover:text-green-100 hover:bg-green-700 rounded-sm cursor-pointer"
-                        onClick={() => {
-                            setOpen((v) => !v);
-                        }}
-                    >
-                        <label className="cursor-pointer">
-                            <FileInput openFolder={true} />
-                            <div className="">Open Folder...</div>
-                        </label>
-                    </li>
-                </ul>
+                        </li>
+                        <li
+                            className="mx-1 px-4 py-1 hover:text-green-100 hover:bg-green-700 rounded-sm cursor-pointer"
+                            onClick={() => {
+                                setOpen((v) => !v);
+                            }}
+                        >
+                            <label className="cursor-pointer">
+                                <FileInput openFolder={true} />
+                                <div className="">Open Folder...</div>
+                            </label>
+                        </li>
+                    </ul>
+                </form>
             }
         </div>
     );
