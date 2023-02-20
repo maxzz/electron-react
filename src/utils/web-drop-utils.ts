@@ -90,7 +90,7 @@ export async function webLoadDataTransferContent(dataTransferItemList: DataTrans
     return webLoadFilesContent(items);
 }
 
-// Web dialog open file/directory
+// Web dialog open file/directory //TODO: it is possible to use https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitEntries but only for drag and drop
 
 async function webGetFilesFromDialog(files: File[]): Promise<DropItem[]> {
     let rv: DropItem[] = [];
