@@ -5,10 +5,12 @@ import { fileEntryToFile, getAllFileEntries } from "./web-data-transfer-item-lis
 type DropItem = {
     name: string;
     fullPath: string;
-    notOur?: boolean;           // load of file content was blocked by allowedExt list.
-    entry: FileSystemFileEntry; // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
-    file: File;                 // File object from async entry.file() call
+    notOur?: boolean;            // load of file content was blocked by allowedExt list.
+    entry?: FileSystemFileEntry; // FileSystemEntry from DataTransfer will exist only when loaded from the web drag and drop.
+    file: File;                  // File object from async entry.file() call
 };
+
+// Web drag and drop
 
 async function webGetFilesTransferItems(dataTransferItemList: DataTransferItemList): Promise<DropItem[]> {
     const entries = await getAllFileEntries(dataTransferItemList);
@@ -41,7 +43,7 @@ async function webLoadFilesContent(dropItems: DropItem[]): Promise<M4RInvoke.Fil
     const res: M4RInvoke.FileContent[] = [];
     for (const item of dropItems) {
         try {
-            if (!item.entry || !item.file) {
+            if (!item.file) {
                 throw new Error('Empty entry or file');
             }
             if (item.notOur) {
@@ -87,6 +89,35 @@ export async function webLoadDataTransferContent(dataTransferItemList: DataTrans
         : items;
     return webLoadFilesContent(items);
 }
+
+// Web dialog open file/directory
+
+async function webGetFilesFromDialog(files: File[]): Promise<DropItem[]> {
+    let rv: DropItem[] = [];
+    try {
+        rv = await Promise.all(files.map(async (file) => ({
+            name: file.name,
+            fullPath: file.webkitRelativePath,
+            entry: undefined,
+            file: file,
+        })));
+    } catch (error) {
+        console.error('cannot read from File[]', files);
+    }
+    return rv;
+}
+
+export async function webLoadDialogOpen(files: File[], allowedExt?: string[]): Promise<M4RInvoke.FileContent[]> {
+    let items: DropItem[] = await webGetFilesFromDialog(files);
+    items = allowedExt
+        ? items.map((item) => allowedExt.includes(ext(item.name).toLowerCase())
+            ? item
+            : { ...item, notOur: true, failed: true })
+        : items;
+    return webLoadFilesContent(items);
+}
+
+// electron filenames
 
 export function electronGetPathes(files: File[]): string[] {
     const filenames = [...files].map((file) => (file as File & { path: string; }).path).filter(Boolean);
