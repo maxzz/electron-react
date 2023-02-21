@@ -4,9 +4,10 @@ import { DocumentDrop } from './components/UI/DocumentDrop';
 import { Section1_Header } from './components/Section1_Header';
 import { Section2_Title } from './components/Section2_Title';
 import { Section2_SendNotification } from './components/Section2_SendNotification';
-import { FileContentViews } from './components/FileContentViews';
-import './App.scss';
 import { Section3_Footer } from './components/Section3_Footer';
+import { FileContentViews } from './components/FileContentViews';
+import { UIToaster } from './components/UI/UIToaster';
+import './App.scss';
 
 export function App() {
     return (<>
@@ -29,5 +30,6 @@ export function App() {
 
         <DocumentDrop doDroppedFilesAtom={doDroppedFilesAtom} />
         <WorldToReactListener />
+        <UIToaster />
     </>);
 }
