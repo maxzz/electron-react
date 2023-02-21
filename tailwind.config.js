@@ -4,5 +4,10 @@ module.exports = {
     theme: {
         extend: {},
     },
-    plugins: [],
+    plugins: [
+        require('./tailwind/tailwnid-plugin-debug-styles'),
+        require('./tailwind/tailwind-plugin-debug-screens'),
+        require('./tailwind/tailwind-plugin-data-state'),
+        require('tailwindcss-radix')(),
+    ],
 };
