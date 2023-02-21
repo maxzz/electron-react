@@ -13,3 +13,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 //TODO: filter files by valid types - done
 //TODO: show errors in UI
 
+//TODO: menu click outside

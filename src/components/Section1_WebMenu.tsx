@@ -17,7 +17,7 @@ function FileInput({ openFolder, onChangeDone }: { openFolder?: boolean; onChang
 }
 
 export function Section1_WebMenu() {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     return (
         <div className="relative">
             <button onClick={() => setOpen((v) => !v)}>
