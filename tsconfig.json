@@ -28,9 +28,8 @@
     },
     "include": [
         "src", 
-        "src/electron/preload-types.d.ts",
-        "src/electron/main-from-renderer/main-handlers-types.d.ts",
-        "vite-preload-calls.d.ts",
+        "src/vite-typescript/preload-types.d.ts",
+        "src/vite-typescript/vite-preload-calls.d.ts",
         //"vite.config.web.js"
     ],
     "exclude": [

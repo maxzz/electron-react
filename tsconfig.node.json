@@ -11,8 +11,8 @@
         "vite.config.js",
         "package.json",
         "electron",
-        "vite-electron-env.d.ts",
-        "vite-preload-calls.d.ts",
+        "src/vite-typescript/vite-electron-env.d.ts",
+        "src/vite-typescript/vite-preload-calls.d.ts",
     ],
     "exclude": [
         "node_modules",
