@@ -1,5 +1,5 @@
 import { M4RInvoke, M4R } from "@/electron/app/ipc-main";
-import { worldStore } from "./WorldToReactListener";
+import { worldStore } from "./ipc-react-listener";
 
 // main process APIs
 

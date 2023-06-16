@@ -1,5 +1,5 @@
 import { BrowserWindow, globalShortcut, MenuItem, MenuItemConstructorOptions } from "electron";
-import { appWin } from "../main-window";
+import { winApp } from "../main-window";
 import { M2R } from "../ipc-main";
 import { mainToRanderer, openFileDialog } from "../ipc-main/ipc-main-commands";
 
@@ -15,12 +15,12 @@ const fileMenu: MenuItemConstructorOptions[] = [
             {
                 label: 'Open File...',
                 accelerator: 'CommandOrControl+O',
-                click: async () => { openFileDialog(appWin, {openDirs: false}); }
+                click: async () => { openFileDialog(winApp, {openDirs: false}); }
             },
             {
                 label: 'Open Folder...',
                 accelerator: 'CommandOrControl+Shift+O',
-                click: async () => { openFileDialog(appWin, {openDirs: true}); }
+                click: async () => { openFileDialog(winApp, {openDirs: true}); }
             },
             // {
             //     label: 'Click',

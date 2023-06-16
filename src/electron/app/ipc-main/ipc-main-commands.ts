@@ -1,11 +1,11 @@
 import { BrowserWindow, dialog } from "electron";
-import { appWin } from "../main-window";
+import { winApp } from "../main-window";
 import { M2R, M4RInvoke } from ".";
 import { loadFilesContent } from "../utils/load-files";
 
 export function mainToRanderer(data: M2R.RendererCalls) {
     const channel: PreloadChannels = 'send-to-renderer';
-    appWin?.webContents.send(channel, data);
+    winApp?.webContents.send(channel, data);
 }
 
 export async function openFileDialog(appWin: BrowserWindow | null | undefined, what: { openDirs: boolean; } = { openDirs: false }) {

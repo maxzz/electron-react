@@ -6,7 +6,7 @@ import { callFromRendererToMain } from './ipc-main/ipc-calls';
 import { invokeFromRendererToMain } from './ipc-main/ipc-invoke';
 import { M4R, M4RInvoke } from './ipc-main';
 
-export let appWin: BrowserWindow | null | undefined = null;
+export let winApp: BrowserWindow | null | undefined = null;
 
 export async function createWindow() {
     const iniOptions = getIniOptions();
@@ -15,7 +15,7 @@ export async function createWindow() {
     const indexHtml = join(process.env.DIST || '', 'index.html');
     const hmrServerUrl = process.env.VITE_DEV_SERVER_URL;
 
-    appWin = new BrowserWindow({
+    winApp = new BrowserWindow({
         title: 'Main window',
         icon: join(process.env.PUBLIC || '', 'favicon.ico'),
         ...(iniOptions?.bounds),
@@ -30,29 +30,27 @@ export async function createWindow() {
     });
 
     if (hmrServerUrl) { //https://github.com/electron-vite/electron-vite-vue/issues/298
-        appWin.loadURL(hmrServerUrl);
-        iniOptions?.devTools && appWin.webContents.openDevTools(); // Open devTool if the app is not packaged
+        winApp.loadURL(hmrServerUrl);
+        iniOptions?.devTools && winApp.webContents.openDevTools(); // Open devTool if the app is not packaged
     } else {
-        appWin.loadFile(indexHtml);
+        winApp.loadFile(indexHtml);
     }
 
-    appWin.once('ready-to-show', () => appWin?.show());
+    winApp.once('ready-to-show', () => winApp?.show());
 
-    // Test actively push message to the Electron-Renderer
-    appWin.webContents.on('did-finish-load', () => {
-        appWin?.webContents.send('main-process-message', new Date().toLocaleString());
-    });
-
-    // Make all links open with the browser, not with the application
-    appWin.webContents.setWindowOpenHandler(({ url }) => {
+    winApp.webContents.setWindowOpenHandler(({ url }) => { // Make all links open with the browser, not with the application
         if (url.startsWith('https:')) {
             shell.openExternal(url);
         }
         return { action: 'deny' };
     });
 
-    appWin.on('close', () => {
-        appWin && saveIniOptions(appWin);
+    winApp.on('close', () => {
+        winApp && saveIniOptions(winApp);
+    });
+
+    winApp.webContents.on('did-finish-load', () => {
+        winApp?.webContents.send('main-process-message', new Date().toLocaleString()); // Test actively push message to the Electron-Renderer
     });
 }
 
@@ -66,17 +64,17 @@ export function connect_MainWindowListeners() {
     }
 
     app.on('window-all-closed', () => {
-        appWin = null;
+        winApp = null;
         if (process.platform !== 'darwin') app.quit();
     });
 
     app.on('second-instance', () => {
-        if (appWin) {
+        if (winApp) {
             // Focus on the main window if the user tried to open another
-            if (appWin.isMinimized()) {
-                appWin.restore();
+            if (winApp.isMinimized()) {
+                winApp.restore();
             }
-            appWin.focus();
+            winApp.focus();
         }
     });
 

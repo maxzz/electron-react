@@ -29,6 +29,7 @@ function electronPlugins() {
     ];
 }
 
+//#region
 /*ts
 function electronPlugins() {
     function debounce<Fn extends (...args: any[]) => void>(fn: Fn, delay = 299): Fn {
@@ -74,6 +75,7 @@ function original() {
 */
 // console.log('process.env.VSCODE_DEBUG', process.env.VSCODE_DEBUG);
 // console.log('pkg.debug.env.VITE_DEV_SERVER_URL', pkg.debug.env.VITE_DEV_SERVER_URL);
+//#endregion
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {

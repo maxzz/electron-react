@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { app, Menu } from 'electron';
-import { createWindow, connect_MainWindowListeners, connect_ListenersForCallFromRenderer, appWin } from './app/main-window';
+import { createWindow, connect_MainWindowListeners, connect_ListenersForCallFromRenderer, winApp } from './app/main-window';
 import { buildGlobalShortcuts, buildMenuTemplate } from './app/menu';
 
 process.env.DIST_ELECTRON = join(__dirname, '../');
@@ -20,5 +20,5 @@ app.whenReady().then(() => {
 
     createWindow();
 
-    buildGlobalShortcuts(appWin);
+    buildGlobalShortcuts(winApp);
 });

@@ -1,5 +1,5 @@
 import { doDroppedFilesAtom } from './store';
-import { WorldToReactListener } from './store/WorldToReactListener';
+import { WorldToReactListener } from './store/ipc-react-listener';
 import { DocumentDrop } from './components/UI/DocumentDrop';
 import { Section1_Header } from './components/Section1_Header';
 import { Section2_Title } from './components/Section2_Title';
