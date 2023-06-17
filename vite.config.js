@@ -89,7 +89,7 @@ export default defineConfig(({ command }) => {
 
             electron({
                 include: ['src/electron'],
-                transformOptions: { sourcemap, },
+                //transformOptions: { sourcemap, },
                 //plugins: original(),
                 plugins: electronPlugins(),
             }),
