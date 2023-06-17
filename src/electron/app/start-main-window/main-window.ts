@@ -1,10 +1,10 @@
 import { join } from 'node:path';
 import { release } from 'node:os';
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, shell } from 'electron';
-import { getIniOptions, saveIniOptions } from './utils/app-ini-options';
-import { callFromRendererToMain } from './ipc-main/ipc-calls';
-import { invokeFromRendererToMain } from './ipc-main/ipc-invoke';
-import { M4R, M4RInvoke } from './ipc-main';
+import { getIniOptions, saveIniOptions } from '../utils/app-ini-options';
+import { callFromRendererToMain } from '../ipc-main/ipc-calls';
+import { invokeFromRendererToMain } from '../ipc-main/ipc-invoke';
+import { M4R, M4RInvoke } from '../ipc-main';
 
 export let winApp: BrowserWindow | null | undefined = null;
 
@@ -36,7 +36,12 @@ export async function createWindow() {
         winApp.loadFile(indexHtml);
     }
 
-    winApp.once('ready-to-show', () => winApp?.show());
+    winApp.once('ready-to-show', () => {
+        if (iniOptions?.devTools && winApp && !winApp.webContents.isDevToolsOpened()) {
+            winApp.webContents.toggleDevTools();
+        }
+        winApp?.show();
+    });
 
     winApp.webContents.setWindowOpenHandler(({ url }) => { // Make all links open with the browser, not with the application
         if (url.startsWith('https:')) {

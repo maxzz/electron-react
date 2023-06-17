@@ -1,5 +1,5 @@
 import { BrowserWindow, globalShortcut, MenuItem, MenuItemConstructorOptions } from "electron";
-import { winApp } from "../main-window";
+import { winApp } from "../start-main-window/main-window";
 import { M2R } from "../ipc-main";
 import { mainToRanderer, openFileDialog } from "../ipc-main/ipc-main-commands";
 

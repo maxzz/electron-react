@@ -1,5 +1,5 @@
 import { BrowserWindow, dialog } from "electron";
-import { winApp } from "../main-window";
+import { winApp } from "../start-main-window/main-window";
 import { M2R, M4RInvoke } from ".";
 import { loadFilesContent } from "../utils/load-files";
 
