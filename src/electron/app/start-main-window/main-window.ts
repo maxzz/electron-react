@@ -11,7 +11,7 @@ export let winApp: BrowserWindow | null | undefined = null;
 export async function createWindow() {
     const iniOptions = getIniOptions();
 
-    const preload = join(__dirname, '../preload.js');
+    const preload = join(__dirname, '../../preload.js');
     const indexHtml = join(process.env.DIST || '', 'index.html');
     const hmrServerUrl = process.env.VITE_DEV_SERVER_URL;
 
