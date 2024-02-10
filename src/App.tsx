@@ -1,12 +1,12 @@
 import { doDroppedFilesAtom } from './store';
 import { WorldToReactListener } from './store/ipc-react-listener';
-import { DocumentDrop } from './components/ui1/DocumentDrop';
+import { DocumentDrop } from './components/ui/DocumentDrop';
 import { Section1_Header } from './components/Section1_Header';
 import { Section2_Title } from './components/Section2_Title';
 import { Section2_SendNotification } from './components/Section2_SendNotification';
 import { Section3_Footer } from './components/Section3_Footer';
 import { FileContentViews } from './components/FileContentViews';
-import { UIToaster } from './components/ui1/UIToaster';
+import { UIToaster } from './components/ui/UIToaster';
 import './App.scss';
 
 export function App() {

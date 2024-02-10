@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSetAtom } from 'jotai';
 import { doDialogFilesAtom } from '@/store';
-import { IconMenu } from './ui1/icons/UIIcons';
-import { toastWarning } from './ui1/UIToaster';
+import { IconMenu } from './ui/icons/UIIcons';
+import { toastWarning } from './ui/UIToaster';
 
 function FileInput({ openFolder, onChangeDone }: { openFolder?: boolean; onChangeDone?: () => void; }) {
     const doDialogFiles = useSetAtom(doDialogFilesAtom);

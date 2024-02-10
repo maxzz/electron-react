@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { filesContentAtom } from '@/store';
-import { IconFile, IconFolderClosed, IconFolderOpen } from './ui1/icons/UIIcons';
+import { IconFile, IconFolderClosed, IconFolderOpen } from './ui/icons/UIIcons';
 import { M4RInvoke } from '@/electron/app/ipc-main';
 
 function SectionHeader({ children, ...rest }: HTMLAttributes<HTMLElement>) {
