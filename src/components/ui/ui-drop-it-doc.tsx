@@ -45,7 +45,7 @@ export function DragHandlers({ doDroppedFilesAtom, activeAtom }: { doDroppedFile
     }, []);
 }
 
-export function DocumentDrop({ doDroppedFilesAtom }: { doDroppedFilesAtom: DoDroppedFilesAtom; }) {
+export function DropItDoc({ doDroppedFilesAtom }: { doDroppedFilesAtom: DoDroppedFilesAtom; }) {
     const [activeAtom] = useState(atom(false));
     const active = useAtomValue(activeAtom);
     DragHandlers({ doDroppedFilesAtom, activeAtom, });

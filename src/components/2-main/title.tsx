@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as ElectronLoad } from '../assets/icons/electron-vite.svg';
+import { ReactComponent as ElectronLoad } from '../../assets/icons/electron-vite.svg';
 
 export function Section2_Title() {
     return (
