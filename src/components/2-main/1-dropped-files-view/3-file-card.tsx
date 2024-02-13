@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import { IconFile, IconFolderClosed } from '../../ui/icons';
+import { IconFile, IconFolderClosed } from "@/components/ui/icons";
 import { M4RInvoke } from '@/electron/app/ipc-main';
 
 function CardTitle({ fileContent: { name, fullPath, failed, notOur }, ...rest }: { fileContent: M4RInvoke.FileContent; } & HTMLAttributes<HTMLElement>) {

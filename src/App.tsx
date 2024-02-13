@@ -2,7 +2,7 @@ import { doDroppedFilesAtom } from './store';
 import { WorldToReactListener } from './store/ipc-react-listener';
 import { DropItDoc, UIToaster } from './components/ui';
 import { Section1_Header } from './components/1-header';
-import { Section2_Title, Section2_SendNotification, FileContentViews } from './components/2-main';
+import { Section2_Title, Section2_SendNotification, DroppedFilesView } from './components/2-main';
 import { Section3_Footer } from './components/3-footer';
 
 export function App() {
@@ -17,7 +17,7 @@ export function App() {
                         <Section2_SendNotification />
                     </div>
 
-                    <FileContentViews />
+                    <DroppedFilesView />
                 </div>
             </div>
 

@@ -4,7 +4,7 @@ import { Card } from './3-file-card';
 import { ButtonClear } from './2-button-clear';
 import { SectionHeader } from './1-header';
 
-export function FileContentViews() {
+export function DroppedFilesView() {
     const filesContent = useAtomValue(filesContentAtom);
     return (<>
         <div className="border-neutral-900/20 border rounded shadow-sm">

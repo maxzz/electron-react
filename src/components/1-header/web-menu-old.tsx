@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSetAtom } from 'jotai';
 import { doDialogFilesAtom } from '@/store';
-import { IconMenu } from '../ui/icons';
+import { IconMenu } from "../ui/icons";
 import { toastWarning } from '../ui/ui-toaster';
 
 function FileInput({ openFolder, onChangeDone }: { openFolder?: boolean; onChangeDone?: () => void; }) {
