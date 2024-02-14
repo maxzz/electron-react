@@ -8,7 +8,7 @@ module.exports = {
         require('./tailwind/tailwnid-plugin-debug-styles'),
         require('./tailwind/tailwind-plugin-debug-screens'),
         require('./tailwind/tailwind-plugin-data-state'),
-        require('./tailwind/tailwind-plugin-shadcn.mts'),
+        require('./tailwind/tailwind-plugin-shadcn.js'),
         require('./tailwind/tailwindcss-animate'),
         require('tailwindcss-radix')(),
     ],
