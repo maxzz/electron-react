@@ -1,29 +1,29 @@
 import React from "react";
-import * as MenubarPrimitive from "@radix-ui/react-menubar";
+import * as Prim from "@radix-ui/react-menubar";
 import { CheckIcon, ChevronRightIcon, DotFilledIcon, } from "@radix-ui/react-icons";
 import { classNames as clsx } from "@/utils/classnames";
 
 type MenubarSeparatorProps = Omit<
-    MenubarPrimitive.MenubarSeparatorProps & React.RefAttributes<HTMLDivElement>,
+    Prim.MenubarSeparatorProps & React.RefAttributes<HTMLDivElement>,
     "className"
 >;
 
 const MenubarSeparator = ({ children, ...rest }: MenubarSeparatorProps) => (
-    <MenubarPrimitive.Separator
+    <Prim.Separator
         className="my-1 h-px mx-1.5 bg-gray-200 dark:bg-gray-700"
         {...rest}
     >
         {children}
-    </MenubarPrimitive.Separator>
+    </Prim.Separator>
 );
 
 type MenubarTriggerProps = Omit<
-    MenubarPrimitive.MenubarTriggerProps & React.RefAttributes<HTMLButtonElement>,
+    Prim.MenubarTriggerProps & React.RefAttributes<HTMLButtonElement>,
     "className"
 >;
 
 const MenubarTrigger = ({ children, ...rest }: MenubarTriggerProps) => (
-    <MenubarPrimitive.Trigger
+    <Prim.Trigger
         className={clsx(
             "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
             "radix-state-open:bg-gray-100 dark:radix-state-open:bg-gray-900",
@@ -35,16 +35,16 @@ const MenubarTrigger = ({ children, ...rest }: MenubarTriggerProps) => (
         {...rest}
     >
         {children}
-    </MenubarPrimitive.Trigger>
+    </Prim.Trigger>
 );
 
 type MenubarSubTriggerProps = Omit<
-    MenubarPrimitive.MenubarSubTriggerProps & React.RefAttributes<HTMLDivElement>,
+    Prim.MenubarSubTriggerProps & React.RefAttributes<HTMLDivElement>,
     "className"
 >;
 
 const MenubarSubTrigger = ({ children, ...rest }: MenubarSubTriggerProps) => (
-    <MenubarPrimitive.SubTrigger
+    <Prim.SubTrigger
         className={clsx(
             "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
             "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
@@ -58,17 +58,17 @@ const MenubarSubTrigger = ({ children, ...rest }: MenubarSubTriggerProps) => (
             {children}
             <ChevronRightIcon className="ml-4 -mr-1 text-gray-700 dark:text-gray-100 font-medium" />
         </div>
-    </MenubarPrimitive.SubTrigger>
+    </Prim.SubTrigger>
 );
 
 type MenubarItemProps = Omit<
-    MenubarPrimitive.MenubarItemProps &
+    Prim.MenubarItemProps &
     React.RefAttributes<HTMLDivElement> & { shortcut?: string; },
     "className"
 >;
 
 const MenubarItem = ({ children, shortcut, ...rest }: MenubarItemProps) => (
-    <MenubarPrimitive.Item
+    <Prim.Item
         className={clsx(
             "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
             "w-full flex items-center justify-between",
@@ -87,11 +87,11 @@ const MenubarItem = ({ children, shortcut, ...rest }: MenubarItemProps) => (
                 </span>
             )}
         </div>
-    </MenubarPrimitive.Item>
+    </Prim.Item>
 );
 
 type MenubarCheckboxItemProps = Omit<
-    MenubarPrimitive.MenubarCheckboxItemProps &
+    Prim.MenubarCheckboxItemProps &
     React.RefAttributes<HTMLDivElement>,
     "className"
 >;
@@ -100,7 +100,7 @@ const MenubarCheckboxItem = ({
     children,
     ...rest
 }: MenubarCheckboxItemProps) => (
-    <MenubarPrimitive.CheckboxItem
+    <Prim.CheckboxItem
         className={clsx(
             "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
             "w-full flex items-center justify-between",
@@ -113,22 +113,22 @@ const MenubarCheckboxItem = ({
     >
         <div className="flex items-center">
             <div className="relative h-3.5 w-3.5 -ml-1">
-                <MenubarPrimitive.ItemIndicator>
+                <Prim.ItemIndicator>
                     <CheckIcon className="h-3.5 w-3.5 -ml-0.5 mr-1.5" />
-                </MenubarPrimitive.ItemIndicator>
+                </Prim.ItemIndicator>
             </div>
             <div className="ml-1">{children}</div>
         </div>
-    </MenubarPrimitive.CheckboxItem>
+    </Prim.CheckboxItem>
 );
 
 type MenubarRadioItemProps = Omit<
-    MenubarPrimitive.MenubarRadioItemProps & React.RefAttributes<HTMLDivElement>,
+    Prim.MenubarRadioItemProps & React.RefAttributes<HTMLDivElement>,
     "className"
 >;
 
 const MenubarRadioItem = ({ children, ...rest }: MenubarRadioItemProps) => (
-    <MenubarPrimitive.RadioItem
+    <Prim.RadioItem
         className={clsx(
             "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
             "w-full flex items-center justify-between",
@@ -141,13 +141,13 @@ const MenubarRadioItem = ({ children, ...rest }: MenubarRadioItemProps) => (
     >
         <div className="flex items-center">
             <div className="relative h-3.5 w-3.5 -ml-1">
-                <MenubarPrimitive.ItemIndicator>
+                <Prim.ItemIndicator>
                     <DotFilledIcon className="absolute inset-0" />
-                </MenubarPrimitive.ItemIndicator>
+                </Prim.ItemIndicator>
             </div>
             <div className="ml-1">{children}</div>
         </div>
-    </MenubarPrimitive.RadioItem>
+    </Prim.RadioItem>
 );
 
 type MenubarProps = {};
@@ -164,11 +164,11 @@ export const Menubar = (props: MenubarProps) => {
     const contentClasses = "bg-white dark:bg-gray-800 rounded-md p-1";
 
     return (
-        <MenubarPrimitive.Root className="relative flex flex-row rounded-lg bg-white dark:bg-gray-800 -space-x-1">
-            <MenubarPrimitive.Menu>
+        <Prim.Root className="relative flex flex-row rounded-lg bg-white dark:bg-gray-800 -space-x-1">
+            <Prim.Menu>
                 <MenubarTrigger>File</MenubarTrigger>
-                <MenubarPrimitive.Portal>
-                    <MenubarPrimitive.Content
+                <Prim.Portal>
+                    <Prim.Content
                         className={contentClasses}
                         align="start"
                         sideOffset={3}
@@ -178,10 +178,10 @@ export const Menubar = (props: MenubarProps) => {
                         <MenubarItem shortcut="⌘ N">New Window</MenubarItem>
                         <MenubarItem disabled>New Incognito Window</MenubarItem>
                         <MenubarSeparator />
-                        <MenubarPrimitive.Sub>
+                        <Prim.Sub>
                             <MenubarSubTrigger>Share</MenubarSubTrigger>
-                            <MenubarPrimitive.Portal>
-                                <MenubarPrimitive.SubContent
+                            <Prim.Portal>
+                                <Prim.SubContent
                                     className={contentClasses}
                                     sideOffset={0}
                                     alignOffset={-4}
@@ -189,20 +189,20 @@ export const Menubar = (props: MenubarProps) => {
                                     <MenubarItem>Email Link</MenubarItem>
                                     <MenubarItem>Messages</MenubarItem>
                                     <MenubarItem>Notes</MenubarItem>
-                                </MenubarPrimitive.SubContent>
-                            </MenubarPrimitive.Portal>
-                        </MenubarPrimitive.Sub>
+                                </Prim.SubContent>
+                            </Prim.Portal>
+                        </Prim.Sub>
 
                         <MenubarSeparator />
                         <MenubarItem shortcut="⌘ P">Print…</MenubarItem>
-                    </MenubarPrimitive.Content>
-                </MenubarPrimitive.Portal>
-            </MenubarPrimitive.Menu>
+                    </Prim.Content>
+                </Prim.Portal>
+            </Prim.Menu>
 
-            <MenubarPrimitive.Menu>
+            <Prim.Menu>
                 <MenubarTrigger>Edit</MenubarTrigger>
-                <MenubarPrimitive.Portal>
-                    <MenubarPrimitive.Content
+                <Prim.Portal>
+                    <Prim.Content
                         className={contentClasses}
                         align="start"
                         sideOffset={3}
@@ -211,11 +211,11 @@ export const Menubar = (props: MenubarProps) => {
                         <MenubarItem shortcut="⌘ Z">Undo</MenubarItem>
                         <MenubarItem shortcut="⇧ ⌘ Z">Redo</MenubarItem>
                         <MenubarSeparator />
-                        <MenubarPrimitive.Sub>
+                        <Prim.Sub>
                             <MenubarSubTrigger>Find</MenubarSubTrigger>
 
-                            <MenubarPrimitive.Portal>
-                                <MenubarPrimitive.SubContent
+                            <Prim.Portal>
+                                <Prim.SubContent
                                     className={contentClasses}
                                     sideOffset={0}
                                     alignOffset={-4}
@@ -226,21 +226,21 @@ export const Menubar = (props: MenubarProps) => {
                                     <MenubarItem>Find…</MenubarItem>
                                     <MenubarItem>Find Next</MenubarItem>
                                     <MenubarItem>Find Previous</MenubarItem>
-                                </MenubarPrimitive.SubContent>
-                            </MenubarPrimitive.Portal>
-                        </MenubarPrimitive.Sub>
+                                </Prim.SubContent>
+                            </Prim.Portal>
+                        </Prim.Sub>
                         <MenubarSeparator />
                         <MenubarItem>Cut</MenubarItem>
                         <MenubarItem>Copy</MenubarItem>
                         <MenubarItem>Paste</MenubarItem>
-                    </MenubarPrimitive.Content>
-                </MenubarPrimitive.Portal>
-            </MenubarPrimitive.Menu>
+                    </Prim.Content>
+                </Prim.Portal>
+            </Prim.Menu>
 
-            <MenubarPrimitive.Menu>
+            <Prim.Menu>
                 <MenubarTrigger>View</MenubarTrigger>
-                <MenubarPrimitive.Portal>
-                    <MenubarPrimitive.Content
+                <Prim.Portal>
+                    <Prim.Content
                         className={contentClasses}
                         align="start"
                         sideOffset={3}
@@ -270,20 +270,20 @@ export const Menubar = (props: MenubarProps) => {
                         <MenubarItem>Toggle Fullscreen</MenubarItem>
                         <MenubarSeparator />
                         <MenubarItem>Hide Sidebar</MenubarItem>
-                    </MenubarPrimitive.Content>
-                </MenubarPrimitive.Portal>
-            </MenubarPrimitive.Menu>
+                    </Prim.Content>
+                </Prim.Portal>
+            </Prim.Menu>
 
-            <MenubarPrimitive.Menu>
+            <Prim.Menu>
                 <MenubarTrigger>Profiles</MenubarTrigger>
-                <MenubarPrimitive.Portal>
-                    <MenubarPrimitive.Content
+                <Prim.Portal>
+                    <Prim.Content
                         className={contentClasses}
                         align="start"
                         sideOffset={3}
                         alignOffset={-14}
                     >
-                        <MenubarPrimitive.RadioGroup
+                        <Prim.RadioGroup
                             value={radioSelection}
                             onValueChange={setRadioSelection}
                         >
@@ -297,10 +297,10 @@ export const Menubar = (props: MenubarProps) => {
                             <MenubarItem>Edit…</MenubarItem>
                             <MenubarSeparator />
                             <MenubarItem>Add Profile…</MenubarItem>
-                        </MenubarPrimitive.RadioGroup>
-                    </MenubarPrimitive.Content>
-                </MenubarPrimitive.Portal>
-            </MenubarPrimitive.Menu>
-        </MenubarPrimitive.Root>
+                        </Prim.RadioGroup>
+                    </Prim.Content>
+                </Prim.Portal>
+            </Prim.Menu>
+        </Prim.Root>
     );
 };
