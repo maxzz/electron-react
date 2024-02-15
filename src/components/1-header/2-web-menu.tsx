@@ -9,10 +9,10 @@ export const Menubar = () => {
     const [checkedSelection, setCheckedSelection] = React.useState([CHECK_ITEMS[1],]);
     const [radioSelection, setRadioSelection] = React.useState(RADIO_ITEMS[2]);
 
-    const contentClasses = "bg-white dark:bg-gray-800 rounded-md p-1";
+    const contentClasses = "bg-popover rounded p-1";
 
     return (
-        <Prim.Root className="relative flex flex-row rounded-lg bg-white dark:bg-gray-800 -space-x-1">
+        <Prim.Root className="relative flex flex-row rounded select-none -space-x-1">
             <Prim.Menu>
                 <MenubarTrigger>File</MenubarTrigger>
                 <Prim.Portal>
@@ -104,6 +104,7 @@ export const Menubar = () => {
                 <Prim.Portal>
                     <Prim.Content className={contentClasses} align="start" sideOffset={3} alignOffset={-14}>
                         <Prim.RadioGroup value={radioSelection} onValueChange={setRadioSelection}>
+                            
                             {RADIO_ITEMS.map((item) => (
                                 <MenubarRadioItem key={item} value={item}>
                                     {item}
