@@ -3,162 +3,144 @@ import * as Prim from "@radix-ui/react-menubar";
 import { CheckIcon, ChevronRightIcon, DotFilledIcon, } from "@radix-ui/react-icons";
 import { classNames as clsx } from "@/utils/classnames";
 
-type MenubarSeparatorProps = Omit<
-    Prim.MenubarSeparatorProps & React.RefAttributes<HTMLDivElement>,
-    "className"
->;
+type MenubarSeparatorProps = Omit<Prim.MenubarSeparatorProps & React.RefAttributes<HTMLDivElement>, "className">;
 
-const MenubarSeparator = ({ children, ...rest }: MenubarSeparatorProps) => (
-    <Prim.Separator
-        className="my-1 h-px mx-1.5 bg-gray-200 dark:bg-gray-700"
-        {...rest}
-    >
-        {children}
-    </Prim.Separator>
-);
-
-type MenubarTriggerProps = Omit<
-    Prim.MenubarTriggerProps & React.RefAttributes<HTMLButtonElement>,
-    "className"
->;
-
-const MenubarTrigger = ({ children, ...rest }: MenubarTriggerProps) => (
-    <Prim.Trigger
-        className={clsx(
-            "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
-            "radix-state-open:bg-gray-100 dark:radix-state-open:bg-gray-900",
-            "px-4 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
-            "text-sm font-medium",
-            "text-gray-700 dark:text-gray-100",
-            "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
-        )}
-        {...rest}
-    >
-        {children}
-    </Prim.Trigger>
-);
-
-type MenubarSubTriggerProps = Omit<
-    Prim.MenubarSubTriggerProps & React.RefAttributes<HTMLDivElement>,
-    "className"
->;
-
-const MenubarSubTrigger = ({ children, ...rest }: MenubarSubTriggerProps) => (
-    <Prim.SubTrigger
-        className={clsx(
-            "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
-            "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
-            "text-sm font-medium",
-            "text-gray-700 dark:text-gray-100",
-            "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
-        )}
-        {...rest}
-    >
-        <div className="w-full flex justify-between items-center">
+function MenubarSeparator({ children, ...rest }: MenubarSeparatorProps) {
+    return (
+        <Prim.Separator className="my-1 h-px mx-1.5 bg-gray-200 dark:bg-gray-700" {...rest}>
             {children}
-            <ChevronRightIcon className="ml-4 -mr-1 text-gray-700 dark:text-gray-100 font-medium" />
-        </div>
-    </Prim.SubTrigger>
-);
+        </Prim.Separator>
+    );
+}
 
-type MenubarItemProps = Omit<
-    Prim.MenubarItemProps &
-    React.RefAttributes<HTMLDivElement> & { shortcut?: string; },
-    "className"
->;
+type MenubarTriggerProps = Omit<Prim.MenubarTriggerProps & React.RefAttributes<HTMLButtonElement>, "className">;
 
-const MenubarItem = ({ children, shortcut, ...rest }: MenubarItemProps) => (
-    <Prim.Item
-        className={clsx(
-            "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
-            "w-full flex items-center justify-between",
-            "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
-            "text-sm font-medium",
-            "text-gray-700 dark:text-gray-100",
-            "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
-        )}
-        {...rest}
-    >
-        <div className="w-full flex justify-between items-center">
-            {children}
-            {shortcut && (
-                <span className="ml-4 text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900">
-                    {shortcut}
-                </span>
+function MenubarTrigger({ children, ...rest }: MenubarTriggerProps) {
+    return (
+        <Prim.Trigger
+            className={clsx(
+                "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
+                "radix-state-open:bg-gray-100 dark:radix-state-open:bg-gray-900",
+                "px-4 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
+                "text-sm font-medium",
+                "text-gray-700 dark:text-gray-100",
+                "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
             )}
-        </div>
-    </Prim.Item>
-);
+            {...rest}
+        >
+            {children}
+        </Prim.Trigger>
+    );
+}
 
-type MenubarCheckboxItemProps = Omit<
-    Prim.MenubarCheckboxItemProps &
-    React.RefAttributes<HTMLDivElement>,
-    "className"
->;
+type MenubarSubTriggerProps = Omit<Prim.MenubarSubTriggerProps & React.RefAttributes<HTMLDivElement>, "className">;
 
-const MenubarCheckboxItem = ({
-    children,
-    ...rest
-}: MenubarCheckboxItemProps) => (
-    <Prim.CheckboxItem
-        className={clsx(
-            "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
-            "w-full flex items-center justify-between",
-            "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
-            "text-sm font-medium",
-            "text-gray-700 dark:text-gray-100",
-            "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
-        )}
-        {...rest}
-    >
-        <div className="flex items-center">
-            <div className="relative h-3.5 w-3.5 -ml-1">
-                <Prim.ItemIndicator>
-                    <CheckIcon className="h-3.5 w-3.5 -ml-0.5 mr-1.5" />
-                </Prim.ItemIndicator>
+function MenubarSubTrigger({ children, ...rest }: MenubarSubTriggerProps) {
+    return (
+        <Prim.SubTrigger
+            className={clsx(
+                "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
+                "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
+                "text-sm font-medium",
+                "text-gray-700 dark:text-gray-100",
+                "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+            )}
+            {...rest}
+        >
+            <div className="w-full flex justify-between items-center">
+                {children}
+                <ChevronRightIcon className="ml-4 -mr-1 text-gray-700 dark:text-gray-100 font-medium" />
             </div>
-            <div className="ml-1">{children}</div>
-        </div>
-    </Prim.CheckboxItem>
-);
+        </Prim.SubTrigger>
+    );
+}
 
-type MenubarRadioItemProps = Omit<
-    Prim.MenubarRadioItemProps & React.RefAttributes<HTMLDivElement>,
-    "className"
->;
+type MenubarItemProps = Omit<Prim.MenubarItemProps & React.RefAttributes<HTMLDivElement> & { shortcut?: string; }, "className">;
 
-const MenubarRadioItem = ({ children, ...rest }: MenubarRadioItemProps) => (
-    <Prim.RadioItem
-        className={clsx(
-            "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
-            "w-full flex items-center justify-between",
-            "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
-            "text-sm font-medium",
-            "text-gray-700 dark:text-gray-100",
-            "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
-        )}
-        {...rest}
-    >
-        <div className="flex items-center">
-            <div className="relative h-3.5 w-3.5 -ml-1">
-                <Prim.ItemIndicator>
-                    <DotFilledIcon className="absolute inset-0" />
-                </Prim.ItemIndicator>
+function MenubarItem({ children, shortcut, ...rest }: MenubarItemProps) {
+    return (
+        <Prim.Item
+            className={clsx(
+                "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
+                "w-full flex items-center justify-between",
+                "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
+                "text-sm font-medium",
+                "text-gray-700 dark:text-gray-100",
+                "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+            )}
+            {...rest}
+        >
+            <div className="w-full flex justify-between items-center">
+                {children}
+                {shortcut && (
+                    <span className="ml-4 text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900">
+                        {shortcut}
+                    </span>
+                )}
             </div>
-            <div className="ml-1">{children}</div>
-        </div>
-    </Prim.RadioItem>
-);
+        </Prim.Item>
+    );
+}
 
-type MenubarProps = {};
+type MenubarCheckboxItemProps = Omit<Prim.MenubarCheckboxItemProps & React.RefAttributes<HTMLDivElement>, "className">;
+
+function MenubarCheckboxItem({ children, ...rest }: MenubarCheckboxItemProps) {
+    return (
+        <Prim.CheckboxItem
+            className={clsx(
+                "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
+                "w-full flex items-center justify-between",
+                "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
+                "text-sm font-medium",
+                "text-gray-700 dark:text-gray-100",
+                "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+            )}
+            {...rest}
+        >
+            <div className="flex items-center">
+                <div className="relative h-3.5 w-3.5 -ml-1">
+                    <Prim.ItemIndicator>
+                        <CheckIcon className="h-3.5 w-3.5 -ml-0.5 mr-1.5" />
+                    </Prim.ItemIndicator>
+                </div>
+                <div className="ml-1">{children}</div>
+            </div>
+        </Prim.CheckboxItem>
+    );
+}
+
+type MenubarRadioItemProps = Omit<Prim.MenubarRadioItemProps & React.RefAttributes<HTMLDivElement>, "className">;
+
+function MenubarRadioItem({ children, ...rest }: MenubarRadioItemProps) {
+    return (
+        <Prim.RadioItem
+            className={clsx(
+                "cursor-default radix-disabled:opacity-50 radix-disabled:cursor-not-allowed",
+                "w-full flex items-center justify-between",
+                "px-3 py-1 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900",
+                "text-sm font-medium",
+                "text-gray-700 dark:text-gray-100",
+                "focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+            )}
+            {...rest}
+        >
+            <div className="flex items-center">
+                <div className="relative h-3.5 w-3.5 -ml-1">
+                    <Prim.ItemIndicator>
+                        <DotFilledIcon className="absolute inset-0" />
+                    </Prim.ItemIndicator>
+                </div>
+                <div className="ml-1">{children}</div>
+            </div>
+        </Prim.RadioItem>
+    );
+}
 
 const RADIO_ITEMS = ["rauchg", "steventey", "0xca0a"];
 const CHECK_ITEMS = ["Always Show Bookmarks Bar", "Always Show Full URLs"];
 
-export const Menubar = (props: MenubarProps) => {
-    const [checkedSelection, setCheckedSelection] = React.useState([
-        CHECK_ITEMS[1],
-    ]);
+export const Menubar = () => {
+    const [checkedSelection, setCheckedSelection] = React.useState([CHECK_ITEMS[1],]);
     const [radioSelection, setRadioSelection] = React.useState(RADIO_ITEMS[2]);
 
     const contentClasses = "bg-white dark:bg-gray-800 rounded-md p-1";
@@ -168,12 +150,7 @@ export const Menubar = (props: MenubarProps) => {
             <Prim.Menu>
                 <MenubarTrigger>File</MenubarTrigger>
                 <Prim.Portal>
-                    <Prim.Content
-                        className={contentClasses}
-                        align="start"
-                        sideOffset={3}
-                        alignOffset={0}
-                    >
+                    <Prim.Content className={contentClasses} align="start" sideOffset={3} alignOffset={0}>
                         <MenubarItem shortcut="⌘ T">New Tab</MenubarItem>
                         <MenubarItem shortcut="⌘ N">New Window</MenubarItem>
                         <MenubarItem disabled>New Incognito Window</MenubarItem>
@@ -181,11 +158,7 @@ export const Menubar = (props: MenubarProps) => {
                         <Prim.Sub>
                             <MenubarSubTrigger>Share</MenubarSubTrigger>
                             <Prim.Portal>
-                                <Prim.SubContent
-                                    className={contentClasses}
-                                    sideOffset={0}
-                                    alignOffset={-4}
-                                >
+                                <Prim.SubContent className={contentClasses} sideOffset={0} alignOffset={-4}>
                                     <MenubarItem>Email Link</MenubarItem>
                                     <MenubarItem>Messages</MenubarItem>
                                     <MenubarItem>Notes</MenubarItem>
@@ -202,12 +175,7 @@ export const Menubar = (props: MenubarProps) => {
             <Prim.Menu>
                 <MenubarTrigger>Edit</MenubarTrigger>
                 <Prim.Portal>
-                    <Prim.Content
-                        className={contentClasses}
-                        align="start"
-                        sideOffset={3}
-                        alignOffset={0}
-                    >
+                    <Prim.Content className={contentClasses} align="start" sideOffset={3} alignOffset={0}>
                         <MenubarItem shortcut="⌘ Z">Undo</MenubarItem>
                         <MenubarItem shortcut="⇧ ⌘ Z">Redo</MenubarItem>
                         <MenubarSeparator />
@@ -215,11 +183,7 @@ export const Menubar = (props: MenubarProps) => {
                             <MenubarSubTrigger>Find</MenubarSubTrigger>
 
                             <Prim.Portal>
-                                <Prim.SubContent
-                                    className={contentClasses}
-                                    sideOffset={0}
-                                    alignOffset={-4}
-                                >
+                                <Prim.SubContent className={contentClasses} sideOffset={0} alignOffset={-4}>
                                     <MenubarItem>Search the web…</MenubarItem>
 
                                     <MenubarSeparator />
@@ -240,12 +204,7 @@ export const Menubar = (props: MenubarProps) => {
             <Prim.Menu>
                 <MenubarTrigger>View</MenubarTrigger>
                 <Prim.Portal>
-                    <Prim.Content
-                        className={contentClasses}
-                        align="start"
-                        sideOffset={3}
-                        alignOffset={-14}
-                    >
+                    <Prim.Content className={contentClasses} align="start" sideOffset={3} alignOffset={-14}>
                         {CHECK_ITEMS.map((item) => (
                             <MenubarCheckboxItem
                                 key={item}
@@ -277,16 +236,8 @@ export const Menubar = (props: MenubarProps) => {
             <Prim.Menu>
                 <MenubarTrigger>Profiles</MenubarTrigger>
                 <Prim.Portal>
-                    <Prim.Content
-                        className={contentClasses}
-                        align="start"
-                        sideOffset={3}
-                        alignOffset={-14}
-                    >
-                        <Prim.RadioGroup
-                            value={radioSelection}
-                            onValueChange={setRadioSelection}
-                        >
+                    <Prim.Content className={contentClasses} align="start" sideOffset={3} alignOffset={-14}>
+                        <Prim.RadioGroup value={radioSelection} onValueChange={setRadioSelection}>
                             {RADIO_ITEMS.map((item) => (
                                 <MenubarRadioItem key={item} value={item}>
                                     {item}
