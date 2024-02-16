@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/x-icon" href="/favicon.ico" /> -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon-6e51e15e.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <title>Electron 🧄 Web</title>
+  <script type="module" crossorigin src="./assets/index-15c002d1.js"></script>
+  <link rel="stylesheet" href="./assets/index-262bf0c9.css">
+</head>
+<body>
+    <script>
+        (function () {
+            const orginalInfo = console.info;
+            console.info = function (message) {
+                if (!/Download the React DevTools/.test(message)) {
+                    orginalInfo.apply(console, arguments);
+                }
+            };
+        })();
+    </script>
+    <div id="root"></div>
+    
+</body>
+</html>
