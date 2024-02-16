@@ -53,7 +53,10 @@
         "build:msi": "tsc && vite build && electron-builder",
         "build:exe": "tsc && vite build && electron-builder --windows portable",
         "build-no-check": "vite build && electron-builder",
+        "build:web": "vite build --config vite.config.web.js",
+        "preview:web": "vite preview --config vite.config.web.js",
         "preview": "vite preview",
+        "deploy": "pnpm build:web && gh-pages -d dist",
         "e2e": "npx playwright test"
     }
 }
