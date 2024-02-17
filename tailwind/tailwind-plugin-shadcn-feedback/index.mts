@@ -9,6 +9,8 @@ const defaultCSSValues = {
         "--destructive": "0 100% 97%",
         "--destructive-foreground": "360 100% 45%",
         "--destructive-border": "359 100% 94%",
+        "--destructive-border2": "359 100% 94%",
+        "--destructive-border3": "359 100% 94%",
 
         "--warning": "49 100% 97%",
         "--warning-foreground": "31 92% 45%",
